@@ -1,11 +1,19 @@
-//Not finished and not checked very well
-sig GeographicalArea {}
+//still incomplete model and not completely checked
+abstract sig Area {
+	points: set Position //simplification,an area can be any kind of polygon, but for what we are
+						 //interested in, an area is a set of point inside that polygon
+} {
+	#points > 0
+}
+sig GeographicalArea extends Area {}
+sig SafeParkingArea extends Area {}
+sig QRCode {}
 abstract sig Boolean {}
 one sig True extends Boolean {}
 one sig False extends Boolean {}
 sig Position {
-	x: one Int,
-	y: one Int
+	x: one Int,//shall be float
+	y: one Int//shall be float
 } {x>=0 and y>=0}
 fun Position.squareDistance[other:Position]:one Int {
 	add[mul[this.x-other.x,this.x-other.x],mul[this.y-other.y,this.y-other.y]]
@@ -13,19 +21,24 @@ fun Position.squareDistance[other:Position]:one Int {
 
 one sig Company {
 	users: set User,
-	cars: set Car
+	cars: set Car,
+	parkingAreas: set SafeParkingArea
+} {
+	#users>0 =>	(#cars>0 and #parkingAreas > 0)
 }
 sig User {
 	position: one Position,
 	state: one UserState
 }
 sig Car {
+	code: one QRCode,
 	ignited: one Boolean,
+	passengers: one Int,
 	locked: one Boolean,
 	position: one Position,
 	area: one GeographicalArea,
 	state: one CarState
-}
+} { passengers >= 0}
 
 abstract sig CarState {}
 one sig AvailableCarState extends CarState {}
@@ -128,6 +141,12 @@ fact allUserInCompanyAreNotUnregistered {
 fact allUserNotUnregisteredAreInACompany {
 	#(Company.users) = #(User - {u:User| u.state = UnregisteredUserState})
 }
+fact allSafeAreaAreUsed {
+	#SafeParkingArea = #Company.parkingAreas
+}
+fact carsContainPassengersOnlyIfUnlocked {
+	all c:Car| { c.locked = True => c.passengers = 0 }
+}
 fact allMultiUserStateHaveAUser {
 	all us:UserState| (not (us in (UnregisteredUserState+RegisteredUserState+LoggedUserState))) implies us in User.state
 }
@@ -145,6 +164,25 @@ fact noDoublesInPosition{
 		p1!=p2
 		p1.x=p2.x
 		p1.y=p2.y
+	}
+}
+fact codesAreUniqueAmongCars {
+	no c1,c2:Car| {
+		c1!=c2 and c1.code = c2.code
+	}
+}
+fact carPositionIsInItsArea {
+	all c:Car| c.position in c.area.points
+}
+fact eachPositionBelongsToAtLeastAGeographicalArea {
+	no p:Position| (p & GeographicalArea.points) = none
+}
+fact areasOfSameTypeDoNotOverlap {
+	no a1,a2:GeographicalArea| {
+		a1 != a2 and (a1.points & a2.points) != none
+	}
+	no a1,a2:SafeParkingArea| {
+		a1 != a2 and (a1.points & a2.points) != none
 	}
 }
 pred show(){
