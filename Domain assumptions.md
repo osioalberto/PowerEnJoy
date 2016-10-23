@@ -1,7 +1,7 @@
 # PowerEnJoy
 ### Domain assumptions
-* At registrations users privide their phone number, in order to receive a password via SMS, and credit card credentials, in order to allow automatic payments
-* Generated passwords are safe, users who have not paid cannot access the system (guessing the password, for instance)
+* At registrations users provide their phone number, in order to receive a password via SMS, and credit card credentials, in order to allow automatic payments
+* Generated passwords are safe, users not registered cannot access the system (guessing the password, for instance)
 * Car position is detected using GPS
 * If a user wants to search for cars available nearby his position, then the user position is detected using GPS
 * If a user wants to search for cars available nearby a certain address, then this address is converted in geographical coordinates via an external service (Google Maps)
