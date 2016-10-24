@@ -19,7 +19,7 @@ fun Position.squareDistance[other:Position]:one Int {
 	add[mul[this.x-other.x,this.x-other.x],mul[this.y-other.y,this.y-other.y]]
 }
 
-one sig Company {
+one sig ManagementSystem {
 	users: set User,
 	cars: set Car,
 	parkingAreas: set SafeParkingArea
@@ -52,7 +52,7 @@ sig ReservedCarState extends CarState {
 	reservedBy: one User,
 	elapsedMinutes: one Int
 } {
-	elapsedMinutes >=0 and elapsedMinutes <= 60
+	elapsedMinutes >=0 and elapsedMinutes < 60
 }
 fun ReservedCarState.getCar[]: one Car {
 	{c:Car| c.state=this}
@@ -76,7 +76,7 @@ sig SearchForNearbyCarsUserState extends UserState {
 		) and
 		c.position.squareDistance[this.getUser[].position] <= mul[distance,distance]
 	}
-	no c:Company.cars| {
+	no c:ManagementSystem.cars| {
 		not (c in cars) and
 		(
 			c.state = AvailableCarState or
@@ -89,11 +89,11 @@ sig SearchForNearbyCarsUserState extends UserState {
 	}
 }
 fun SearchForNearbyCarsUserState.getUser[]: one User {
-	{u:Company.users| u.state = this}
+	{u:ManagementSystem.users| u.state = this}
 }
 fact onlyIgnitedCarCanChargeUser {
 	no c:Car| {
-		(c.ignited = False and c.state in UsingCarState) => c.state.(UsingCarState <: elapsedMinutes) = 0
+		c.ignited = False and c.state in UsingCarState and c.state.(UsingCarState <: elapsedMinutes) > 0
 	}
 }
 fact userCanOnlyUseACarAtTime {
@@ -105,7 +105,7 @@ fact userCanOnlyUseACarAtTime {
 	}
 }
 fact usingCarHasSamePositionOfUser {
-	no c:Car| c.state in UsingCarState => c.state.usingBy.position = c.position
+	no c:Car| c.state in UsingCarState and c.state.usingBy.position != c.position
 }
 fact onlyUsingCarMustBeUnlocked{
 	all c:Car| {
@@ -118,7 +118,7 @@ fact ignitedCarMustBeUnlocked {
 	}
 }
 fact userCanReserveOnlyACarPerArea {
-	no c1,c2:Company.cars| {
+	no c1,c2:ManagementSystem.cars| {
 		c1!=c2
 		c1.area = c2.area
 		c1.state in ReservedCarState
@@ -132,17 +132,17 @@ fact unregisteredUserCannotHaveACar {
 		(c.state in ReservedCarState and c.state.reservedBy = u)
 	}
 }
-fact allCarAreOfCompany {
-	#(Company.cars) = #(Car)
+fact allCarAreOfManagementSystem {
+	#(ManagementSystem.cars) = #(Car)
 }
-fact allUserInCompanyAreNotUnregistered {
-	(Company.users.state & UnregisteredUserState) = none
+fact allUserInManagementSystemAreNotUnregistered {
+	(ManagementSystem.users.state & UnregisteredUserState) = none
 }
-fact allUserNotUnregisteredAreInACompany {
-	#(Company.users) = #(User - {u:User| u.state = UnregisteredUserState})
+fact allUserNotUnregisteredAreInAManagementSystem {
+	#(ManagementSystem.users) = #(User - {u:User| u.state = UnregisteredUserState})
 }
 fact allSafeAreaAreUsed {
-	#SafeParkingArea = #Company.parkingAreas
+	#SafeParkingArea = #ManagementSystem.parkingAreas
 }
 fact carsContainPassengersOnlyIfUnlocked {
 	all c:Car| { c.locked = True => c.passengers = 0 }
@@ -186,5 +186,6 @@ fact areasOfSameTypeDoNotOverlap {
 	}
 }
 pred show(){
+	some c:Car| c.ignited = True
 }
-run show for 10
+run show for 20
