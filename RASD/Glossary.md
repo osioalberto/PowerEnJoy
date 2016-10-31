@@ -24,4 +24,4 @@
 * **GPS**: A system capable of providing the location of a receiver device with a good precision (5 meters)
 * **Overlapping areas**: Two areas are said to be overlapping if there exists at least one geographical coordinates which is contained inside the two areas
 * **Expiration of a car reservation**: when a reservation expires, the car becomes available again, the reservor user loses his reservation and he is charged a fee of 1€
-* **Applying a raise** or ** a discount**: Thoose operation are delayed untill immediately before the system charges the user for a bill, in exactly this moment these operation are evaluated on the bill and then algebraically added to the bill
+* **Applying a raise** or **a discount**: Thoose operation are delayed untill immediately before the system charges the user for a bill, in exactly this moment these operation are evaluated on the bill and then algebraically added to the bill
