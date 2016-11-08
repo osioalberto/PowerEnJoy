@@ -15,3 +15,4 @@
 * [D14] A user interacting with the system has an internet connection
 * [D15] Geographical regions do not overlap
 * [D16] Safe areas do not overlap
+* [D17] Each employee or manager of PowerEnJoy has its own username and password (different from those used to reserve cars)

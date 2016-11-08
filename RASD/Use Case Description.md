@@ -201,3 +201,158 @@ _No other actor than SYSTEM is involved_
 ##### Exceptions
 * If a payment fails, SYSTEM notifies the user of the error
 * If a payment could not be performed, SYSTEM notifies the user of the error
+
+#### Manage safe parking areas
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+##### Flow of events
+* The employee activates the _manage safe parking areas_ function on his terminal. SYSTEM responds with a list of safe parking areas currently known
+* If the employee chooses to add a new safe parking area activating the _add safe parking area_ function on his terminal, then the use case __add safe parking area__ is activated
+* If the employee chooses to remove a new safe parking area activating the _remove safe parking area_ function on his terminal, then the use case __remove safe parking area__ is activated
+##### Exit conditions
+* The list of safe parking areas is updated
+
+#### Add safe parking area
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has chosen to add a new safe parking area
+##### Flow of events
+* SYSTEM shows the employee a form
+* The employee fills the form with the parameters of the new safe parking area (including the boundaries of the area), then submits the form
+* SYSTEM adds the new safe parking area to the list of known parking areas
+##### Exit conditions
+* The new safe parking area is added to the list of safe parking areas
+##### Exceptions
+* If the new parking area overlaps with another parking area, than the request of adding it is rejected
+
+#### Remove safe parking area
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has chosen to remove a safe parking area
+##### Flow of events
+* The employee chooses which safe parking area has to be deleted
+* SYSTEM deletes the safe parking area from the list of known parking areas
+##### Exit conditions
+* The safe parking area is removed from the list
+
+#### Manage recharging stations
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+##### Flow of events
+* The employee activates the _manage recharging stations_ function on his terminal. SYSTEM responds with a list of recharging stations currently stored in the known
+* If the employee chooses to add a new recharging station activating the _add recharging station_ function on his terminal, then the use case __add recharging station__ is activated
+* If the employee chooses to remove a recharging station activating the _remove recharging station_ function on his terminal, then the use case __remove recharging station__ is activated
+* If the employee chooses to update a recharging station activating the _update recharging station_ function on his terminal, then the use case __update recharging station__ is activated
+##### Exit conditions
+* The list of recharging stations is updated
+
+#### Add recharging station
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has chosen to add a new recharging station
+##### Flow of events
+* SYSTEM shows the employee a form
+* The employee fills the form with the parameters of the new recharging station (including the boundaries of the area and the number of available plugs), then submits the form
+* SYSTEM adds the new recharging station to the list of known recharging stations
+##### Exit conditions
+* The new recharging station is added to the list
+##### Exceptions
+* If the new recharging station boundaries overlap with another parking area, than the request of adding it is rejected
+
+#### Remove recharging station
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has chosen to remove a recharging station
+##### Flow of events
+* The employee chooses which recharging station has to be deleted
+* SYSTEM deletes the recharging station from the list of known recharging stations
+##### Exit conditions
+* The recharging station is removed from the list
+
+#### Update recharging station
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has chosen to remove a recharging station
+##### Flow of events
+* The employee chooses which recharging station has to be updated
+* SYSTEM shows a form in which user can update recharging station parameters (including its boundaries and/or number of plugs), then submits the form
+* SYSTEM updates the parameters of the selected recharging station
+##### Exit conditions
+* The recharging station parameters are updated
+##### Exceptions
+* If the recharging station boundaries overlap with another parking area, than the request of updating it is rejected
+
+#### Manage geographical regions
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+##### Flow of events
+* The employee activates the _manage geographical regions_ function on his terminal
+* SYSTEM sends to the employee's terminal a map showing all the geographical regions
+* If the employee chooses to add one more region, than the __add geographical region__ use case is activated
+* If the employee selects one region, he can decide to divide it into two regions or to merge it with another region. In the former case __split geographical region__ use case is activated, in the latter __merge geographical regions__ use case is activated
+##### Exit conditions
+* Geographical regions are updated
+* New reservations will be affected by the update
+* Reservations that are already inserted are not affected by the update 
+
+#### Add geographical region
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has chosen to add a new geographical region
+##### Flow of events
+* SYSTEM presents on the employee's terminal a map where actual geographical regions are highlighted
+* The employee selects on the map the boundaries of the new geographical area
+* The employee confirms his choice
+* SYSTEM adds the new region to the list of the geographical regions
+##### Exit conditions
+* The new region is inserted into the set of geographical regions
+##### Exceptions
+* If the selected region overlaps with some other geographical region already inserted, then the insertion is rejected
+
+#### Split geographical region
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has selected a region from the ones inserted in the system
+* The employee has chosen to split that region
+##### Flow of events
+* SYSTEM presents on the employee's terminal a map where selected geographical region is highlighted
+* The employee draws a line across the region so that the geographical region is divided in two subregions
+* The employee confirms his choice
+* SYSTEM updates the set of geographical regions removing the old geographical region and adding the two subregions
+##### Exit conditions
+* The geographical region selected by the employee is now split into two subregions
+
+####  Merge geographical regions
+##### Actors
+* PowerEnJoy employee
+##### Entry conditions
+* The employee is logged in with his company credentials
+* The employee has selected a region from the ones inserted in the system
+* The employee has chosen to merge that region with another region
+##### Flow of events
+* SYSTEM presents on the employee's terminal a map where geographical regions adjoining the selected one are highlighted
+* The employee selects one of the highlighted geographical regions
+* The employee confirms his choice
+* SYSTEM updates the set of geographical regions removing the two selected geographical regions and adding one geographical region which is the result of the union of the two deleted geographical regions
+##### Exit conditions
+* The geographical regionsselected by the employee are now merged into a single region

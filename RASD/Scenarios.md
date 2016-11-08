@@ -27,3 +27,9 @@ Professor Talmoto has to take part in an important conference in Florence. He ch
 
 ## Scenario 9
 Rose is a very affectionate user of PowerEnJoy car sharing, and she daily use shared cars provided by that company. She is also very inattentive, and never remembers to charge her prepaid card. One day, after having parked her car, she receives a message that tells her it was not possible to complete the payment for her last ride. She knows that she will not be able to reserve and use cars until she pays her last ride, so she runs to the nearest bank to charge her credit card back, then opens her profile on PowerEnJoy's website and pays the ride.
+
+## Scenario 10
+Mark is an employee of PowerEnJoy. His job includes the responsibility to maintain the list of safe parking areas and recharging areas updated. In order to update the list of those areas, Mark has to connect to the management system with his employee credentials. Then he can open a page with the list of safe parking areas and add, remove or update parking areas. He can also open another page dedicated to recharging stations and update, insert or remove them as well.
+
+## Scenario 11
+Jack is one of the managers of PowerEnJoy. Jack is in charge of tuning the service in order to best fit user needs. Jack can modify the geographical areas in which users can reserve only one car in order to alter the way users reserve cars, and so the availability of the same cars. To do that, Jack connects to the management system with his company credentials and opens a map which shows how a certain territory is divided in geographical areas, and from here he can modify the boundaries of each area, split an area in two subareas or merge several areas into a single area. When Jack applies the changes, new reservations will be affected, but not old ones.
