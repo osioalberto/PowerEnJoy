@@ -1,191 +1,176 @@
-//still incomplete model and not completely checked
-abstract sig Area {
-	points: set Position //simplification,an area can be any kind of polygon, but for what we are
-						 //interested in, an area is a set of point inside that polygon
-} {
-	#points > 0
-}
-sig GeographicalArea extends Area {}
-sig SafeParkingArea extends Area {}
-sig QRCode {}
+//TODO
+//Add employee
+//Add discounts and raises
+//closed attribute on car?
+//SIGNATURES
 abstract sig Boolean {}
 one sig True extends Boolean {}
 one sig False extends Boolean {}
+
 sig Position {
-	x: one Int,//shall be float
-	y: one Int//shall be float
-} {x>=0 and y>=0}
-fun Position.squareDistance[other:Position]:one Int {
-	add[mul[this.x-other.x,this.x-other.x],mul[this.y-other.y,this.y-other.y]]
+	x: one Int,//Shall be float
+	y: one Int//Shall be float
+} {
+	//No need to use other numbers since this is a mapping of geographical coordinate
+	x >= 0
+	y >= 0
 }
 
+abstract sig Area {
+	//Simplification,an area can be any kind of polygon, but for what we are
+	//interested in, an area is a set of point inside that polygon
+	points: some Position 
+}
+sig Plate {}
+sig Credential {}
+sig GeographicalRegion extends Area {}
+abstract sig SafeArea extends Area {}
+sig SafeParkingArea extends SafeArea {}
+sig RechargingStationArea extends SafeArea {
+	maxPlugs: one Int,
+	pluggedCars: set Car
+} {
+	maxPlugs > 0
+	#pluggedCars <= maxPlugs
+}
 one sig ManagementSystem {
 	users: set User,
 	cars: set Car,
-	parkingAreas: set SafeParkingArea
+	safeAreas: set SafeArea,
+	geographicalRegion: set GeographicalRegion
 } {
-	#users>0 =>	(#cars>0 and #parkingAreas > 0)
+	//users must be served
+	users!=none =>	{
+		cars!=none
+		(safeAreas & RechargingStationArea) != none
+	}
+	//areas must be complete
+	safeAreas = SafeArea
+	cars = Car
+	geographicalRegion = GeographicalRegion
 }
 sig User {
-	position: one Position,
-	state: one UserState
+	credential: lone Credential,
+	registered: one Boolean,
+	logged: one Boolean,
+	banned: one Boolean,
+	position: one Position
+} {
+	//An unregistered user cannot be banned or logged into the system
+	registered = False => {
+		logged = False
+		banned = False
+	}
+	//all registered user belongs to the system, the other are free
+	registered = True <=> {
+		this in ManagementSystem.users
+		credential != none
+	}
 }
 sig Car {
-	code: one QRCode,
+	plate: one Plate,
 	ignited: one Boolean,
 	passengers: one Int,
 	locked: one Boolean,
+	closed: one Boolean,
 	position: one Position,
-	area: one GeographicalArea,
-	state: one CarState
-} { passengers >= 0}
-
-abstract sig CarState {}
-one sig AvailableCarState extends CarState {}
-sig UsingCarState extends CarState {
-	usingBy: one User,
 	costPerMinute: one Int,
+	chargeLevel: one Int,			//percentage
+	area: one GeographicalRegion
+} {
+	chargeLevel >= 0
+	chargeLevel <= 50
+	passengers >= 0					//passengers are persons... and include the driver
+	costPerMinute > 0				//negative or zero cost ride are not allowed
+	position in area.points			//the position must belong to the area
+	locked = True => {
+		passengers = 0
+		ignited = False
+		closed = True
+	}
+	chargeLevel = 0 => ignited = False
+}
+sig Reservation {
+	reservor: one User,
+	car: one Car,
 	elapsedMinutes: one Int
-} {elapsedMinutes>=0 and costPerMinute>0}
+} {
+	elapsedMinutes >= 0
+	car.locked = True
+}
 
-sig ReservedCarState extends CarState {
-	reservedBy: one User,
+sig Ride {
+	car: one Car,
+	reservor: one User,
 	elapsedMinutes: one Int
 } {
-	elapsedMinutes >=0 and elapsedMinutes < 60
+	elapsedMinutes >= 0
+	car.locked = False
 }
-fun ReservedCarState.getCar[]: one Car {
-	{c:Car| c.state=this}
-}
-abstract sig UserState { }
-one sig UnregisteredUserState extends UserState {}
-one sig RegisteredUserState extends UserState {}
-one sig LoggedUserState extends UserState {}
-sig SearchForNearbyCarsUserState extends UserState {
-	distance: one Int,
-	cars: set Car
-} {
-	distance >= 0 and
-	all c:cars| {
-		(
-			c.state = AvailableCarState or
-			(
-				c.state in ReservedCarState and
-				c.state.reservedBy = this.getUser[]
-			)
-		) and
-		c.position.squareDistance[this.getUser[].position] <= mul[distance,distance]
-	}
-	no c:ManagementSystem.cars| {
-		not (c in cars) and
-		(
-			c.state = AvailableCarState or
-			(
-				c.state in ReservedCarState and
-				c.state.reservedBy = this.getUser[]
-			)
-		) and
-		c.position.squareDistance[this.getUser[].position] <= mul[distance,distance]
-	}
-}
-fun SearchForNearbyCarsUserState.getUser[]: one User {
-	{u:ManagementSystem.users| u.state = this}
-}
-fact onlyIgnitedCarCanChargeUser {
-	no c:Car| {
-		c.ignited = False and c.state in UsingCarState and c.state.(UsingCarState <: elapsedMinutes) > 0
-	}
-}
-fact userCanOnlyUseACarAtTime {
-	no c1,c2:Car | {
-		c1!=c2
-		c1.state in UsingCarState
-		c2.state in UsingCarState
-		c1.state.usingBy = c2.state.usingBy
-	}
-}
-fact usingCarHasSamePositionOfUser {
-	no c:Car| c.state in UsingCarState and c.state.usingBy.position != c.position
-}
-fact onlyUsingCarMustBeUnlocked{
-	all c:Car| {
-		c.state in UsingCarState <=> c.locked = False
-	}
-}
-fact ignitedCarMustBeUnlocked {
-	all c:Car| {
-		(c.ignited = True) => (c.locked = False)
-	}
-}
-fact userCanReserveOnlyACarPerArea {
-	no c1,c2:ManagementSystem.cars| {
-		c1!=c2
-		c1.area = c2.area
-		c1.state in ReservedCarState
-		c2.state in ReservedCarState
-		c1.state.reservedBy = c2.state.reservedBy
-	}
-}
-fact unregisteredUserCannotHaveACar {
-	all u:User| u.state = UnregisteredUserState <=> no c:Car| {
-		(c.state in UsingCarState and c.state.usingBy = u) or
-		(c.state in ReservedCarState and c.state.reservedBy = u)
-	}
-}
-fact allCarAreOfManagementSystem {
-	#(ManagementSystem.cars) = #(Car)
-}
-fact allUserInManagementSystemAreNotUnregistered {
-	(ManagementSystem.users.state & UnregisteredUserState) = none
-}
-fact allUserNotUnregisteredAreInAManagementSystem {
-	#(ManagementSystem.users) = #(User - {u:User| u.state = UnregisteredUserState})
-}
-fact allSafeAreaAreUsed {
-	#SafeParkingArea = #ManagementSystem.parkingAreas
-}
-fact carsContainPassengersOnlyIfUnlocked {
-	all c:Car| { c.locked = True => c.passengers = 0 }
-}
-fact allMultiUserStateHaveAUser {
-	all us:UserState| (not (us in (UnregisteredUserState+RegisteredUserState+LoggedUserState))) implies us in User.state
-}
-fact allMultiCarStateHaveACar {
-	all cs:CarState| (not (cs in (AvailableCarState))) implies cs in Car.state
-}
-fact positionsMustBeAllUsed {
-	#(Position) = #(User.position + Car.position)
-}
-fact geographicalAreasMustBeAllUsed {
-	#(GeographicalArea) = #(Car.area)
-}
-fact noDoublesInPosition{
-	no p1,p2:Position| {
-		p1!=p2
+
+//FACTS
+fact noDuplicatesInPosition{
+	no disjoint p1,p2:Position| {
 		p1.x=p2.x
 		p1.y=p2.y
 	}
 }
-fact codesAreUniqueAmongCars {
-	no c1,c2:Car| {
-		c1!=c2 and c1.code = c2.code
+fact platesAreUniqueByCar {
+	no disjoint c1,c2:Car| c1.plate = c2.plate 
+}
+fact platesAreAllUsed {
+	Car.plate = Plate
+}
+fact credentialAreUniqueByUser {
+	no disjoint u1,u2:User| {
+		u1.registered = True
+		u1.registered = u2.registered
+		u1.credential = u2.credential
 	}
 }
-fact carPositionIsInItsArea {
-	all c:Car| c.position in c.area.points
+fact credentialAreAllUsed {
+	User.credential = Credential
 }
-fact eachPositionBelongsToAtLeastAGeographicalArea {
-	no p:Position| (p & GeographicalArea.points) = none
+fact geographicalRegionDoNotOverlap {
+	no disjoint g1,g2:GeographicalRegion| g1.points&g2.points != none
 }
-fact areasOfSameTypeDoNotOverlap {
-	no a1,a2:GeographicalArea| {
-		a1 != a2 and (a1.points & a2.points) != none
+fact safeAreaDoNotOverlap {
+	no disjoint s1,s2:SafeArea| s1.points&s2.points != none
+}
+fact eachPositionBelongsToAtLeastGeographicalRegion {
+	all p:Position| p in GeographicalRegion.points
+}
+fact reservationsMustExpire {
+	all r:Reservation| r.elapsedMinutes < 60
+}
+fact onlyRegisteredNotBannedUserCanHaveReservations {
+	all r:Reservation| {
+		r.reservor.registered = True
+		r.reservor.banned = False
 	}
-	no a1,a2:SafeParkingArea| {
-		a1 != a2 and (a1.points & a2.points) != none
+}
+fact userCannotReserveManyCarsInTheSameArea {
+	no disjoint r1,r2:Reservation| {
+		r1.reservor = r2.reservor
+		r1.car.area = r2.car.area
 	}
+}
+fact onlyRegisteredNotBannedUserCanHaveARide {
+	all r:Ride| {
+		r.reservor.registered = True
+		r.reservor.banned = False
+	}
+}
+fact userCannotRideManyCarsAtTime {
+	no disjoint r1,r2:Ride| r1.reservor = r2.reservor
+}
+fact unlockedCarsHaveARideAssociated {
+	all c:Car| c.locked = False => one r:Ride| r.car = c
+}
+fact onlyLockedCarCanBeRecharged {
+	no c:Car,rc:RechargingStationArea| c.locked = False and c in rc.pluggedCars
 }
 pred show(){
-	some c:Car| c.ignited = True
+	#(RechargingStationArea.pluggedCars) > 0
 }
-run show for 20
+run show for 5 but 7 Int

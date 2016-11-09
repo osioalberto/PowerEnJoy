@@ -1,6 +1,6 @@
 ﻿### Goals
 * [G1] Users must be able to sign up to the system entering their name, birth date, address, credit card information and a valid driving license number, in addition to username and password
-* [G2] Only registered users must be able to log in to the system
+* [G2] Only registered users and employee must be able to log in to the system
 * [G3] Logged users must be able to find the location and the level of the battery of available cars within a user defined distance from his current location
 * [G4] Logged users must be able to find the location and the level of the battery of available cars within a user defined distance from a user defined address
 * [G5] Logged users must be able to reserve for each geographical region at most one car among the available ones
@@ -13,3 +13,4 @@
 * [G12] The system must incentivize the virtuous behaviors of the users
 * [G13] After being used by its reservor user, a car will be available for a new reservation after the system has charged that user with the bill corresponding to his ride
 * [G14] A user that cannot pay his bill is banned until the bill is estinguished
+* [G15] Logged users must be able to find all their reservation that are still valid
