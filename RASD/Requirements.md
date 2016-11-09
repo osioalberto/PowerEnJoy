@@ -8,9 +8,10 @@
 	- [R1.4]: The system registers this new user only if given information are valid
 * [G2]:
 	- [D14]
+	- [D17]
 	- [R2.1]: The system can acquire user information for login (username and password)
-	- [R2.2]: System is able to check whether a tuple (username, password) is correct, that is whether that tuple matches the information of a registered user or not
-	- [R2.3]: The user logs in if and only if username and password costitute a correct tuple
+	- [R2.2]: System is able to check whether a tuple (username, password) is correct, that is whether that tuple matches the information of a registered user or of an employee or not
+	- [R2.3]: The user or the employee logs in if and only if username and password costitute a correct tuple
 * [G3]:
 	- [D5]
 	- [D6]
@@ -38,7 +39,6 @@
 	- [R5.1]: The system only allows the logged in user who is not banned to reserve an available car
 	- [R5.2]: The system is able to get the geographical region from the car geographical coordinates
 	- [R5.3]: The system only reserves a car if the logged in user that requests it has no other reservation for the same geographical area in which the car is located
-	- ___Missing: we have never stated how the system knows the list and the boundaries of the geographic areas___
 * [G6]:
 	- [R6.1]: The system keeps track of the time elapsed since a reservation is made
 	- [R6.2]: If the elapsed time is greater than one hour, then the reservation expires
@@ -100,3 +100,10 @@
 	- [R14.3]: The system marks a bill as paid if and only if a payment operation associated to this bill is successful
 	- [R14.4]: A user can ask the system to try again to extinguish his pending bills
 	- [R14.5]: Only pending bills can be required to be paid
+* [G15]:
+	- [D5]
+	- [D6]
+	- [D7]
+	- [R15.1]: The system only allow a logged in user who is not banned to view his reservations
+	- [R15.2]: The system is capable of finding all the reservation made by the user
+	- [R15.3]: The system is able to show to a user a list of cars with their position, battery level and the expiration time
