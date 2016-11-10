@@ -90,6 +90,17 @@
 ##### Special requirements
 * SYSTEM checks and car reservation must be performed as a unique atomic sequence.
 
+#### View reservations
+##### Actors
+* User
+##### Entry conditions
+* User is logged in
+##### Flow of events
+* User activates the _my reservations_ function on his terminal
+* SYSTEM retrives the list of all still valid reservations (those neither used to actually take a car nor expired yet)
+* SYSTEM responds to the user with the list of those actions
+##### Exit conditions
+* User can see a list of all his still valid reservations
 
 #### Reservation expiration
 ##### Actors
