@@ -28,10 +28,10 @@
 	- [D6]
 	- [D7]
 	- [D14]
-	- [R6]
-	- [R8]: The system is capable of finding all available cars within a distance range from the geographical coordinate of the address
+	- [R3.1]
+	- [R4.1]: The system is capable of finding all available cars within a distance range from the geographical coordinate of the address
 	- [R3.3]
-	- [R4.1]: The system only allows the logged in user who is not banned to insert the address on which the search area will be centered
+	- [R4.2]: The system only allows the logged in user who is not banned to insert the address on which the search area will be centered
 * [G5]:
 	- [D5]
 	- [D6]
