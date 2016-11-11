@@ -4,8 +4,9 @@
 	- [D14]
 	- [R1.1]: The system can acquire user information for the registration (name, surname, address, birth date, driving licence number, credit card number and CVV)
 	- [R1.2]: The system validates the driving licence number using the external service mentioned in [D1]
-	- [R1.3]: The system is able to verify that no other registered user exists with the same username
-	- [R1.4]: The system registers this new user only if given information are valid
+	- [R1.3]: The system validates the payment information using the external service mentioned in [D2]
+	- [R1.4]: The system is able to verify that no other registered user exists with the same username or driving licence number or payment information
+	- [R1.5]: The system registers this new user only if given information are valid
 * [G2]:
 	- [D14]
 	- [D17]
@@ -34,6 +35,7 @@
 * [G5]:
 	- [D5]
 	- [D6]
+	- [D7]
 	- [D14]
 	- [D15]
 	- [R5.1]: The system only allows the logged in user who is not banned to reserve an available car
@@ -69,8 +71,9 @@
 	- [D5]
 	- [D6]
 	- [D8]
-	- [D16]
 	- [D10]
+	- [D16]
+	- [D18]
 	- [R9.1]
 	- [R12.1]: When a car is becoming available and this car is parked in a recharging station area there is a 5 minute window before the system charges the bill to the reservor user 
 	- [R12.2]: When a car is becoming available and this car is parked in a safe parking area the system charges immediatly the reservor user with the bill
@@ -82,7 +85,8 @@
 	- [D9]
 	- [D10]
 	- [R16]
-	- [R11.1]: When a car is becoming available, if the system detects that this car has had at least two passengers (not including the driver) for all the time of the ride, then the system applies a discount of 10% on the bill of the reservor user  
+	- [D18]
+	- [R11.1]: When a car is becoming available, if the system detects that this car has had at least two passengers (not including the driver) for all the time of the ride when the engine was ignited, then the system applies a discount of 10% on the bill of the reservor user  
 	- [R11.2]: When a car is becoming available, if its battery level is greater or equal to the 50% of the total battery level, the system applies a discount of 20% on the bill of the reservor user
 	- [R11.3]: When a car is becoming available, if it is parked in a recharging station area and it is plugged to the power grid, the system applies a discount of 30% on the bill of the reservor user and the 5 minute window terminates
 	- [R11.4]: When a car is becoming available, if the battery level is less than 20% of the total battery level, the system applies a raise of 30% on the bill of the reservor user

@@ -16,3 +16,4 @@
 * [D15] Geographical regions do not overlap
 * [D16] Safe areas do not overlap
 * [D17] Each employee or manager of PowerEnJoy has its own username and password (different from those used to reserve cars)
+* [D18] The system is able to detect whether the doors of a car are opened or closed
