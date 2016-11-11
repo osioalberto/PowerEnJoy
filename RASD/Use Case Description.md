@@ -1,6 +1,5 @@
-# TODOS
+﻿# TODOS
 * Give a name to the SYSTEM
-* In use case "registration", there is a incoherence with requirements - need fixup
 ---
 ### Use cases
 #### Registration
@@ -13,7 +12,7 @@
 ##### Flow of events
 * The user activates the _sign up_ function on his terminal. SYSTEM responds by presenting him a form.
 * The user fills the form, inserting his complete name, birth date, driving licence number, credit card number and CVV, along with a username and a password. Once the form is completed, the user submits it.
-* SYSTEM validates the inserted data, and in particular queries external systems for driving licence number and credit card informations validation (___MISSING IN REQUIREMENTS___). If all is correct, then SYSTEM stores the new user data
+* SYSTEM validates the inserted data, and in particular queries external systems for driving licence number and credit card informations validation. If all is correct, then SYSTEM stores the new user data
 ##### Exit conditions
 * User is registered and can log in to the system
 * User is not banned
