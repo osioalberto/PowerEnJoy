@@ -90,6 +90,17 @@
 ##### Special requirements
 * SYSTEM checks and car reservation must be performed as a unique atomic sequence.
 
+#### View reservations
+##### Actors
+* User
+##### Entry conditions
+* User is logged in
+##### Flow of events
+* User activates the _my reservations_ function on his terminal
+* SYSTEM retrives the list of all still valid reservations (those neither used to actually take a car nor expired yet)
+* SYSTEM responds to the user with the list of those actions
+##### Exit conditions
+* User can see a list of all his still valid reservations
 
 #### Reservation expiration
 ##### Actors
@@ -202,99 +213,60 @@ _No other actor than SYSTEM is involved_
 * If a payment fails, SYSTEM notifies the user of the error
 * If a payment could not be performed, SYSTEM notifies the user of the error
 
-#### Manage safe parking areas
+#### Manage safe areas
 ##### Actors
 * PowerEnJoy employee
 ##### Entry conditions
 * The employee is logged in with his company credentials
 ##### Flow of events
-* The employee activates the _manage safe parking areas_ function on his terminal. SYSTEM responds with a list of safe parking areas currently known
-* If the employee chooses to add a new safe parking area activating the _add safe parking area_ function on his terminal, then the use case __add safe parking area__ is activated
-* If the employee chooses to remove a new safe parking area activating the _remove safe parking area_ function on his terminal, then the use case __remove safe parking area__ is activated
+* The employee activates the _manage safe areas_ function on his terminal. SYSTEM responds with a list of safe areas currently known (this list includes both safe parking areas and recharging stations)
+* If the employee chooses to add a new safe area activating the _add safe area_ function on his terminal, then the use case __add safe area__ is activated
+* If the employee chooses to remove a new safe area activating the _remove safe area_ function on his terminal, then the use case __remove safe area__ is activated
+* If the employee chooses to update the parameters of a safe area activating the _update safe area_ function on his terminal, then the use case __update safe area__ is activated
 ##### Exit conditions
-* The list of safe parking areas is updated
+* The list of safe areas is updated
 
-#### Add safe parking area
+#### Add safe area
 ##### Actors
 * PowerEnJoy employee
 ##### Entry conditions
 * The employee is logged in with his company credentials
-* The employee has chosen to add a new safe parking area
+* The employee has chosen to add a new safe area
 ##### Flow of events
 * SYSTEM shows the employee a form
-* The employee fills the form with the parameters of the new safe parking area (including the boundaries of the area), then submits the form
-* SYSTEM adds the new safe parking area to the list of known parking areas
+* The employee fills the form with the parameters of the new safe area (the type of the area, chosen between safe parking area and recharging station, the boundaries of the area and the number of plugs if he is inserting a recharging station), then submits the form
+* SYSTEM adds the new safe area to the list of known areas
 ##### Exit conditions
-* The new safe parking area is added to the list of safe parking areas
+* The new safe area is added to the list of safe areas
 ##### Exceptions
-* If the new parking area overlaps with another parking area, than the request of adding it is rejected
+* If the new area overlaps with another safe area, than the request of adding it is rejected
 
-#### Remove safe parking area
+#### Remove safe area
 ##### Actors
 * PowerEnJoy employee
 ##### Entry conditions
 * The employee is logged in with his company credentials
-* The employee has chosen to remove a safe parking area
+* The employee has chosen to remove a safe area
 ##### Flow of events
-* The employee chooses which safe parking area has to be deleted
-* SYSTEM deletes the safe parking area from the list of known parking areas
+* The employee chooses which safe area has to be deleted
+* SYSTEM deletes the safe area from the list of known areas
 ##### Exit conditions
-* The safe parking area is removed from the list
+* The safe area is removed from the list
 
-#### Manage recharging stations
+#### Update safe area
 ##### Actors
 * PowerEnJoy employee
 ##### Entry conditions
 * The employee is logged in with his company credentials
+* The employee has chosen to remove a safe area
 ##### Flow of events
-* The employee activates the _manage recharging stations_ function on his terminal. SYSTEM responds with a list of recharging stations currently stored in the known
-* If the employee chooses to add a new recharging station activating the _add recharging station_ function on his terminal, then the use case __add recharging station__ is activated
-* If the employee chooses to remove a recharging station activating the _remove recharging station_ function on his terminal, then the use case __remove recharging station__ is activated
-* If the employee chooses to update a recharging station activating the _update recharging station_ function on his terminal, then the use case __update recharging station__ is activated
+* The employee chooses which safe area has to be updated
+* SYSTEM shows a form in which user can update safe area parameters, then submits the form
+* SYSTEM updates the parameters of the selected safe area
 ##### Exit conditions
-* The list of recharging stations is updated
-
-#### Add recharging station
-##### Actors
-* PowerEnJoy employee
-##### Entry conditions
-* The employee is logged in with his company credentials
-* The employee has chosen to add a new recharging station
-##### Flow of events
-* SYSTEM shows the employee a form
-* The employee fills the form with the parameters of the new recharging station (including the boundaries of the area and the number of available plugs), then submits the form
-* SYSTEM adds the new recharging station to the list of known recharging stations
-##### Exit conditions
-* The new recharging station is added to the list
+* The safe area parameters are updated
 ##### Exceptions
-* If the new recharging station boundaries overlap with another parking area, than the request of adding it is rejected
-
-#### Remove recharging station
-##### Actors
-* PowerEnJoy employee
-##### Entry conditions
-* The employee is logged in with his company credentials
-* The employee has chosen to remove a recharging station
-##### Flow of events
-* The employee chooses which recharging station has to be deleted
-* SYSTEM deletes the recharging station from the list of known recharging stations
-##### Exit conditions
-* The recharging station is removed from the list
-
-#### Update recharging station
-##### Actors
-* PowerEnJoy employee
-##### Entry conditions
-* The employee is logged in with his company credentials
-* The employee has chosen to remove a recharging station
-##### Flow of events
-* The employee chooses which recharging station has to be updated
-* SYSTEM shows a form in which user can update recharging station parameters (including its boundaries and/or number of plugs), then submits the form
-* SYSTEM updates the parameters of the selected recharging station
-##### Exit conditions
-* The recharging station parameters are updated
-##### Exceptions
-* If the recharging station boundaries overlap with another parking area, than the request of updating it is rejected
+* If the safe area boundaries overlap with another parking area, than the request of updating it is rejected
 
 #### Manage geographical regions
 ##### Actors
@@ -304,28 +276,11 @@ _No other actor than SYSTEM is involved_
 ##### Flow of events
 * The employee activates the _manage geographical regions_ function on his terminal
 * SYSTEM sends to the employee's terminal a map showing all the geographical regions
-* If the employee chooses to add one more region, than the __add geographical region__ use case is activated
 * If the employee selects one region, he can decide to divide it into two regions or to merge it with another region. In the former case __split geographical region__ use case is activated, in the latter __merge geographical regions__ use case is activated
 ##### Exit conditions
 * Geographical regions are updated
 * New reservations will be affected by the update
 * Reservations that are already inserted are not affected by the update 
-
-#### Add geographical region
-##### Actors
-* PowerEnJoy employee
-##### Entry conditions
-* The employee is logged in with his company credentials
-* The employee has chosen to add a new geographical region
-##### Flow of events
-* SYSTEM presents on the employee's terminal a map where actual geographical regions are highlighted
-* The employee selects on the map the boundaries of the new geographical area
-* The employee confirms his choice
-* SYSTEM adds the new region to the list of the geographical regions
-##### Exit conditions
-* The new region is inserted into the set of geographical regions
-##### Exceptions
-* If the selected region overlaps with some other geographical region already inserted, then the insertion is rejected
 
 #### Split geographical region
 ##### Actors

@@ -17,7 +17,7 @@
 * **Reservor user**: the user who has made a reservation for the specific car. A user is considered the reservor user of a car until the reservation expires or the user is charged with the bill
 * **Available car**: a locked car for which no reservation exists
 * **Reserved car**: a locked car for which it exists a user who has reserved it
-* **Becoming available car**: an unlocked car is said to be "becoming available" as soon as all the passengers and the driver of this car exits the car and it is parked in a safe area
+* **Becoming available car**: an unlocked car is said to be "becoming available" as soon as all the passengers and the driver of this car exits the car, the doors of the car are closed and it is parked in a safe area
 * **In use car**: an unlocked car which is not becoming available
 * **GPS**: A system capable of providing the location of a receiver device with a good precision (5 meters)
 * **Overlapping areas**: Two areas are said to be overlapping if there exists at least one geographical coordinates which is contained inside the two areas
