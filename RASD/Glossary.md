@@ -1,6 +1,7 @@
 ### Glossary
 * **System**: the system to be developed for PowerEnJoy
 * **User**: a generic person interacting with the system
+* **Employee**: a person who works for PowerEnJoy
 * **Car**: an electric vehicle owned by the company
 * **Bill**: an amount of money a user has to pay. It is related to only a single ride
 * **Pending bill**: a bill that the user has not paid yet
