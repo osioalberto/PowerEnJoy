@@ -2,7 +2,9 @@
 	This is a signature representing a tuple composed of
 		a unique driving licence number,
 		a unique username,
-		a password
+		a password,
+		a date of birth,
+		a complete name
 */
 sig Credential {}
 sig PaymentInformation {}

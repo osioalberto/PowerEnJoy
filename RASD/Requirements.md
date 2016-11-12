@@ -96,7 +96,7 @@
 	- [D5]
 	- [D12]
 	- [R13.1]: The system knows whether a payment attempt was made for the current car
-	- [R13.2]: The system locks the car and makes it available only if the payment attempt was processed, either if the payment is successful or not.
+	- [R13.2]: The system locks the car and makes it available only if the payment attempt was processed, either if the payment is successful or not
 * [G14]:
 	- [D2]
 	- [R14.1]: The system knows the result of the payment operation
@@ -142,7 +142,7 @@
 	- [R19.1]
 	- [R19.2]
 	- [R19.3]
-	- [R21.1]: The system can acquire from the employee the type of safe area, its shape as a sequence of coordinate, and eventually the number of plugs of...
+	- [R21.1]: The system can acquire from the employee the type of safe area, its shape as a sequence of coordinate, and eventually the number of plugs of the recharging station area
 	- [R21.2]: The system is able to check if the defined safe area will overlap with the already defined safe areas
 	- [R21.3]: The system insert the new safe area only if it is not overlapping
 * [G22]:
@@ -150,7 +150,7 @@
 	- [R19.2]
 	- [R19.3]
 	- [R22.1]: The system allows the employee to select a safe area
-	- [R21.1]: The system can acquire from the employee the type of safe area, its shape as a sequence of coordinate, and eventually the number of plugs of...
+	- [R21.1]: The system can acquire from the employee the type of safe area, its shape as a sequence of coordinate, and eventually the number of plugs of the recharging station area
 	- [R22.2]: The system is able to check if the defined safe area will overlap with the already defined safe areas except for the selected one
 	- [R22.3]: The system updates the selected safe area only if it is not overlapping
 * [G23]:
