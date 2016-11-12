@@ -121,6 +121,7 @@ sig Car {
 		passengers = 0
 		ignited = False
 		closed = True
+        position in SafeArea.boundaries
 	}
 	chargeLevel = 0 => ignited = False
 }
@@ -283,11 +284,11 @@ fact userCannotRideManyCarsAtTime {
 	}
 }
 fact onlyUnlockedCarsHaveARideAssociated {
-	all c:Car| c.locked = False <=> one r:Ride| {
-		r.car = c
+	all c:Car| {
+		c.locked = False <=> one r:Ride| r.car = c
+		c.locked = True => no r:Ride| r.car = c
 	}
-}
-pred show(){
+}pred show(){
 	#(RechargingStationArea.pluggedCars) > 0
 	some r:Ride| r.elapsedMinutes>0
 	(#Bill) > 0

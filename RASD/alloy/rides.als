@@ -31,7 +31,8 @@ fact userCannotRideManyCarsAtTime {
 	}
 }
 fact onlyUnlockedCarsHaveARideAssociated {
-	all c:Car| c.locked = False <=> one r:Ride| {
-		r.car = c
+	all c:Car| {
+		c.locked = False <=> one r:Ride| r.car = c
+		c.locked = True => no r:Ride| r.car = c
 	}
 }

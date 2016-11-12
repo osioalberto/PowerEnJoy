@@ -19,6 +19,7 @@ sig Car {
 		passengers = 0
 		ignited = False
 		closed = True
+        position in SafeArea.boundaries
 	}
 	chargeLevel = 0 => ignited = False
 }
