@@ -19,3 +19,4 @@
 * [D18] The system is able to detect whether the doors of a car are opened or closed
 * [D19] Car plates are unique
 * [D20] Driving licence are unique
+* [D21] Cars are managed via an external system, that the company already owns

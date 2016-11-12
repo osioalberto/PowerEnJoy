@@ -3,7 +3,7 @@
 	interested in, an area is a set of point inside such polygon
 */
 abstract sig Area {
-	points: some Position 
+	boundaries: some Position 
 }
 sig GeographicalRegion extends Area {}
 abstract sig SafeArea extends Area {}
@@ -14,63 +14,70 @@ sig RechargingStationArea extends SafeArea {
 } {
 	maxPlugs > 0
 	#pluggedCars <= maxPlugs
+	all c:pluggedCars| c.position in boundaries
 }
 /*
 	It finds a position with a minimal distance from the argument, such that
 	the position found belongs to a RechargingStationArea
 */
 fun findNearestPositionOfRechargingStations[pos:Position]:lone Position {
-	{p:RechargingStationArea.points|
-		all p2:RechargingStationArea.points| p.distance[pos] <= p2.distance[pos]
+	{p:RechargingStationArea.boundaries|
+		all p2:RechargingStationArea.boundaries| p.distance[pos] <= p2.distance[pos]
 	}
 }
 /*
 	Geographical regions cannot overlap, because of the way a geographical region can be modified
 */
 fact geographicalRegionDoNotOverlap {
-	no disjoint g1,g2:GeographicalRegion| g1.points&g2.points != none
+	no disjoint g1,g2:GeographicalRegion| g1.boundaries&g2.boundaries != none
 }
 /*
 	Safe areas cannot overlap because the two subset are defined to be partitions of the superset.
 	Overlapping within the same partition, even if logically possible, it is useless.
 */
 fact safeAreaDoNotOverlap {
-	no disjoint s1,s2:SafeArea| s1.points&s2.points != none
+	no disjoint s1,s2:SafeArea| s1.boundaries&s2.boundaries != none
 }
 /*
 	Since geographical region must cover all the territory, it is necessary that any position belongs
 	to a geographical area
 */
 fact eachPositionBelongsToAtLeastGeographicalRegion {
-	all p:Position| p in GeographicalRegion.points
+	all p:Position| p in GeographicalRegion.boundaries
 }
+enum BillStatus { PendingBill, PaidBill, RejectedBill }
 abstract sig Bill {
-	cost: one Int,
-	isRejected: lone Boolean
+	amount: one Int,
+	status: one BillStatus
 }
 sig ExpirationBill extends Bill {} {
-	cost = 1
+	amount = 1
 }
 sig RideBill extends Bill {
 	percentageDeltas: set PercentageDelta,
 } {
-	cost >= 0
-	isRejected = none => {
+	amount >= 0
+	status = PendingBill => {
 		one r:Ride| {
 			this in r.reservor.pendingBills
 			r.car.isBecomingAvailable[] => {
 				all p:PercentageDelta| canApplyPercentageDelta[r, p] <=> p in percentageDeltas
-				cost = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
+				amount = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
 			}
 			not r.car.isBecomingAvailable[] => {
 				percentageDeltas = none
-				cost = mul[r.elapsedMinutes, r.car.costPerMinute]
+				amount = mul[r.elapsedMinutes, r.car.costPerMinute]
 			}
 		}
 	}
-	isRejected = True => cost != 0
+	status = RejectedBill => amount != 0
 }
-
+fact thereCannotTwoRideBillsOneIsPending {
+	no rb1,rb2:RideBill| {
+		rb1.status = PendingBill
+		rb2.status = RejectedBill
+	}
+}
 fact allBillAreUsed {
 	User.pendingBills = Bill
 }
@@ -81,12 +88,12 @@ fact billAreUniqueByUser {
 }
 fact allRideHaveAnAssociatedBill {
 	all r:Ride| one b:RideBill| {
-		b.isRejected = none
+		b.status = PendingBill
 		b in r.reservor.pendingBills
 	}
 }
 fact notStoringCompletedBills {
-	no b:Bill|b.isRejected = False
+	no b:Bill|b.status = PaidBill
 }
 abstract sig Boolean {}
 one sig True extends Boolean {}
@@ -107,7 +114,7 @@ sig Car {
 	chargeLevel <= 100
 	passengers >= 0					//passengers are persons... and include the driver
 	costPerMinute > 0				//negative or zero cost ride are not allowed
-	position in area.points			//the position must belong to the area
+	position in area.boundaries		//the position must belong to the area
 	locked = True => {
 		passengers = 0
 		ignited = False
@@ -120,7 +127,7 @@ pred Car.isBecomingAvailable[]{
 	this.closed=True
 	this.locked=False
 	this.passengers = 0
-	this.position in SafeArea.points
+	this.position in SafeArea.boundaries
 }
 fact platesAreUniqueByCar {
 	no disjoint c1,c2:Car| c1.plate = c2.plate 
@@ -208,6 +215,11 @@ fact noDuplicatesInPosition{
 		p1.longitude=p2.longitude
 	}
 }
+/*
+	The elapsedMinutes relation is a simplification of the creationTime field in the class diagram.
+	The elapsedMinutes is the only relevant information for the system as it is, and can be computed
+	quite easly from the creationTime.
+*/
 sig Reservation {
 	reservor: one User,
 	car: one Car,
@@ -236,11 +248,22 @@ fact userCannotReserveManyCarsInTheSameArea {
 fact sameCarReservationIsNotPossible {
 	no r1,r2:Reservation| r1.car = r2.car
 }
+/*
+	The elapsedMinutes relation is a simplification of the creationTime field in the class diagram.
+	The elapsedMinutes is the only relevant information for the system as it is, and can be computed
+	quite easly from the creationTime.
+	The beforeGettingBanned expresses a temporal constraint, the system cannot prevent a user from
+	riding in the following situation:
+		a user reserves two cars,
+		then he starts a ride in one of the two,
+		the other reservation expires and the user is banned because he cannot pay
+*/
 sig Ride {
 	car: one Car,
 	reservor: one User,
 	elapsedMinutes: one Int,
-	passengersFromBegin: one Int
+	passengersFromBegin: one Int,
+	private beforeGettingBanned: one Boolean
 } {
 	elapsedMinutes >= 0
 	passengersFromBegin >= 0
@@ -249,7 +272,7 @@ sig Ride {
 fact onlyRegisteredNotBannedUserCanHaveARide {
 	all r:Ride| {
 		r.reservor.isRegistered[]
-		not r.reservor.isBanned[]
+		r.beforeGettingBanned = False => not r.reservor.isBanned[]
 	}
 }
 fact userCannotRideManyCarsAtTime {
@@ -268,6 +291,12 @@ pred show(){
 	(#Bill) > 0
 }
 run show for 5 but 8 Int
+/*
+	This is a signature representing a tuple composed of
+		a unique driving licence number,
+		a unique username,
+		a password
+*/
 sig Credential {}
 sig PaymentInformation {}
 sig User {
@@ -287,7 +316,7 @@ sig User {
 	this.isRegistered[] <=> paymentInformation != none
 }
 pred User.isBanned[] {
-	this.pendingBills.isRejected = True
+	some b:this.pendingBills| b.status = RejectedBill
 }
 pred User.isRegistered[] {
 	this in ManagementSystem.users

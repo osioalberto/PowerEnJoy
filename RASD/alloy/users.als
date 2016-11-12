@@ -1,3 +1,9 @@
+/*
+	This is a signature representing a tuple composed of
+		a unique driving licence number,
+		a unique username,
+		a password
+*/
 sig Credential {}
 sig PaymentInformation {}
 sig User {
@@ -17,7 +23,7 @@ sig User {
 	this.isRegistered[] <=> paymentInformation != none
 }
 pred User.isBanned[] {
-	this.pendingBills.isRejected = True
+	some b:this.pendingBills| b.status = RejectedBill
 }
 pred User.isRegistered[] {
 	this in ManagementSystem.users
