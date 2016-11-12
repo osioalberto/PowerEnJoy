@@ -14,3 +14,11 @@
 * [G13] After being used by its reservor user, a car will be available for a new reservation after the system has charged that user with the bill corresponding to his ride
 * [G14] A user that cannot pay his bill is banned until the bill is estinguished
 * [G15] Logged users must be able to find all their reservation that are still valid
+* [G16] Logged employees are able to view all the geographical regions
+* [G17] Logged employees are able to split geographical regions
+* [G18] Logged employees are able to merge geographical regions
+* [G19] Logged employees are able to view all the safe areas
+* [G20] Logged employees are able to remove a safe area
+* [G21] Logged employees are able to add a new safe area
+* [G22] Logged employees are able to update the information of a safe area
+* [G23] Logged employees can view all the cars which are in mantainace and are not plugged into a power grid...

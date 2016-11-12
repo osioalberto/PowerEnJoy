@@ -1,27 +1,36 @@
+enum BillStatus { PendingBill, PaidBill, RejectedBill }
 abstract sig Bill {
-	cost: one Int,
-	isRejected: lone Boolean
-} {
-	isRejected = none => {
-		one r:Ride| this in r.reservor.pendingBills
-	}
+	amount: one Int,
+	status: one BillStatus
 }
 sig ExpirationBill extends Bill {} {
-	cost = 1
+	amount = 1
 }
 sig RideBill extends Bill {
 	percentageDeltas: set PercentageDelta,
 } {
-	cost >= 0
-	isRejected = none => {
+	amount >= 0
+	status = PendingBill => {
 		one r:Ride| {
-			all p:PercentageDelta| canApplyPercentageDelta[r, p] <=> p in percentageDeltas
-			cost = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
+			this in r.reservor.pendingBills
+			r.car.isBecomingAvailable[] => {
+				all p:PercentageDelta| canApplyPercentageDelta[r, p] <=> p in percentageDeltas
+				amount = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
+			}
+			not r.car.isBecomingAvailable[] => {
+				percentageDeltas = none
+				amount = mul[r.elapsedMinutes, r.car.costPerMinute]
+			}
 		}
 	}
-	isRejected = True => cost != 0
+	status = RejectedBill => amount != 0
 }
-
+fact thereCannotTwoRideBillsOneIsPending {
+	no rb1,rb2:RideBill| {
+		rb1.status = PendingBill
+		rb2.status = RejectedBill
+	}
+}
 fact allBillAreUsed {
 	User.pendingBills = Bill
 }
@@ -30,15 +39,12 @@ fact billAreUniqueByUser {
 		u1.pendingBills & u2.pendingBills != none
 	}
 }
-fact notProcessedBillHaveARide {
-	all b:Bill| b.isRejected = none => one r:Ride| {
+fact allRideHaveAnAssociatedBill {
+	all r:Ride| one b:RideBill| {
+		b.status = PendingBill
 		b in r.reservor.pendingBills
-		r.car.isBecomingAvailable[]
 	}
 }
 fact notStoringCompletedBills {
-	no b:Bill|b.isRejected = False
-}
-fact atMostOneCurrentBillPerUser {
-	all u:User| lone b:u.pendingBills|b.isRejected = none
+	no b:Bill|b.status = PaidBill
 }

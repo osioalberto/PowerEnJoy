@@ -14,7 +14,7 @@ sig Car {
 	chargeLevel <= 100
 	passengers >= 0					//passengers are persons... and include the driver
 	costPerMinute > 0				//negative or zero cost ride are not allowed
-	position in area.points			//the position must belong to the area
+	position in area.boundaries		//the position must belong to the area
 	locked = True => {
 		passengers = 0
 		ignited = False
@@ -25,8 +25,9 @@ sig Car {
 pred Car.isBecomingAvailable[]{
 	this.ignited=False
 	this.closed=True
+	this.locked=False
 	this.passengers = 0
-	this.position in SafeArea.points
+	this.position in SafeArea.boundaries
 }
 fact platesAreUniqueByCar {
 	no disjoint c1,c2:Car| c1.plate = c2.plate 

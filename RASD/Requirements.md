@@ -29,9 +29,9 @@
 	- [D7]
 	- [D14]
 	- [R3.1]
-	- [R4.1]: The system is capable of finding all available cars within a distance range from the geographical coordinate of the address
+	- [R4.1]: The system only allows the logged in user who is not banned to insert the address on which the search area will be centered
+	- [R4.2]: The system is capable of finding all available cars within a distance range from the geographical coordinate of the address
 	- [R3.3]
-	- [R4.2]: The system only allows the logged in user who is not banned to insert the address on which the search area will be centered
 * [G5]:
 	- [D5]
 	- [D6]
@@ -108,6 +108,55 @@
 	- [D5]
 	- [D6]
 	- [D7]
-	- [R15.1]: The system only allow a logged in user who is not banned to view his reservations
+	- [R15.1]: The system only allows a logged in user who is not banned to view his reservations
 	- [R15.2]: The system is capable of finding all the reservation made by the user
 	- [R15.3]: The system is able to show to a user a list of cars with their position, battery level and the expiration time
+* [G16]:
+	- [R16.1]: The system only allows a logged in employee to manage geographical regions
+	- [R16.2]: The system is able to find all the geographical regions already defined
+	- [R16.3]: The system is able to display the geographical regions to the employee
+* [G17]:
+	- [R16.1]
+	- [R16.2]
+	- [R16.3]
+	- [R17.1]: The system allows the employee to select a geographical region
+	- [R17.2]: The system allows the employee to draw a line inside the selected geographical region
+	- [R17.3]: The system is able to compute the new geographical region and store them
+* [G18]:
+	- [R16.1]
+	- [R16.2]
+	- [R16.3]
+	- [R18.1]: The system allows the employee to select two geographical regions
+	- [R18.2]: The system merges the two region into one single region and store it, removing the two sources region
+* [G19]:
+	- [R19.1]: The system only allow a logged in employee to manage safe areas
+	- [R19.2]: The system is able to find all the safe areas already defined
+	- [R19.3]: The system is able to display the safe areas to the employee
+* [G20]:
+	- [R19.1]
+	- [R19.2]
+	- [R19.3]
+	- [R20.1]: The system allows the employee to select a safe area
+	- [R20.2]: The system remove the selected safe area
+* [G21]:
+	- [R19.1]
+	- [R19.2]
+	- [R19.3]
+	- [R21.1]: The system can acquire from the employee the type of safe area, its shape as a sequence of coordinate, and eventually the number of plugs of...
+	- [R21.2]: The system is able to check if the defined safe area will overlap with the already defined safe areas
+	- [R21.3]: The system insert the new safe area only if it is not overlapping
+* [G22]:
+	- [R19.1]
+	- [R19.2]
+	- [R19.3]
+	- [R22.1]: The system allows the employee to select a safe area
+	- [R21.1]: The system can acquire from the employee the type of safe area, its shape as a sequence of coordinate, and eventually the number of plugs of...
+	- [R22.2]: The system is able to check if the defined safe area will overlap with the already defined safe areas except for the selected one
+	- [R22.3]: The system updates the selected safe area only if it is not overlapping
+* [G23]:
+	- [D5]
+	- [D6]
+	- [D7]
+	- [R23.1]: The system only allows a logged in employee to view the list of in maintenance cars
+	- [R23.2]: The system is capable of finding all the in maintenance cars
+	- [R3.3]

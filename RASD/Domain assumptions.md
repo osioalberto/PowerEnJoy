@@ -15,5 +15,8 @@
 * [D14] A user interacting with the system has an internet connection
 * [D15] Geographical regions do not overlap
 * [D16] Safe areas do not overlap
-* [D17] Each employee or manager of PowerEnJoy has its own username and password (different from those used to reserve cars)
+* [D17] Each employee has its own username and password (different from those used to reserve cars)
 * [D18] The system is able to detect whether the doors of a car are opened or closed
+* [D19] Car plates are unique
+* [D20] Driving licence are unique
+* [D21] Cars are managed via an external system, that the company already owns

@@ -1,3 +1,8 @@
+/*
+	The elapsedMinutes relation is a simplification of the creationTime field in the class diagram.
+	The elapsedMinutes is the only relevant information for the system as it is, and can be computed
+	quite easly from the creationTime.
+*/
 sig Reservation {
 	reservor: one User,
 	car: one Car,

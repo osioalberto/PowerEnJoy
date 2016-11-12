@@ -1,6 +1,7 @@
 ### Glossary
 * **System**: the system to be developed for PowerEnJoy
 * **User**: a generic person interacting with the system
+* **Employee**: a person who works for PowerEnJoy
 * **Car**: an electric vehicle owned by the company
 * **Bill**: an amount of money a user has to pay. It is related to only a single ride
 * **Pending bill**: a bill that the user has not paid yet
@@ -23,4 +24,5 @@
 * **GPS**: A system capable of providing the location of a receiver device with a good precision (5 meters)
 * **Overlapping areas**: Two areas are said to be overlapping if there exists at least one geographical coordinates which is contained inside the two areas
 * **Expiration of a car reservation**: when a reservation expires, the car becomes available again, the reservor user loses his reservation and he is charged a fee of 1€
+* **Percentage delta**: a discount or a raise based on percentage
 * **Applying a raise** or **a discount**: The operation of increasing or reducing the amount of a bill for a specific reason. The amount is computed just before the system charges the user of a bill, and then all those amounts (each one related to a specific reason) are algebraically added to the same bill.
