@@ -4,6 +4,8 @@
 */
 abstract sig Area {
 	boundaries: some Position 
+} {
+	#boundaries>2
 }
 sig GeographicalRegion extends Area {}
 abstract sig SafeArea extends Area {}
@@ -280,8 +282,8 @@ fact userCannotRideManyCarsAtTime {
 		r1.reservor = r2.reservor
 	}
 }
-fact unlockedCarsHaveARideAssociated {
-	all c:Car| c.locked = False => one r:Ride| {
+fact onlyUnlockedCarsHaveARideAssociated {
+	all c:Car| c.locked = False <=> one r:Ride| {
 		r.car = c
 	}
 }

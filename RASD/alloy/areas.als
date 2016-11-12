@@ -4,6 +4,8 @@
 */
 abstract sig Area {
 	boundaries: some Position 
+} {
+	#boundaries>2
 }
 sig GeographicalRegion extends Area {}
 abstract sig SafeArea extends Area {}
