@@ -13,10 +13,8 @@ sig User {
 		not this.isBanned[]
 	}
 	//all registered user belongs to the system, the other are free
-	this.isRegistered[] <=> {
-		paymentInformation != none
-		credential != none
-	}
+	this.isRegistered[] <=> credential != none
+	this.isRegistered[] <=> paymentInformation != none
 }
 pred User.isBanned[] {
 	this.pendingBills.isRejected = True

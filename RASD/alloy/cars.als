@@ -25,6 +25,7 @@ sig Car {
 pred Car.isBecomingAvailable[]{
 	this.ignited=False
 	this.closed=True
+	this.locked=False
 	this.passengers = 0
 	this.position in SafeArea.points
 }

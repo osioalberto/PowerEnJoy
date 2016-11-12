@@ -47,10 +47,6 @@ fact eachPositionBelongsToAtLeastGeographicalRegion {
 abstract sig Bill {
 	cost: one Int,
 	isRejected: lone Boolean
-} {
-	isRejected = none => {
-		one r:Ride| this in r.reservor.pendingBills
-	}
 }
 sig ExpirationBill extends Bill {} {
 	cost = 1
@@ -61,8 +57,15 @@ sig RideBill extends Bill {
 	cost >= 0
 	isRejected = none => {
 		one r:Ride| {
-			all p:PercentageDelta| canApplyPercentageDelta[r, p] <=> p in percentageDeltas
-			cost = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
+			this in r.reservor.pendingBills
+			r.car.isBecomingAvailable[] => {
+				all p:PercentageDelta| canApplyPercentageDelta[r, p] <=> p in percentageDeltas
+				cost = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
+			}
+			not r.car.isBecomingAvailable[] => {
+				percentageDeltas = none
+				cost = mul[r.elapsedMinutes, r.car.costPerMinute]
+			}
 		}
 	}
 	isRejected = True => cost != 0
@@ -76,17 +79,14 @@ fact billAreUniqueByUser {
 		u1.pendingBills & u2.pendingBills != none
 	}
 }
-fact notProcessedBillHaveARide {
-	all b:Bill| b.isRejected = none => one r:Ride| {
+fact allRideHaveAnAssociatedBill {
+	all r:Ride| one b:RideBill| {
+		b.isRejected = none
 		b in r.reservor.pendingBills
-		r.car.isBecomingAvailable[]
 	}
 }
 fact notStoringCompletedBills {
 	no b:Bill|b.isRejected = False
-}
-fact atMostOneCurrentBillPerUser {
-	all u:User| lone b:u.pendingBills|b.isRejected = none
 }
 abstract sig Boolean {}
 one sig True extends Boolean {}
@@ -118,6 +118,7 @@ sig Car {
 pred Car.isBecomingAvailable[]{
 	this.ignited=False
 	this.closed=True
+	this.locked=False
 	this.passengers = 0
 	this.position in SafeArea.points
 }
@@ -282,10 +283,8 @@ sig User {
 		not this.isBanned[]
 	}
 	//all registered user belongs to the system, the other are free
-	this.isRegistered[] <=> {
-		paymentInformation != none
-		credential != none
-	}
+	this.isRegistered[] <=> credential != none
+	this.isRegistered[] <=> paymentInformation != none
 }
 pred User.isBanned[] {
 	this.pendingBills.isRejected = True
