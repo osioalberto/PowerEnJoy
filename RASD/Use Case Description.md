@@ -1,7 +1,4 @@
-﻿# TODOS
-* Give a name to the SYSTEM
----
-### Use cases
+﻿### Use cases
 #### Registration
 ##### Actors
 * User
@@ -11,7 +8,7 @@
 * User is not registered to SYSTEM
 ##### Flow of events
 * The user activates the _sign up_ function on his terminal. SYSTEM responds by presenting him a form.
-* The user fills the form, inserting his complete name, birth date, driving licence number, credit card number and CVV, along with a username and a password. Once the form is completed, the user submits it.
+* The user fills the form, inserting his complete name, birth date driving licence number, credit card number and CVV, along with a username and a password. Once the form is completed, the user submits it.
 * SYSTEM validates the inserted data, and in particular queries external systems for driving licence number and credit card informations validation. If all is correct, then SYSTEM stores the new user data
 ##### Exit conditions
 * User is registered and can log in to the system
@@ -45,7 +42,7 @@
 * User chooses whether to search for cars near his current position or near a target address, and fills the form entering the radius of the search and, if he has chosen to search by address, the target address, then he submits the form.
 * If search by address was chosen, __address translation into geographical coordinates__ use case is called
 * SYSTEM queries the list of cars searching for available cars that fit user parameters (search center expressed by its geographical coordinates and search radius)
-* * SYSTEM responds to the user's terminal with a list of the available cars, each one charcterized by its unique identification number, its position (expressed by its geographical coordinates) and its battery level
+* SYSTEM responds to the user's terminal with a list of the available cars, each one charcterized by its unique identification number, its position (expressed by its geographical coordinates) and its battery level
 * The user terminal builds a map in which car positions are highlighted with a pin reporting the car identification number and a list of all cars reporting, for each car, identification number, position (expressed by its geographical coordinates) and battery level
 ##### Exit condition
 * The user has received a list of all cars that fit its search parameters
@@ -126,6 +123,7 @@
 * Other people not necessarly registered to SYSTEM (referred to as passengers)
 ##### Initial condition
 * User is logged in
+* User is not banned
 * User is the reservor user for a car
 ##### Flow of events
 * User reaches the reserved car and activates the _unlock car_ function on his terminal
@@ -140,7 +138,7 @@
 
 #### Ride conclusion
 ##### Actors
-* User
+* _(User is not directly involved, SYSTEM will charge him with the bill, but he actually does nothing)_
 ##### Entry condition
 * The car reserved by the user has been parked in a safe area
 ##### Flow of events
@@ -183,7 +181,7 @@ _No other actor than SYSTEM is involved_
 * External system for payments processing
 * _(User is not directly involved, SYSTEM eventually changes his status, but he actually does nothing)_
 ##### Entry condition
-* There is a pending bill in SYSTEM
+* There is a pending bill in SYSTEM related to the user
 ##### Flow of events
 * SYSTEM requests the external system to actually carry out the payment, sending in the request the amount of the bill and the credit card information of the user whom this bill belongs to
 * The external system acknowledges the payment
@@ -199,15 +197,14 @@ _No other actor than SYSTEM is involved_
 * User
 ##### Entry conditions
 * User is logged is
-* User is banned
-* There exists at least one pending payment associated to the user
+* There exists at least one pending payment associated to the user (and thus the user is banned)
 ##### Flow of events
 * User activates the _pay pending bills_ function on his terminal. A request is sent to SYSTEM.
 * SYSTEM searches all pending payments associated to the user
 * For each found payment, SYSTEM activates the ___payment___ use case
 * SYSTEM responds to the request acknowledging the completion of the payments
 ##### Exit conditions
-* User is not anymore "banned" and can reserve cars
+* User is not anymore banned and can reserve cars
 ##### Exceptions
 * If a payment fails, SYSTEM notifies the user of the error
 * If a payment could not be performed, SYSTEM notifies the user of the error
@@ -309,4 +306,4 @@ _No other actor than SYSTEM is involved_
 * The employee confirms his choice
 * SYSTEM updates the set of geographical regions removing the two selected geographical regions and adding one geographical region which is the result of the union of the two deleted geographical regions
 ##### Exit conditions
-* The geographical regionsselected by the employee are now merged into a single region
+* The geographical regions selected by the employee are now merged into a single region
