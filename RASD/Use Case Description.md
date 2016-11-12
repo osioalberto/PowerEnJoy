@@ -196,7 +196,7 @@ _No other actor than SYSTEM is involved_
 ##### Actors
 * User
 ##### Entry conditions
-* User is logged is
+* User is logged in
 * There exists at least one pending payment associated to the user (and thus the user is banned)
 ##### Flow of events
 * User activates the _pay pending bills_ function on his terminal. A request is sent to SYSTEM.
