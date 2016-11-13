@@ -254,7 +254,7 @@ _No other actor than SYSTEM is involved_
 * PowerEnJoy employee
 ##### Entry conditions
 * The employee is logged in with his company credentials
-* The employee has chosen to remove a safe area
+* The employee has chosen to update a safe area
 ##### Flow of events
 * The employee chooses which safe area has to be updated
 * SYSTEM shows a form in which user can update safe area parameters, then submits the form
