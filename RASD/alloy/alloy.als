@@ -67,12 +67,16 @@ assert noOverFreeBonusCombo {
 		sumPercentageDelta[{p:PercentageDelta| canApplyPercentageDelta[r,p]}]>100
 	}
 }
+assert noDoubleReservation {
+	no disjoint r1,r2: Ride| r1.car = r2.car
+}
 check reservationOnRideCar for 5 but 8 Int
 check noDoubleRide for 5 but 8 Int
 check positionBelongsToOneRegion for 5 but 8 Int
 check noTwoPendingRideBill for 5 but 8 Int
 check onRejectedNoReservation for 5 but 8 Int
 check noOverFreeBonusCombo for 5 but 8 Int
+check noDoubleReservation for 5 but 8 Int
 enum BillStatus { PendingBill, PaidBill, RejectedBill }
 abstract sig Bill {
 	amount: one Int,
@@ -320,7 +324,8 @@ fact onlyUnlockedCarsHaveARideAssociated {
 		c.locked = False <=> one r:Ride| r.car = c
 		c.locked = True => no r:Ride| r.car = c
 	}
-}pred show(){
+}
+pred show(){
 	#(RechargingStationArea.pluggedCars) > 0
 	some r:Ride| r.elapsedMinutes>0
 	(#Bill) > 0
