@@ -26,11 +26,17 @@ pred canApplyPercentageDelta[r: one Ride, p: one PercentageDelta] {
 	p = DiscountBatteryHigh => r.car.chargeLevel >= 50
 	p = DiscountManyPeople => r.passengersFromBegin >= 3
 }
-
 //consistency among deltas
 fact BatteryIsLowOrHigh {
 	no b:Bill| {
 		RaiseBatteryLow in b.percentageDeltas
 		DiscountBatteryHigh in b.percentageDeltas
 	}
+}
+fun sumPercentageDelta[s: set PercentageDelta]: one Int {
+	(DiscountManyPeople in s => DiscountManyPeople.delta  else 0)+
+	(DiscountBatteryHigh in s => DiscountBatteryHigh.delta else 0)+
+	(DiscountCarPlugged in s => DiscountCarPlugged.delta else 0)+
+	(RaiseFarCar in s => RaiseFarCar.delta else 0) +
+	(RaiseBatteryLow in s => RaiseBatteryLow.delta else 0)
 }

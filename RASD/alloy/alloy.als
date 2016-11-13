@@ -47,6 +47,32 @@ fact safeAreaDoNotOverlap {
 fact eachPositionBelongsToAtLeastGeographicalRegion {
 	all p:Position| p in GeographicalRegion.boundaries
 }
+assert reservationOnRideCar {
+	no r:Reservation,rr:Ride| r.car = rr.car
+}
+assert noDoubleRide {
+	no disjoint r1,r2: Ride| r1.reservor = r2.reservor
+}
+assert positionBelongsToOneRegion {
+	no disjoint r1,r2: GeographicalRegion| (r1.boundaries & r2.boundaries) != none
+}
+assert noTwoPendingRideBill {
+	no u:User| #({p:u.pendingBills| p in RideBill and p.status = PendingBill})>1
+}
+assert onRejectedNoReservation {
+	no r:Reservation| {b:r.reservor.pendingBills| b.status = RejectedBill} != none
+}
+assert noOverFreeBonusCombo {
+	no r:Ride| {
+		sumPercentageDelta[{p:PercentageDelta| canApplyPercentageDelta[r,p]}]>100
+	}
+}
+check reservationOnRideCar for 5 but 8 Int
+check noDoubleRide for 5 but 8 Int
+check positionBelongsToOneRegion for 5 but 8 Int
+check noTwoPendingRideBill for 5 but 8 Int
+check onRejectedNoReservation for 5 but 8 Int
+check noOverFreeBonusCombo for 5 but 8 Int
 enum BillStatus { PendingBill, PaidBill, RejectedBill }
 abstract sig Bill {
 	amount: one Int,
@@ -64,7 +90,7 @@ sig RideBill extends Bill {
 			this in r.reservor.pendingBills
 			r.car.isBecomingAvailable[] => {
 				all p:PercentageDelta| canApplyPercentageDelta[r, p] <=> p in percentageDeltas
-				amount = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
+				amount = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sumPercentageDelta[percentageDeltas]],100]
 			}
 			not r.car.isBecomingAvailable[] => {
 				percentageDeltas = none
@@ -169,13 +195,19 @@ pred canApplyPercentageDelta[r: one Ride, p: one PercentageDelta] {
 	p = DiscountBatteryHigh => r.car.chargeLevel >= 50
 	p = DiscountManyPeople => r.passengersFromBegin >= 3
 }
-
 //consistency among deltas
 fact BatteryIsLowOrHigh {
 	no b:Bill| {
 		RaiseBatteryLow in b.percentageDeltas
 		DiscountBatteryHigh in b.percentageDeltas
 	}
+}
+fun sumPercentageDelta[s: set PercentageDelta]: one Int {
+	(DiscountManyPeople in s => DiscountManyPeople.delta  else 0)+
+	(DiscountBatteryHigh in s => DiscountBatteryHigh.delta else 0)+
+	(DiscountCarPlugged in s => DiscountCarPlugged.delta else 0)+
+	(RaiseFarCar in s => RaiseFarCar.delta else 0) +
+	(RaiseBatteryLow in s => RaiseBatteryLow.delta else 0)
 }
 one sig ManagementSystem {
 	users: set User,
@@ -298,7 +330,9 @@ run show for 5 but 8 Int
 	This is a signature representing a tuple composed of
 		a unique driving licence number,
 		a unique username,
-		a password
+		a password,
+		a date of birth,
+		a complete name
 */
 sig Credential {}
 sig PaymentInformation {}

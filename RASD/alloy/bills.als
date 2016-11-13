@@ -15,7 +15,7 @@ sig RideBill extends Bill {
 			this in r.reservor.pendingBills
 			r.car.isBecomingAvailable[] => {
 				all p:PercentageDelta| canApplyPercentageDelta[r, p] <=> p in percentageDeltas
-				amount = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sum[percentageDeltas.delta]],100]
+				amount = div[mul[mul[r.elapsedMinutes,r.car.costPerMinute], 100+sumPercentageDelta[percentageDeltas]],100]
 			}
 			not r.car.isBecomingAvailable[] => {
 				percentageDeltas = none
