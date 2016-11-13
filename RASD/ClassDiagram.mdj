@@ -4872,7 +4872,7 @@
 									"model": {
 										"$ref": "AAAAAAFYUA8uDYAH/QM="
 									},
-									"visible": false,
+									"visible": true,
 									"enabled": true,
 									"lineColor": "#000000",
 									"fillColor": "#ffffff",
@@ -4881,18 +4881,19 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 903,
-									"top": 468,
-									"width": 0,
+									"left": 615,
+									"top": 439,
+									"width": 52.39990234375,
 									"height": 13,
 									"autoResize": false,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
+									"alpha": -0.04938946156869006,
+									"distance": 263.32109676210905,
 									"hostEdge": {
 										"$ref": "AAAAAAFYUA8uEYALD88="
 									},
 									"edgePosition": 1,
 									"underline": false,
+									"text": "+position",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -4971,7 +4972,7 @@
 									"model": {
 										"$ref": "AAAAAAFYUA8uDYAI3Fg="
 									},
-									"visible": true,
+									"visible": false,
 									"enabled": true,
 									"lineColor": "#000000",
 									"fillColor": "#ffffff",
@@ -5395,13 +5396,13 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 630,
+									"left": 951,
 									"top": 440,
 									"width": 52.39990234375,
 									"height": 13,
 									"autoResize": false,
-									"alpha": -4.961406330030753,
-									"distance": 300.2615526503518,
+									"alpha": -0.3734971913082401,
+									"distance": 79.47955712005447,
 									"hostEdge": {
 										"$ref": "AAAAAAFYUA+fZoOQAmE="
 									},
@@ -16446,7 +16447,7 @@
 									"model": {
 										"$ref": "AAAAAAFYV+HxlKbhdyc="
 									},
-									"visible": true,
+									"visible": false,
 									"enabled": true,
 									"lineColor": "#000000",
 									"fillColor": "#ffffff",
@@ -19938,13 +19939,13 @@
 							"_parent": {
 								"$ref": "AAAAAAFYTnBwxGKY1Fk="
 							},
+							"name": "position",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAFYUA8uDYAI3Fg=",
 								"_parent": {
 									"$ref": "AAAAAAFYUA8uDYAH/QM="
 								},
-								"name": "position",
 								"reference": {
 									"$ref": "AAAAAAFYTnBwxGKY1Fk="
 								},
@@ -21381,7 +21382,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFYV8r1eZyrww0="
 							},
-							"name": "geographicalRegions",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAFYV+HxlKbiEbs=",
