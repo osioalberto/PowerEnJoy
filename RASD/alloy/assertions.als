@@ -15,7 +15,7 @@ assert onRejectedNoReservation {
 }
 assert noOverFreeBonusCombo {
 	no r:Ride| {
-		sumPercentageDelta[{p:PercentageDelta| canApplyPercentageDelta[r,p]}]>100
+		sumPercentageDelta[{p:PercentageDelta| canApplyPercentageDelta[r,p]}]<-100
 	}
 }
 assert noDoubleReservation {
