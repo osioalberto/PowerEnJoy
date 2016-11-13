@@ -62,6 +62,7 @@ The system allows:
 	* View the status of all the cars
 	* Manage geographical regions
 	* Manage safe areas
+
 ## 2.3 User characteristics ##
 The system has two classes of users: PowerEnJoy employees and end user of shared cars. All of them have access to the Internet, and can use a browser.
 ## 2.4 Constraints ##
@@ -72,6 +73,7 @@ The system must ask the user permission for acquiring, processing and storing pe
 The system has to run under the following worst-case conditions:
 * 1 Mb/s Internet connection
 * Viewport size of 320x480 pixels
+
 ### 2.4.3 Reliability requirements ###
 The system must have a minimum availability of 99%.
 ### 2.4.4 Criticality of the application ###
@@ -79,6 +81,7 @@ The system is not used in life-critical applications.
 ### 2.4.5 Safety and security considerations ###
 * The user's payment information and driving licence number and their location must be kept private.
 * The position of in use cars must be visible only to the employee.
+
 ## 2.5 Assumptions and dependencies ##
 ### Domain assumptions.md ###
 ## 2.6 Future extensions ##
@@ -88,6 +91,7 @@ The system will be implemented foreseeing the possibility of further extensions.
 * Programmatically assign in maintenance cars to employees
 * Provide the users with a money saving option, letting them input their destination and providing informations about where to leave the car, as to provide a better distribution of cars.
 * Keep track of virtuous behaviours of the users, in order to provide the most virtuous users with further discounts.
+
 # Chapter 3 #
 # Specific requirements #
 ## 3.1 External interface requirements ##
@@ -100,14 +104,17 @@ The user interfaces must satisfy the following constraints:
 * The user interface must provide breadcrumbs navigation
 * The compilation of input fields must be done with suitable controls to simplify user's interactions
 * Web pages must be responsive
+
 ### 3.1.2 Hardware interfaces ###
 The system should use the following hardware interfaces:
 * GPS interface to obtain the position of car and logged users
 * Car monitoring system to obtain the charge level of the battery, whether the engine is ignited, the number of passengers, whether all the doors are closed
+
 ### 3.1.3 Software interfaces ###
 The system requires:
 * MySQL 5.7
 * Java EE7
+
 ### 3.1.4 Communications interfaces ###
 Users and employees communicate with the system via HTTPS connection.
 ## 3.2 System features ##
@@ -117,6 +124,7 @@ Users and employees communicate with the system via HTTPS connection.
 2. All of the requests must be processed 10 seconds. The majority of them (>90%) must be processed in less than 5 seconds.
 3. The system must be able to manage more than 100 simultaneos connections from users
 4. The system must be able to handle all the connections with the cars in the same time. Signals coming from cars must be processed in less than 1 second, in order to grant a fluid interaction experience to the users when interacting with the cars.
+
 ## 3.4 Software system attributes ##
 ### 3.4.1 Reliability ###
 System is designed to run on a single server. A backup server is also present, in order to take place of main server in case of failure. This is done to prevent service unavailability and to ensure that reserved cars can be effectively picked up by users.
@@ -127,6 +135,7 @@ The system must guarantee an availability of 99%.
 * All attempts of establishing an unsecure communication with the server must be refused.
 * Users' passwords must be stored using a one way function
 * Users' payment informations and driving licence number must be stored in a private location
+
 ### 3.4.4 Maintainability ###
 All the code must be documented using JavaDoc so that other developers can easily understand and edit it.
 The system must provide a logging functionality for debug purpose.
