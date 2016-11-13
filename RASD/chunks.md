@@ -76,11 +76,24 @@ The system has to run under the following worst-case conditions:
 * 1 Mb/s Internet connection
 * Viewport size of 320x480 pixels
 
-### 2.4.3 Reliability requirements ###
+### 2.4.3 Interfaces to other applications ###
+* External system for driving licence validation
+
+   The interaction with external system for driving licence validation is carried out over HTTPS requests
+   
+* External system for address translation
+
+   The interaction with external system for address translation is carried out over HTTPS protocol
+   
+* External system for payments processing
+
+   The interaction with external system for payments processing is carried out over a SOAP API offered by the same service
+
+### 2.4.4 Reliability requirements ###
 The system must have a minimum availability of 99%.
-### 2.4.4 Criticality of the application ###
+### 2.4.5 Criticality of the application ###
 The system is not used in life-critical applications.
-### 2.4.5 Safety and security considerations ###
+### 2.4.6 Safety and security considerations ###
 * The user's payment information and driving licence number and their location must be kept private.
 * The position of in use cars must be visible only to the employee.
 
