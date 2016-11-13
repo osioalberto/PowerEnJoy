@@ -1,6 +1,6 @@
 ####TODO Front Page####
-###Chapter 1###
-###Introduction###
+#Chapter 1#
+#Introduction#
 ##1.1 Purpose##
 This document is the Requirement Analysis and Specification Document for
 the PowerEnjoy system. Its aim is to completely describe the system,
@@ -39,14 +39,14 @@ This document is structured in three parts:
 * **Chapter 2: Overall description.** Provides a general perspective over the principal system features, constraints and assumptions about the users and the environment
 * **Chapter 3: Specific requirements.** It focuses in the functional and nonfunctional requirements.
 
-###Chapter 2###
-###Overall description###
+#Chapter 2#
+#Overall description#
 ##2.1 Product perspective##
-#2.1.1 User interfaces#
+###2.1.1 User interfaces###
 The system will present itself as a web application, the interface will be intuitive and responsive.
-#2.1.2 Hardware interfaces#
+###2.1.2 Hardware interfaces###
 ####TODO####
-#2.1.3 Software interfaces#
+###2.1.3 Software interfaces###
 The web application works on any web server that supports Java.
 The back-end stores its data in a RDBMS and can run on every platform that supports Java.
 ##2.2 Product functions##
@@ -54,28 +54,28 @@ TODO
 ##2.3 User characteristics##
 The two types of users are employee and clients (users), both of them have access to Internet, and both can use a browser.
 ##2.4 Constraints##
-#2.4.1 Regulatory policies#
+###2.4.1 Regulatory policies###
 The users are responsable of the information inserted and for any unlawful behaviour.
 The system must ask the user permission for processing and storing personal data.
-#2.4.2 Hardware limitations#
+###2.4.2 Hardware limitations###
 The system has to run under the following worst-case conditions:
 * 1 Mb/s Internet connection
 * Viewport size of 320x480 pixels
-#2.4.3 Reliability requirements#
+###2.4.3 Reliability requirements###
 The system must have a minimum availability of 99%.
-#2.4.4 Criticality of the application#
+###2.4.4 Criticality of the application###
 The system is not used in life-critical applications.
-#Safety and security considerations#
+###2.4.5 Safety and security considerations###
 The user payment information, the driving licence number and their location must be kept private.
 The location of in use car must be visible only to the employee.
 ##2.5 Assumptions and dependencies##
 ###TODO###
 ##2.6 Future extensions##
 ###TODO###
-###Chapter 3###
-###Specific requirements###
+#Chapter 3#
+#Specific requirements#
 ##3.1 External interface requirements##
-#3.1.1 User interfaces#
+###3.1.1 User interfaces###
 The user interfaces must satisfy the following constraints:
 * Web pages must adhere to the W3C and Ecma International standards. In particular to the HTML5, CSS and ECMA-262 specification.
 * The first screen must ask the user to login or to sign up in order to begin operations.
@@ -83,22 +83,22 @@ The user interfaces must satisfy the following constraints:
 * The menu must be visible in any view
 * The compilation of input fields must be done with suitable controls to simplify user's interactions
 * Web pages must be responsive
-#3.1.2 Hardware interfaces#
+###3.1.2 Hardware interfaces###
 ###TODO###
-#3.1.3 Software interfaces#
+###3.1.3 Software interfaces###
 The system requires:
 * MySQL 5.7
 * Java EE7
-#3.1.4 Communications interfaces#
+###3.1.4 Communications interfaces###
 The users communicate with the system via HTTPS.
 ##3.2 System features##
 ###Scenario, use cases, etc... as sublist###
 ##3.3 Performance requirements##
 ###Da inventare###
 ##3.4 Software system attributes##
-#3.4.1 Reliability#
-#3.4.2 Availability#
-#3.4.3 Security#
-#3.4.4 Maintainability#
-#3.4.5 Portability#
+###3.4.1 Reliability###
+###3.4.2 Availability###
+###3.4.3 Security###
+###3.4.4 Maintainability###
+###3.4.5 Portability###
 ##3.5 Alloy##
