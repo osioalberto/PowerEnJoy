@@ -45,8 +45,10 @@ The system will present itself as a web application, the interface will be intui
 The system should use the following hardware interfaces:
 * GPS interface to obtain the position of car and logged users
 * Car monitoring system to obtain the charge level of the battery, whether the engine is ignited, the number of passengers, whether all the doors are closed.
+
 ### 2.1.3 Software interfaces ###
 * The system will run on any web server that supports Java Enterprise Edition and stores its data in a RDBMS.
+
 ## 2.2 Product functions ##
 The system allows:
 * The users to:
