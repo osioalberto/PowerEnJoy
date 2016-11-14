@@ -162,6 +162,24 @@ pre#alloy_code * {
     word-wrap: break-word;      /* IE */
 }
 </style>
+<style>
+#toc OL { counter-reset: item; text-align: justify; }
+#toc LI { display: block }
+#toc LI:before { content: counters(item, ".") " "; counter-increment: item }
+#toc table {
+    display: inline-block;
+    vertical-align: middle;
+}
+#toc table tr td:nth-of-type(2) {
+    position: absolute;
+    right: 10px;
+}
+#toc td {
+padding: 0px;
+margin: 0px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/FE6D018F-B45C-B743-8965-C391603A101C/main.js" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="http://gc.kis.v2.scr.kaspersky-labs.com/C101A306193C-5698-347B-C54B-F810D6EF/abn/main.css"/></head>
 <body id="preview">
 <div class="frontpage">
@@ -170,8 +188,85 @@ pre#alloy_code * {
     <h3>Nardo Loris, Osio Alberto</h3>
     <h4>Politecnico di Milano</h4>
 </div>
-<h1><a id="Chapter_1_1"></a>Chapter 1</h1>
-<h1><a id="Introduction_2"></a>Introduction</h1>
+<div class="frontpage" style="text-align: left; padding-top: 0px;" id="toc">
+    <h1>Table of contents</h1>
+<ol>
+    <li>
+        <table><tr><td>Introduction</td><td>4</td></tr></table>
+        <ol>
+            <li><table><tr><td>Purpose</td><td>4</td></tr></table>
+            <li><table><tr><td>Scope</td><td>4</td></tr></table>
+            <li><table><tr><td>Glossary</td><td>4</td></tr></table>
+            <li><table><tr><td>Goals</td><td>5</td></tr></table>
+            <li><table><tr><td>References</td><td>6</td></tr></table>
+            <li><table><tr><td>Overview</td><td>6</td></tr></table>
+        </ol>
+    </li>
+    <li>
+        <table><tr><td>Overall Description</td><td>7</td></tr></table>
+        <ol>
+            <li><table><tr><td>Product perspective</td><td>7</td></tr></table>
+                <ol>
+                    <li><table><tr><td>User interfaces</td><td>7</td></tr></table>
+                    <li><table><tr><td>Hardware interfaces</td><td>7</td></tr></table>
+                    <li><table><tr><td>Software interfaces</td><td>7</td></tr></table>
+                </ol>
+            </li>
+            <li><table><tr><td>Product functions</td><td>7</td></tr></table></li>
+            <li><table><tr><td>User characteristics</td><td>8</td></tr></table></li>
+            <li><table><tr><td>Constraints</td><td>8</td></tr></table>
+                <ol>
+                    <li><table><tr><td>Regulatory policies</td><td>8</td></tr></table>
+                    <li><table><tr><td>Hardware limitations</td><td>8</td></tr></table>
+                    <li><table><tr><td>Interfaces to other applications</td><td>8</td></tr></table>
+                    <li><table><tr><td>Reliability requirements</td><td>9</td></tr></table>
+                    <li><table><tr><td>Criticality of the application</td><td>9</td></tr></table>
+                    <li><table><tr><td>Safety and security considerations</td><td>9</td></tr></table>
+                </ol>
+            </li>
+            <li><table><tr><td>Assumptions and dependencies</td><td>9</td></tr></table></li>
+            <li><table><tr><td>Future extensions</td><td>10</td></tr></table></li>
+        </ol>
+    </li>
+    <li>
+        <table><tr><td>Specific requirements</td><td>10</td></tr></table>
+        <ol>
+            <li><table><tr><td>External interface requirements</td><td>10</td></tr></table>
+                <ol>
+                    <li><table><tr><td>User interfaces</td><td>10</td></tr></table>
+                    <li><table><tr><td>Hardware interfaces</td><td>10</td></tr></table>
+                    <li><table><tr><td>Software interfaces</td><td>11</td></tr></table>
+                    <li><table><tr><td>Communication interfaces</td><td>11</td></tr></table>
+                </ol>
+            </li>
+            <li><table><tr><td>System features</td><td>11</td></tr></table>
+                <ol>
+                    <li><table><tr><td>Typical usage scenarios</td><td>11</td></tr></table>
+                    <li><table><tr><td>Detailed use case description</td><td>14</td></tr></table>
+                    <li><table><tr><td>Domain models</td><td>26</td></tr></table>
+                    <li><table><tr><td>Application mockups</td><td>33</td></tr></table>
+                    <li><table><tr><td>Specific requirements</td><td>42</td></tr></table>
+                </ol>
+            </li>
+            <li><table><tr><td>Performance requirements</td><td>48</td></tr></table></li>
+            <li><table><tr><td>Software system attributes</td><td>48</td></tr></table>
+                <ol>
+                    <li><table><tr><td>Reliability</td><td>48</td></tr></table>
+                    <li><table><tr><td>Availability</td><td>48</td></tr></table>
+                    <li><table><tr><td>Security</td><td>48</td></tr></table>
+                    <li><table><tr><td>Maintainability</td><td>49</td></tr></table>
+                    <li><table><tr><td>Portability</td><td>49</td></tr></table>
+                </ol>
+            </li>
+            <li><table><tr><td>Alloy</td><td>49</td></tr></table></li>
+        </ol>
+    </li>
+    <li>
+        <table><tr><td>Appendix</td><td>55</td></tr></table>
+    </li>
+</ol>
+</div>
+<h1><a id="Chapter_1_1"></a>1 Introduction</h1>
 <h2><a id="11_Purpose_3"></a>1.1 Purpose</h2>
 <p>This document is the Requirement Analysis and Specification Document for
 the PowerEnjoy system. Its aim is to completely describe the system,
@@ -255,8 +350,7 @@ Registered users are allowed to reserve a single car in each geographic area at 
 <li><strong>Chapter 2: Overall description</strong> It provides a general perspective over the main system features, constraints and assumptions about the users and the environment</li>
 <li><strong>Chapter 3: Specific requirements</strong> It focuses in the functional and non-functional requirements.</li>
 </ul>
-<h1><a id="Chapter_2_86"></a>Chapter 2</h1>
-<h1><a id="Overall_description_87"></a>Overall description</h1>
+<h1><a id="Chapter_2_86"></a>2 Overall description</h1>
 <h2><a id="21_Product_perspective_88"></a>2.1 Product perspective</h2>
 <h3><a id="211_User_interfaces_89"></a>2.1.1 User interfaces</h3>
 <p>The system will present itself as a web application, the interface will be intuitive and responsive.</p>
@@ -362,8 +456,7 @@ The system must ask the user permission for acquiring, processing and storing pe
 <li>Provide the users with a money saving option, letting them input their destination and providing informations about where to leave the car, as to provide a better distribution of cars.</li>
 <li>Keep track of virtuous behaviours of the users, in order to provide the most virtuous users with further discounts.</li>
 </ul>
-<h1><a id="Chapter_3_178"></a>Chapter 3</h1>
-<h1><a id="Specific_requirements_179"></a>Specific requirements</h1>
+<h1><a id="Chapter_3_178"></a>3 Specific Requirements</h1>
 <h2><a id="31_External_interface_requirements_180"></a>3.1 External interface requirements</h2>
 <h3><a id="311_User_interfaces_181"></a>3.1.1 User interfaces</h3>
 <p>The user interfaces must satisfy the following constraints:</p>
@@ -1187,7 +1280,7 @@ The system must provide a logging functionality for debug purpose.</p>
 <h3><a id="345_Portability_738"></a>3.4.5 Portability</h3>
 <p>The web application being written in Java, will be portable to any OS able to run the JVM and Java class files with major version 51.
 The interface with the employees and the users must be compatible with the last two years version of the major browsers that are Android Browser, Chrome, Chrome for Android, Edge, Firefox, Firefox for Android, IE Mobile, Internet Explorer, Safari, iOS Safari.</p>
-<h2><a id="35_Alloy_741"></a>3.5 Alloy</h2>
+<h2><a id="35_Alloy_741"></a>3.5 Alloy</h2><h3>World model</h3>
 <pre id="alloy_code" style="white-space:pre-wrap;background:none;" class="code_page"><table cellspacing="0" cellpadding="0" class="code_page"><tr><td><table cellspacing="0" cellpadding="0" class="code_page"><tr><td valign="top" id="L_0_1" class="code_text code_gutter" style="background: #FFFFFF"><span style="color: #000000;">&nbsp;&nbsp;&nbsp;1&nbsp;</span></td><td valign="top" class="code_text code_line" style="background-color: #FFFFFF;"><div id="C_0_1"><span class=" real_text" style="background-color: #FFFFFF; color: #A5A5A5;">/*</span>
 </div></td></tr><tr><td valign="top" id="L_0_2" class="code_text code_gutter" style="background: #FFFFFF"><span style="color: #000000;">&nbsp;&nbsp;&nbsp;2&nbsp;</span></td><td valign="top" class="code_text code_line" style="background-color: #FFFFFF;"><div id="C_0_2"><span class=" real_text" style="background-color: #FFFFFF; color: #A5A5A5;">&nbsp;&nbsp;&nbsp; Simplification,an area can be any kind of polygon, but for what we are</span>
 </div></td></tr><tr><td valign="top" id="L_0_3" class="code_text code_gutter" style="background: #FFFFFF"><span style="color: #000000;">&nbsp;&nbsp;&nbsp;3&nbsp;</span></td><td valign="top" class="code_text code_line" style="background-color: #FFFFFF;"><div id="C_0_3"><span class=" real_text" style="background-color: #FFFFFF; color: #A5A5A5;">&nbsp;&nbsp;&nbsp; interested in, an area is a set of point inside such polygon</span>
@@ -1573,7 +1666,7 @@ The interface with the employees and the users must be compatible with the last 
 </div></td></tr><tr><td valign="top" id="L_0_383" class="code_text code_gutter" style="background: #FFFFFF"><span style="color: #000000;">&nbsp;383&nbsp;</span></td><td valign="top" class="code_text code_line" style="background-color: #FFFFFF;"><div id="C_0_383"><span class=" real_text" style="background-color: #FFFFFF; color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; u1</span><span class=" real_text" style="background-color: #FFFFFF; color: #C70040;">.</span><span class=" real_text" style="background-color: #FFFFFF; color: #000000;">paymentInformation </span><span class=" real_text" style="background-color: #FFFFFF; color: #C70040;">=</span><span class=" real_text" style="background-color: #FFFFFF; color: #000000;"> u2</span><span class=" real_text" style="background-color: #FFFFFF; color: #C70040;">.</span><span class=" real_text" style="background-color: #FFFFFF; color: #000000;">paymentInformation</span>
 </div></td></tr><tr><td valign="top" id="L_0_384" class="code_text code_gutter" style="background: #FFFFFF"><span style="color: #000000;">&nbsp;384&nbsp;</span></td><td valign="top" class="code_text code_line" style="background-color: #FFFFFF;"><div id="C_0_384"><span class=" real_text" style="background-color: #FFFFFF; color: #000000;">&nbsp;&nbsp;&nbsp; }</span>
 </div></td></tr><tr><td valign="top" id="L_0_385" class="code_text code_gutter" style="background: #FFFFFF"><span style="color: #000000;">&nbsp;385&nbsp;</span></td><td valign="top" class="code_text code_line" style="background-color: #FFFFFF;"><div id="C_0_385"><span class=" real_text" style="background-color: #FFFFFF; color: #000000;">}</span>
-</div></td></tr></table></td></tr></table></pre>
+</div></td></tr></table></td></tr></table></pre><h3>World example</h3><img src="img/model.png"/>
 </pre>
 <h1><a id="Appendix"></a>Appendix</h1>
 <h2>Software and tools used</h2>
@@ -1584,7 +1677,6 @@ The interface with the employees and the users must be compatible with the last 
 <li>Signavio (http://www.signavio.com/) for use case diagrams</li>
 <li>Sublime Text Editor (https://www.sublimetext.com/) for alloy sintax highlighting</li>
 <li>Dillinger (http://dillinger.io/) as markdown editor and conversion from MarkDown to HTML</li>
-<li>Pandoc (http://pandoc.org/) for PDF conversion</li>
 </ul>
 <h2>Hours of work</h2>
 <ul>
