@@ -21,7 +21,7 @@ Each component is connected only to the _server_ component. In this way it is po
 The _monitoring system_ actually is part neither of the _presentation layer_ nor of the _application logic layer_, as it represents only a kind of _sensor layer_. By the way, it only interacts with the _server_ component in a event-driven architectural style. 
 
 ## Component view
-![Alt Server Component Diagram](http://localhost/powerenjoy/DD/images/servcomp.png "Server component  diagram")
+![Alt Server Component Diagram](http://localhost/powerenjoy/DD/images/servcomp.svg "Server component  diagram")
 
 The picture shows the logical architecture for the _Server_ component. The architecture is made up of several different components, each one devoted to a specific task:
 
