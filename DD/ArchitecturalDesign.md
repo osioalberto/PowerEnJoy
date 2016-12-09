@@ -12,14 +12,13 @@ The picture shows a representation of the proposed logical architecture. The sys
 * A _Employee Application_ component, that takes care of employee-related functionalities, making them available to the employees
 * A _Car Monitoring System_ which models the monitoring system actually installed on cars
 
-We have different kinds of architectural styles used to interface the different components with the server
+Each component is connected only to the _server_ component. In this way it is possibile to keep clearly distinguished three logical levels:
 
-* _Server_ and _User Application_ interaction is implemented using a _client - server_ architecture, because the interaction of final users with the system can be seen as a sequence of requests and responses where the user invokes a service from the server, and the server actually carries out operations according to user's input.
-* _Server_ and _Employee Application_ interaction is implemented again as a _client - server_ architecture, for the very same reasons of the interaction between _Server_ and _User Application_
-* _Server_ and _Car Monitoring System_ interaction is implemented as a event - driven architecture, because of two main reasons:
-  + Monitoring system collects data about the car status, and sends them to the server without waiting for a server response, it justs _"sends and forgets"_
-  + Different objects of the server might want to react to events coming from cars (for example, a ride should be notified when a passenger enters or exits the car).
-* _Server_ and _DBMS_ interaction is based on the standard interface provided by the SQL language
+1. The _DBMS_, which represents the _data layer_ of the system
+2. The _server_, which represents the _application logic layer_ of the system. It is the only component to interact with the _DBMS_, as to grant data security and privacy.
+3. The _user application_ and the _employee application_, which represent the _presentation layer_ of the system. They carry out all the tasks related with interaction with end users (both users of the service and employees). They are connected only with the _server_ as to preserve data security. Moreover, they are modeled as thin clients, as no application logic function is delegated to them. This was chosen for security reasons, as it is very easy to attack functions delegated to a client living in a browser.
+
+The _monitoring system_ actually is part neither of the _presentation layer_ nor of the _application logic layer_, as it represents only a kind of _sensor layer_. By the way, it only interacts with the _server_ component in a event-driven architectural style. 
 
 ## Component view
 ![Alt Server Component Diagram](http://localhost/powerenjoy/DD/images/servcomp.png "Server component  diagram")
@@ -37,7 +36,9 @@ The picture shows the logical architecture for the _Server_ component. The archi
 * __Ride controller__ controls each ride in progress in the given instant of time, monitors the state of the car during the ride (in particular, the number of passengers and the battery level) and computes the bill at the end of the ride, applying proper discounts or raises on the calculated fee.
 
 ##Deployment view
-***TODO***
+![Alt Deployment Diagram](http://localhost/powerenjoy/DD/images/deploy.svg "Deployment Diagram")
+This picture shows how the system should be deployed.
+The database server and the application server are deployed on two different physical machines, in order to have more security for data and to achieve a decoupled architecture that can be replicated for reliability reasons. This way we can have a main application server, and a backup application server, that are almost identical as of deployed components. The HTTPS protocol, and the routing IP protocol beside it, are configured so as to send all the request to the main application server, and if that server is not available, to the backup application server. This also gives the possibility to carry out maintenance tasks on the system without bringing it completely down, just working on a server at a time. Finally, the DBMS server is not replicated for the money saving reasons. It is not so likely that an attacker can gain access to the DBMS server, and so there is no need of invest money in a distributed DBMS.
 
 ##Runtime view
 This section describes several interesting dynamic behaviours of the system.
@@ -70,7 +71,44 @@ This diagram shows the interaction between components involved in the insertion 
 *** RESTful APIs ***
 
 ##Selected architectural styles and patterns
-*** TODO ***
+There are two different architectural styles used to build the architucture of the system:
+
+* __Client - Server__ style is used in the interaction between _user application_ and _employee application_ and the _server_ component. This architectural style supports the request - response pattern, that is the one that mostly fits the way actors interact with the system: they make a request invoking some services provided by the _server_, and the _server_ itself provides a response according to the received request. 
+* __Event - driven__ style is used in the interaction between _monitoring system_ built on the cars and the _server_ component. This architectural style was selected due to two main reasons: 
+
+  + _Monitoring system_ collects data about the car status on board, and sends them to the server without waiting for a server response, it justs _"sends and forgets"_
+  + Different objects living in the server might want to react to events coming from cars
+
+  Both these can be reliably achieved with a event-driven architectural style
+
+* __RESTful APIs__ 
+  
+  ___TODO___ 
 
 ##Other design decisions
-*** TODO J2EE ***
+
+### Framework selection
+
+  Java Enterprise Edition was selected for the implementation of the server components, because we can easily build reliable and scalable application modeling the components as Enterprise Java Beans, and using Java Server Pages for building dynamical user interfaces. Moreover, Java Persistence APIs can be used for the interaction with the DBMS.
+
+### DBMS selection
+
+  MySQL DBMS was selected because it grants good performance along with no licence cost, in order to reduce system total cost.
+
+### Security
+  
+  Passwords are not stored in plain text, but are hashed and salted with strong cryptographic functions. After several failing access trials a user account is blocked by the system, as to prevent brute force attacks.
+
+
+  Payments security is granted by the external system for payments processing.
+
+### Service providers
+
+#### Maps generation and address translation
+The system uses _Google Maps (https://maps.google.it)_ to carry out map rendering and address translation (into geographical coordinates) in a reliable, well-known and well-tested way. Moreover, this can save the huge cost of the implementation of a new system and of the collection of data.
+
+#### Driving licence validation
+The system uses _Il portale dell'automobilista (www.ilportaledellautomobilista.it)_ for validating the driving licence numbers. This was the only feasible solution to have access to a updated data source.
+
+#### Payment information validation and payment processing
+The system uses _Paypal (www.paypal.com)_ to carry out tasks related to payment processing. _Paypal_ was chosen because it is a very well-known and well-tested platform, which provides a lot of guarantees about payments and that is very used, so the majority of users of the PowerEnJoy system already has a Paypal account. Moreover, it provides a well-defined set of APIs to carry out all the required tasks.
