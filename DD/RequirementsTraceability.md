@@ -74,4 +74,3 @@ Reliability | Presence of a backup server
 Availability | Presence of a backup server
 Security | Strong cryptographic functions
 Portability | Web Standards and J2EE framework
-

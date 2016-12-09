@@ -61,7 +61,7 @@ This diagram shows the interaction between components involved in the creation o
 
 ###Ride conclusion and bill computation
 ![Alt Ride End Sequence Diagram](http://localhost/powerenjoy/DD/images/seq_rideend.svg "Ride End Sequence Diagram")
-This diagram shows the interaction between components involved in the conclusion of a ride. The interaction is triggered by an event sent from the car, that signals that all passengers have got off the car. The *ride* entity models the ride that is listening on that event, and that will end. At ride end, a new bill is created and charged to the user whom the ride is referred to, and then the ride unsubscribes from the events sent by the car, as they are of no interest anymore.
+This diagram refers to the situation in which the car is parked in a safe area and not in a recharching station (otherwise, a timeout of 5 minutes should be added before locking the car). This diagram shows the interaction between components involved in the conclusion of a ride. The interaction is triggered by an event sent from the car, that signals that all passengers have got off the car. The *ride* entity models the ride that is listening on that event, and that will end. At ride end, a new bill is created and charged to the user whom the ride is referred to, and then the ride unsubscribes from the events sent by the car, as they are of no interest anymore.
 
 ###Insertion of a new safe area
 ![Alt Employee Sequence Diagram](http://localhost/powerenjoy/DD/images/seq_employee.svg "Employee Sequence Diagram")
