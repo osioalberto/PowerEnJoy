@@ -1,0 +1,938 @@
+[
+  {
+    "url": "\/users\/{id}\/login",
+    "verb": "GET",
+    "desc": "It allows a user or an employee to login, the returned token must be used to access all the other api except for <code>\/users\/{id}\/register<\/code>. It is subject to expiration after a predefined amount of time",
+    "params": [
+      {
+        "name": "id",
+        "type": "String",
+        "desc": "The username preceded by <code>user:<\/code>"
+      }
+    ],
+    "fields": [
+      {
+        "name": "password",
+        "type": "String",
+        "desc": "The password associated to the account"
+      }
+    ],
+    "returns": [
+      {
+        "name": "token",
+        "type": "String",
+        "desc": "The token which grant access to the other api"
+      }
+    ],
+    "errors": [
+      {
+        "name": "UserOrPasswordInvalid",
+        "desc": "The username or the password is invalid"
+      }
+    ]
+  },
+  {
+    "url": "\/users\/{id}\/register",
+    "verb": "POST",
+    "desc": "It allows an unregistered user to register",
+    "params": [
+      {
+        "name": "id",
+        "type": "String",
+        "desc": "The username preceded by <code>user:<\/code>"
+      }
+    ],
+    "fields": [
+      {
+        "name": "password",
+        "type": "String",
+        "desc": "The password associated to the account"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "desc": "The real first and last name"
+      },
+      {
+        "name": "dateOfBirth",
+        "type": "String",
+        "desc": "The date of birth in <code>dd-MM-yyyy<\/code> format"
+      },
+      {
+        "name": "creditCard",
+        "type": "Object",
+        "desc": "The credit card information",
+        "subtype": [
+          {
+            "name": "number",
+            "type": "String",
+            "desc": "The credit card number"
+          },
+          {
+            "name": "owner",
+            "type": "String",
+            "desc": "The credit card owner"
+          },
+          {
+            "name": "cvv",
+            "type": "String",
+            "desc": "The credit card cvv"
+          },
+          {
+            "name": "expiration",
+            "type": "String",
+            "desc": "The credit card expiration in <code>dd-MM-yyyy<\/code> format"
+          }
+        ]
+      },
+      {
+        "name": "drivingLicenceNumber",
+        "type": "String",
+        "desc": "The driving licence number"
+      }
+    ],
+    "errors": [
+      {
+        "name": "UsernameAlreadyExists",
+        "desc": "There is already a user with such a username"
+      },
+      {
+        "name": "InvalidDrivingLicence",
+        "desc": "The driving licence inserted is invalid or it is not associated to this user"
+      },
+      {
+        "name": "InvalidCreditCard",
+        "desc": "The credit card inserted is invalid or expired"
+      }
+    ]
+  },
+  {
+    "url": "\/users\/{id}\/bills",
+    "verb": "GET",
+    "desc": "It retrives all the pending bills a user has still to pay",
+    "params": [
+      {
+        "name": "id",
+        "type": "String",
+        "desc": "The username preceded by <code>user:<\/code> or <code>me<\/code> for the current user"
+      }
+    ],
+    "returns": [
+      {
+        "name": "bills",
+        "type": "Object[]",
+        "desc": "An array of pending bills",
+        "subtype": [
+          {
+            "name": "dateTime",
+            "type": "String",
+            "desc": "The datetime in <code>dd-MM-yyyyThh:mm:ss<\/code> format"
+          },
+          {
+            "name": "amount",
+            "type": "String",
+            "desc": "The amount in Euro the user must pay, the fractional part is preceded by a <code>.<\/code>"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "\/users\/me\/bills",
+    "desc": "It allows a user to pay the pending bills in a non defined order, if the user cannot pay all the pending bills there is no rollback",
+    "verb": "DELETE"
+  },
+  {
+    "url": "\/users\/{id}\/reservations",
+    "verb": "POST",
+    "desc": "It allows a user or an employee to reserve a car",
+    "params": [
+      {
+        "name": "id",
+        "type": "String",
+        "desc": "The username preceded by <code>user:<\/code> or <code>me<\/code>"
+      }
+    ],
+    "fields": [
+      {
+        "name": "car",
+        "type": "String",
+        "desc": "The plate associated with the car the user wants to reserve"
+      }
+    ],
+    "errors": [
+      {
+        "name": "CarUnavailable",
+        "desc": "The car for some reason is not available, or the plate is not valid"
+      },
+      {
+        "name": "QuotaExceeded",
+        "desc": "The user has already reserved a car in the same geographical area"
+      },
+      {
+        "name": "UserBanned",
+        "desc": "The user is banned and thus he cannot reserve any car"
+      }
+    ]
+  },
+  {
+    "url": "\/users\/{id}\/reservations",
+    "verb": "GET",
+    "desc": "It allows a user or an employee to obtain the list of the reservation made by the user",
+    "params": [
+      {
+        "name": "id",
+        "type": "String",
+        "desc": "The username preceded by <code>user:<\/code> or <code>me<\/code> or <code>all<\/code>"
+      }
+    ],
+    "fields": [
+      {
+        "name": "position",
+        "type": "Object",
+        "desc": "The center to search for reservations",
+        "optional": true,
+        "subtype": [
+          {
+            "name": "latitude",
+            "type": "Number",
+            "desc": "The latitude of the position"
+          },
+          {
+            "name": "longitude",
+            "type": "Number",
+            "desc": "The longitude of the position"
+          }
+        ]
+      },
+      {
+        "name": "radius",
+        "type": "Number",
+        "desc": "The maximum distance in meters from the position to search for reservations",
+        "optional": true
+      }
+    ],
+    "returns": [
+      {
+        "name": "reservations",
+        "type": "Object[]",
+        "desc": "An array of all the reservations in the search area for the specified user",
+        "subtype": [
+          {
+            "name": "car",
+            "type": "String",
+            "desc": "The plate of the car"
+          },
+          {
+            "name": "position",
+            "type": "Object",
+            "desc": "The position where the car is located",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of the position"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of the position"
+              }
+            ]
+          },
+          {
+            "name": "creationTime",
+            "type": "String",
+            "desc": "The datetime in <code>dd-MM-yyyyThh:mm:ss<\/code> format"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "\/users\/{id}\/reservations\/{plate}",
+    "verb": "GET",
+    "desc": "It allows a user or an employee to obtain information about a specific reservation",
+    "params": [
+      {
+        "name": "id",
+        "type": "String",
+        "desc": "The username preceded by <code>user:<\/code> or <code>me<\/code> or <code>all<\/code>"
+      },
+      {
+        "name": "plate",
+        "type": "String",
+        "desc": "The plate of the car for which the user expressed by the id parameter has made a reservation"
+      }
+    ],
+    "returns": [
+      {
+        "name": "reservations",
+        "type": "Object",
+        "desc": "The information for the specific reservation",
+        "subtype": [
+          {
+            "name": "car",
+            "type": "String",
+            "desc": "The plate of the car"
+          },
+          {
+            "name": "position",
+            "type": "Object",
+            "desc": "The position where the car is located",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of the position"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of the position"
+              }
+            ]
+          },
+          {
+            "name": "creationTime",
+            "type": "String",
+            "desc": "The datetime in <code>dd-MM-yyyyThh:mm:ss<\/code> format"
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoReservationFound",
+        "desc": "There is no reservation for this tuple of parameters"
+      }
+    ]
+  },
+  {
+    "url": "\/cars",
+    "verb": "GET",
+    "desc": "It allows a user or an employee to obtain a list of all cars in an area.In the case of a user, the <code>position<\/code> or the <code>location<\/code> and <code>radius<\/code> field are mandatory. The <code>position<\/code> and <code>location<\/code> are mutually exclusive",
+    "fields": [
+      {
+        "name": "position",
+        "type": "Object",
+        "desc": "The center to search for cars",
+        "optional": true,
+        "subtype": [
+          {
+            "name": "latitude",
+            "type": "Number",
+            "desc": "The latitude of the position"
+          },
+          {
+            "name": "longitude",
+            "type": "Number",
+            "desc": "The longitude of the position"
+          }
+        ]
+      },
+      {
+        "name": "location",
+        "type": "String",
+        "desc": "The location expressed as a string suitable for geocoding",
+        "optional": true
+      },
+      {
+        "name": "radius",
+        "type": "Number",
+        "desc": "The maximum distance in meters from the position to search for cars",
+        "optional": true
+      },
+      {
+        "name": "status",
+        "type": "String[]",
+        "desc": "The admissible status of the cars returned"
+      }
+    ],
+    "returns": [
+      {
+        "name": "cars",
+        "type": "Object[]",
+        "desc": "An array of cars",
+        "subtype": [
+          {
+            "name": "position",
+            "type": "Object",
+            "desc": "The position where the car is located",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of the position"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of the position"
+              }
+            ]
+          },
+          {
+            "name": "status",
+            "type": "String",
+            "desc": "The status of the car"
+          },
+          {
+            "name": "plate",
+            "type": "String",
+            "desc": "The plate of the car"
+          },
+          {
+            "name": "batteryChargeLevel",
+            "type": "Number",
+            "desc": "The normalized percentage (0-1), of the battery charge"
+          },
+          {
+            "name": "geographicalLocation",
+            "type": "Number",
+            "desc": "The identifier of a geographical region"
+          },
+          {
+            "name": "parkingLocation",
+            "type": "Number",
+            "optional": true,
+            "desc": "The identifier of a safe area where the car is parked"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "\/cars\/{plate}",
+    "verb": "GET",
+    "desc": "It allows a user or an employee to obtain information about a specific car",
+    "params": [
+      {
+        "name": "plate",
+        "type": "String",
+        "desc": "The plate of the car to search for"
+      }
+    ],
+    "returns": [
+      {
+        "name": "cars",
+        "type": "Object",
+        "desc": "The car whoose plate is the same as the parameter",
+        "subtype": [
+          {
+            "name": "position",
+            "type": "Object",
+            "desc": "The position where the car is located",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of the position"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of the position"
+              }
+            ]
+          },
+          {
+            "name": "status",
+            "type": "String",
+            "desc": "The status of the car"
+          },
+          {
+            "name": "plate",
+            "type": "String",
+            "desc": "The plate of the car"
+          },
+          {
+            "name": "batteryChargeLevel",
+            "type": "Number",
+            "desc": "The normalized percentage (0-1), of the battery charge"
+          },
+          {
+            "name": "geographicalLocation",
+            "type": "Number",
+            "desc": "The identifier of a geographical region"
+          },
+          {
+            "name": "parkingLocation",
+            "type": "Number",
+            "optional": true,
+            "desc": "The identifier of a safe area where the car is parked"
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoCarFound",
+        "desc": "The plate is not associated with a car"
+      }
+    ]
+  },
+  {
+    "url": "\/cars\/{plate}\/unlock",
+    "verb": "PATCH",
+    "desc": "It allows a user to unlock the specific car",
+    "params": [
+      {
+        "name": "plate",
+        "type": "String",
+        "desc": "The plate of the car to unlock"
+      }
+    ],
+    "fields": [
+      {
+        "name": "position",
+        "type": "Object",
+        "desc": "The position where the user is located",
+        "subtype": [
+          {
+            "name": "latitude",
+            "type": "Number",
+            "desc": "The latitude of the position"
+          },
+          {
+            "name": "longitude",
+            "type": "Number",
+            "desc": "The longitude of the position"
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoCarFound",
+        "desc": "The plate is not associated with a car"
+      },
+      {
+        "name": "FarUser",
+        "desc": "The user is too far from the car"
+      }
+    ]
+  },
+  {
+    "url": "\/area\/geographicals",
+    "verb": "GET",
+    "desc": "It allows an employee to obtain the list of all the geographical regions",
+    "returns": [
+      {
+        "name": "areas",
+        "type": "Object[]",
+        "desc": "An array of all the defined geographical region",
+        "subtype": [
+          {
+            "name": "id",
+            "type": "Number",
+            "desc": "The identifier of this region"
+          },
+          {
+            "name": "path",
+            "type": "Object[]",
+            "desc": "The path of this geographical region",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of a single position in the path"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of a single position in the path"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "\/area\/geographicals\/{id}",
+    "verb": "GET",
+    "desc": "It allows an employee to obtain information about a specific geographical region",
+    "params": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of a geographical region"
+      }
+    ],
+    "returns": [
+      {
+        "name": "area",
+        "type": "Object",
+        "desc": "The geographical region whoose id matches the one in the parameters",
+        "subtype": [
+          {
+            "name": "id",
+            "type": "Number",
+            "desc": "The identifier of this region"
+          },
+          {
+            "name": "path",
+            "type": "Object[]",
+            "desc": "The path of this geographical region",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of a single position in the path"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of a single position in the path"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoRegionFound",
+        "desc": "The identifier is not associated with a valid geographical region"
+      }
+    ]
+  },
+  {
+    "url": "\/area\/geographicals\/{id}\/split",
+    "verb": "PATCH",
+    "desc": "It allows an employee to split a geographical region",
+    "params": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of a geographical region"
+      }
+    ],
+    "fields": [
+      {
+        "name": "path",
+        "type": "Object[]",
+        "desc": "The path used to split the region",
+        "subtype": [
+          {
+            "name": "latitude",
+            "type": "Number",
+            "desc": "The latitude of a single position in the path"
+          },
+          {
+            "name": "longitude",
+            "type": "Number",
+            "desc": "The longitude of a single position in the path"
+          }
+        ]
+      }
+    ],
+    "returns": [
+      {
+        "name": "areas",
+        "type": "Object[]",
+        "desc": "The new geographical regions replacing the one splitted",
+        "subtype": [
+          {
+            "name": "id",
+            "type": "Number",
+            "desc": "The identifier of this region"
+          },
+          {
+            "name": "path",
+            "type": "Object[]",
+            "desc": "The path of this geographical region",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of a single position in the path"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of a single position in the path"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoRegionFound",
+        "desc": "The identifier is not associated with a valid geographical region"
+      }
+    ]
+  },
+  {
+    "url": "\/area\/geographicals\/{id}\/merge",
+    "verb": "PATCH",
+    "desc": "It allows an employee to merge two geographical regions",
+    "params": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of a geographical region"
+      }
+    ],
+    "fields": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of the region to be merged with this one"
+      }
+    ],
+    "returns": [
+      {
+        "name": "area",
+        "type": "Object",
+        "desc": "The new geographical region replacing the two merged",
+        "subtype": [
+          {
+            "name": "id",
+            "type": "Number",
+            "desc": "The identifier of this region"
+          },
+          {
+            "name": "path",
+            "type": "Object[]",
+            "desc": "The path of this geographical region",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of a single position in the path"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of a single position in the path"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoRegionFound",
+        "desc": "The identifier is not associated with a valid geographical region"
+      }
+    ]
+  },
+  {
+    "url": "\/area\/safes",
+    "verb": "GET",
+    "desc": "It allows an employee to obtain the list of all safe areas",
+    "returns": [
+      {
+        "name": "areas",
+        "type": "Object[]",
+        "desc": "An array of all the defined safe areas",
+        "subtype": [
+          {
+            "name": "id",
+            "type": "Number",
+            "desc": "The identifier of this area"
+          },
+          {
+            "name": "path",
+            "type": "Object[]",
+            "desc": "The path of this safe area",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of a single position in the path"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of a single position in the path"
+              }
+            ]
+          },
+          {
+            "name": "numberOfPlugs",
+            "type": "Number",
+            "desc": "The number of plugs if it is a recharging station area",
+            "optional": true
+          },
+          {
+            "name": "availablePlugs",
+            "type": "Number",
+            "desc": "The number of plugs if it is a recharging station area that are not in use",
+            "optional": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "\/area\/safes\/{id}",
+    "verb": "GET",
+    "desc": "It allows an employee to obtain information about a specific safe area",
+    "params": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of the safe area"
+      }
+    ],
+    "returns": [
+      {
+        "name": "areas",
+        "type": "Object[]",
+        "desc": "An array of all the defined safe areas",
+        "subtype": [
+          {
+            "name": "id",
+            "type": "Number",
+            "desc": "The identifier of this area"
+          },
+          {
+            "name": "path",
+            "type": "Object[]",
+            "desc": "The path of this safe area",
+            "subtype": [
+              {
+                "name": "latitude",
+                "type": "Number",
+                "desc": "The latitude of a single position in the path"
+              },
+              {
+                "name": "longitude",
+                "type": "Number",
+                "desc": "The longitude of a single position in the path"
+              }
+            ]
+          },
+          {
+            "name": "numberOfPlugs",
+            "type": "Number",
+            "desc": "The number of plugs if it is a recharging station area",
+            "optional": true
+          },
+          {
+            "name": "availablePlugs",
+            "type": "Number",
+            "desc": "The number of plugs if it is a recharging station area that are not in use",
+            "optional": true
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoSafeAreaFound",
+        "desc": "The identifier is not associated with a valid safe area"
+      }
+    ]
+  },
+  {
+    "url": "\/area\/safes\/{id}",
+    "verb": "DELETE",
+    "desc": "It allows an employee to remove a safe area",
+    "params": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of the safe area"
+      }
+    ],
+    "errors": [
+      {
+        "name": "NoSafeAreaFound",
+        "desc": "The identifier is not associated with a valid safe area"
+      }
+    ]
+  },
+  {
+    "url": "\/area\/safes",
+    "verb": "POST",
+    "desc": "It allows an employee to insert a new safe area",
+    "fields": [
+      {
+        "name": "path",
+        "type": "Object[]",
+        "desc": "The path of this safe area",
+        "subtype": [
+          {
+            "name": "latitude",
+            "type": "Number",
+            "desc": "The latitude of a single position in the path"
+          },
+          {
+            "name": "longitude",
+            "type": "Number",
+            "desc": "The longitude of a single position in the path"
+          }
+        ]
+      },
+      {
+        "name": "numberOfPlugs",
+        "type": "Number",
+        "desc": "The number of plugs if it is a recharging station area",
+        "optional": true
+      }
+    ],
+    "returns": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of the newly created safe area"
+      }
+    ],
+    "errors": [
+      {
+        "name": "SafeAreaOverlap",
+        "desc": "The safe area overlaps with an already present safe area"
+      }
+    ]
+  },
+  {
+    "url": "\/area\/safes\/{id}",
+    "verb": "PATCH",
+    "desc": "It allows an employee to modify a safe area",
+    "params": [
+      {
+        "name": "id",
+        "type": "Number",
+        "desc": "The identifier of the safe area"
+      }
+    ],
+    "fields": [
+      {
+        "name": "path",
+        "type": "Object[]",
+        "desc": "The path of this safe area",
+        "subtype": [
+          {
+            "name": "latitude",
+            "type": "Number",
+            "desc": "The latitude of a single position in the path"
+          },
+          {
+            "name": "longitude",
+            "type": "Number",
+            "desc": "The longitude of a single position in the path"
+          }
+        ]
+      },
+      {
+        "name": "numberOfPlugs",
+        "type": "Number",
+        "desc": "The number of plugs if it is a recharging station area",
+        "optional": true
+      }
+    ],
+    "errors": [
+      {
+        "name": "SafeAreaOverlap",
+        "desc": "The safe area overlaps with an already present safe area"
+      }
+    ]
+  }
+]
