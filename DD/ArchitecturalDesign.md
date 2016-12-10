@@ -68,7 +68,26 @@ This diagram refers to the situation in which the car is parked in a safe area a
 This diagram shows the interaction between components involved in the insertion of a new safe area. It can be seen as a general model for all the interaction involving an employee, as all of them follow the same message pattern (adapted to the operation being carried out).
 
 ##Component interfaces
-*** RESTful APIs ***
+There are two different kinds of interfaces: RESTful APIs are used with client-server architectural style, and Messages are used in event-driven interactions
+
+###RESTful APIs
+***INCLUDE***
+
+###Messages
+####StatusReport####
+This message is sent by the car system, to communicate variations of the car status.
+It is sent immediatly after the status or the number of passengers change or the batteryLevel drops more than 5% or the batteryLevel reaches its minimum or maximum value,
+or every 15 minutes if the batteryLevel changes by less than 5% and nothing else happens in the meantime
+|Field|Type|Description|
+|-----|----|-----------|
+|batteryLevel|float|The normalized percentage of the battery charge level|
+|status|CarStatus|The status of the car|
+|passengers|integer|The number of persons that the car has detected inside|
+|position|Position|The current position of the car
+
+####Unlock####
+This message is sent by management system to the car system in order to unlock the car.
+This message has no parameters
 
 ##Selected architectural styles and patterns
 There are two different architectural styles used to build the architucture of the system:
@@ -83,7 +102,7 @@ There are two different architectural styles used to build the architucture of t
 
 * __RESTful APIs__ 
   
-  ___TODO___ 
+  RESTful APIs were implemented over the HTTPS protocol used in client-server interaction. This was chosen in order to have a clean and neat API, that is easier to understand, extend and mantain.
 
 ##Other design decisions
 
