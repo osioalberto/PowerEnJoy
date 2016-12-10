@@ -60,5 +60,6 @@ The document is organized in six sections:
 1. **Introduction**: describes the overall structure of the whole document
 2. **Architectural design**: describes both the logical architecture and the deployment of the system, along with some dynamical views of the presented components
 3. **Algorithm design**: describes some guidelines for the implementation of the most critical algorithms
-4. **Requirements traceability**: presents a mapping of functional and non functional requirements on described components and architectural decisions
-5. **Appendix**: contains informations about the effort spent in writing this document and about the references from which further documentation can be obtained.
+4. **User interface design**: describes a UX model for the user interface (both for users and employees)
+5. **Requirements traceability**: presents a mapping of functional and non functional requirements on described components and architectural decisions
+6. **Appendix**: contains informations about the effort spent in writing this document and about the references from which further documentation can be obtained.
