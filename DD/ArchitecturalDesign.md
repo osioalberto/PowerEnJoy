@@ -53,7 +53,7 @@ This diagram describes the interaction between the components involved in the re
 
 ###Car unlock
 ![Alt Unlock Sequence Diagram](http://localhost/powerenjoy/DD/images/seq_unlock.svg "Unlock Sequence Diagram")
-This diagram describes the interaction between components involved in the procedure of unlocking a car. The "user" lifeline models the human user trying to unlock a car. The procedures searches for a reservation which maps to a car that is very near to the user (this is the meaning of the "getNearestReservation" message), and then sends to the car a *unlock car* event throw the event-driven monitoring system connection (invoked by the car controller). During the procedure a new ride entity is created to model the incipent ride. For details about the creation of this ride entity refer to the next sequence diagram.
+This diagram describes the interaction between components involved in the procedure of unlocking a car. The "user" lifeline models the human user trying to unlock a car. The procedures searches for a reservation which maps to the car requested by the user (this is the meaning of the "getReservationForRequestedCar" message), and then sends to the car a *Unlock* event throw the event-driven monitoring system connection (invoked by the car controller). During the procedure a new ride entity is created to model the incipent ride. For details about the creation of this ride entity refer to the next sequence diagram.
 
 ###Ride entity creation and ride start
 ![Alt Init Ride Sequence Diagram](http://localhost/powerenjoy/DD/images/seq_rideinit.svg "Init Ride Sequence Diagram")
@@ -97,8 +97,7 @@ There are two different architectural styles used to build the architucture of t
 
 ### Security
   
-  Passwords are not stored in plain text, but are hashed and salted with strong cryptographic functions. After several failing access trials a user account is blocked by the system, as to prevent brute force attacks.
-
+  Passwords are not stored in plain text, but are hashed and salted with strong cryptographic functions. 
 
   Payments security is granted by the external system for payments processing.
 
