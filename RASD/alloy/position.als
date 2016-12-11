@@ -11,7 +11,7 @@ sig Position {
 	It does not take into account the fact that the Earth is not a plane.
 */
 fun Position.distance[p: Position]: one Int {
-	mul[p.latitude-this.latitude, p.latitude-this.latitude]+mul[p.longitude-this.longitude,p.longitude-this.longitude]
+	mul[p.latitude.minus[this.latitude], p.latitude.minus[this.latitude]]+mul[p.longitude.minus[this.longitude],p.longitude.minus[this.longitude]]
 }
 /*
 	It has no sense to have two position with the same longitude and latitude.

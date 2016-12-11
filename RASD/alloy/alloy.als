@@ -207,11 +207,11 @@ fact BatteryIsLowOrHigh {
 	}
 }
 fun sumPercentageDelta[s: set PercentageDelta]: one Int {
-	(DiscountManyPeople in s => DiscountManyPeople.delta  else 0)+
-	(DiscountBatteryHigh in s => DiscountBatteryHigh.delta else 0)+
-	(DiscountCarPlugged in s => DiscountCarPlugged.delta else 0)+
-	(RaiseFarCar in s => RaiseFarCar.delta else 0) +
-	(RaiseBatteryLow in s => RaiseBatteryLow.delta else 0)
+	(DiscountManyPeople in s => DiscountManyPeople.delta else 0).plus[
+	(DiscountBatteryHigh in s => DiscountBatteryHigh.delta else 0)].plus[
+	(DiscountCarPlugged in s => DiscountCarPlugged.delta else 0)].plus[
+	(RaiseFarCar in s => RaiseFarCar.delta else 0) ].plus[
+	(RaiseBatteryLow in s => RaiseBatteryLow.delta else 0)]
 }
 one sig ManagementSystem {
 	users: set User,
@@ -242,7 +242,7 @@ sig Position {
 	It does not take into account the fact that the Earth is not a plane.
 */
 fun Position.distance[p: Position]: one Int {
-	mul[p.latitude-this.latitude, p.latitude-this.latitude]+mul[p.longitude-this.longitude,p.longitude-this.longitude]
+	mul[p.latitude.minus[this.latitude], p.latitude.minus[this.latitude]]+mul[p.longitude.minus[this.longitude],p.longitude.minus[this.longitude]]
 }
 /*
 	It has no sense to have two position with the same longitude and latitude.
@@ -329,8 +329,12 @@ pred show(){
 	#(RechargingStationArea.pluggedCars) > 0
 	some r:Ride| r.elapsedMinutes>0
 	(#Bill) > 0
+	no r:Ride|r.passengersFromBegin > 5
+	no c:Car|c.passengers > 5
+	all r:RideBill| r.percentageDeltas!=none => r.amount != 0
+	no c:RechargingStationArea| c.maxPlugs > 15
 }
-run show for 5 but 8 Int
+run show for 3 but 8 Int
 /*
 	This is a signature representing a tuple composed of
 		a unique driving licence number,
