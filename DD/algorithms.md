@@ -2,30 +2,33 @@ The algorithms listed here can be useful, but it is not mandatory to implement e
 
 ### Computing the bill amount ###
 Assuming time subtraction yields a time offset and PercentageDelta.delta are normalized in the interval [-1, 1],
-this function computes the bill amount from a ride and a list of all percentageDeltas implemented in the system.
+this function computes the bill amount from a ride and a list of all percentageDeltas implemented in the system
 
-    function computeBillAmount(ride: Ride, discounts: PercentageDelta[]):
-        let multiplier = 1;
-        let elapsedMinutes = (Time.now() - ride.startTime).totalMinutes
-        if ride.car.parkedIn is a RechargingStationArea then:
-            wait first of new Timer(5, "minute") or ride.car.status == "charging"
-        for discount in discounts:
-            if discount.canBeApplyed(ride) then:
-                multiplier = multiplier + discount.delta
-        return elapsedMinutes * multiplier * COST_PER_MINUTE
+~~~
+function computeBillAmount(ride: Ride, discounts: PercentageDelta[]):  
+     let multiplier = 1;
+     let elapsedMinutes = (Time.now() - ride.startTime).totalMinutes
+     if ride.car.parkedIn is a RechargingStationArea then:
+         wait first of (new Timer(5, "minute") or ride.car.status == "charging")
+     for discount in discounts:
+        if discount.canBeApplyed(ride) then:
+            multiplier = multiplier + discount.delta
+     return elapsedMinutes * multiplier * COST_PER_MINUTE
+~~~
 
 ### Getting the MULTIPOLYGON representation of a Path ###
 It is assumed that a path is an ordered set of segments, as such it cannot have duplicate items.
 The entry point for this algorithm is **getMultiPolyRepresentation**.
 
 **getMultiPolyRepresentation**(*path*: Path): Path[][]
-This algorithm converts a generic path to a multipolygon representation suitable for storing in a dbms or to apply simpler algorithm
+This algorithm converts a generic path to a multipolygon representation suitable for storage in a dbms or for application of simpler algorithm
+
 1. Let *polygons* be an empty sequence
 2. Iterate over the **complex polygons of *path***, at each time
     1. Let *simplePolygons* be the **simple polygons of the *current polygon***
     2. Iterate over *simplePolygons*, at each time
         1. Let *point* be one random interior point of the *current simple polygon*
-        2. Apply the even-odd algorithm (https://drive.google.com/file/d/0BzPnfgeA6pjZLVRqNHdWdXNRUVE/view) to the *current complex polygon* and *point*
+        2. Apply the [even-odd algorithm](https://drive.google.com/file/d/0BzPnfgeA6pjZLVRqNHdWdXNRUVE/view) to the *current complex polygon* and *point*
         3. If the *point* is outside the *complex polygon*, then mark the *current simple polygon* as "hole"
         4. Otherwise, mark the *current simple polygon* as "fill"
         5. **Insert the *current simple polygon* inside *polygons***
@@ -52,17 +55,23 @@ This algorithm converts a generic path to a multipolygon representation suitable
 5. Return *result*
 
 **getComplexPolygons**(*path*: Path): Path[]
+
 This algorithm returns a sequence of complex polygons from a single path object
+
 1. Iterate over the point sequence of *path*, at each time
     1. If the *current point* is not marked yet, then mark it
-    2. Otherwise collect all points in the sequence marked from the *current point* up to the previous marked one, and name this sequence *currentPath*
-    3. Remove the marking for each point in the *currentPath* sequence
-    4. **Remove the leaf segments from *currentPath***
-    5. If *currentPath* is not empty, then add *currentPath* to the *result* sequence
+    2. Otherwise 
+        1.  Collect all marked points in the sequence from the previous occurrence of *current point* (the one that caused that point to be marked) up to *current point* (but do not include this occurrence of *current point*), and name this sequence *currentPath*
+        2. Remove the marking for each point in the *currentPath* sequence
+        3. Mark the *current point*
+        4. **Remove the leaf segments from *currentPath***
+        5. If *currentPath* is not empty, then add *currentPath* to the *result* sequence
 2. Return the *result*
 
 **removeLeafSegments**(*path*: Path): Path
+
 This algorithm returns a path where all the trailing segment not connected will be removed from path
+
 1. Let *points* be the point sequence of *path*
 2. Iterate over *points* except for the last point, at each time
     1. If the *current point* is equal to the last point in points, then return a path constructed from *points*
@@ -71,7 +80,9 @@ This algorithm returns a path where all the trailing segment not connected will 
 5. Repeat the steps from 2
 
 **getSimplePolygons**(*path*: Path): Path[]
+
 This algorithm returns a sequence of simple polygons starting from a complex polygon
+
 1. Let *segments* be the segment sequence of *path*
 2. Iterate over *segments*, at each time
     1. Let *first* be the *current segment*
@@ -86,9 +97,11 @@ This algorithm returns a sequence of simple polygons starting from a complex pol
 4. Return the **complex polygons from *newPath***, these are not complex anymore
 
 **insertSimplePolygonToSequence**(*polygon*: Path, *sequence*: Path[])
+
 This algorithm adds the polygon to the sequence preventing any violation of the property of the multipolygon representation
+
 1. If the same point sequence of *polygon* is already in *sequence*, then
-    1. Let *presentPolygon* be the polygon whoose point sequence is the same as *polygon*
+    1. Let *presentPolygon* be the polygon whose point sequence is the same as *polygon*
     2. **Update the mark of *presentPolygon* with respect to *polygon***
     3. Return
 2. Let *polySequence* a sequence containing only *polygon*
@@ -97,7 +110,9 @@ This algorithm adds the polygon to the sequence preventing any violation of the 
     1. **Insert the *current polygon* inside *sequence***
 
 **computeSimpleIntersection**(*sequence*: Path[], *simple*: Path[])
-This algorithm computes the intersection polygons and updates the two sequence inserting theese intermediate polygons
+
+This algorithm computes the intersection polygons and updates the two sequence inserting these intermediate polygons
+
 1. Iterate over *simple*, at each time:
 2. Let *currentSimple* be the *current polygon*
     1. Iterate over *sequence*, at each time:
@@ -113,7 +128,9 @@ This algorithm computes the intersection polygons and updates the two sequence i
         3. Otherwise, do nothing
 
 **addSimpleIntersection**(*sequence*: Path[], *originalPolygon*: Path, *newPolygon*: Path):
+
 This procedure adds a copy of newPolygon to sequence if the originalPolygon intersects with the newPolygon
+
 1. If *originalPolygon* intersects with *newPolygon*, then
     1. Let *copy* be the copy of *newPolygon*
     2. Set the mark of *copy* to the same of *originalPolygon*
@@ -121,7 +138,10 @@ This procedure adds a copy of newPolygon to sequence if the originalPolygon inte
 2. Otherwise, do nothing
 
 **updateMark**(*target*: Path, *source*: Path)
+
 This procedure will assign the correct mark to target
+
 1. If *target* is marked as "fill" and *source* is marked as "fill", then mark *target* as "hole"
 2. If *target* is marked as "hole" and *source* is marked as "fill", then mark *target* as "fill"
 3. Otherwise, do nothing
+
