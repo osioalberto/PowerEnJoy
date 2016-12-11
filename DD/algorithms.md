@@ -2,14 +2,17 @@ The algorithms listed here can be useful, but it is not mandatory to implement e
 
 ### Computing the bill amount ###
 Assuming time subtraction yields a time offset and PercentageDelta.delta are normalized in the interval [-1, 1],
-this function computes the bill amount from a ride and a list of all percentageDeltas implemented in the system
-function computeBillAmount(ride: Ride, discounts: PercentageDelta[]):
-    let multiplier = 1;
-    let elapsedMinutes = (Time.now() - ride.startTime).totalMinutes
-    for discount in discounts:
-        if discount.canBeApplyed(ride) then:
-            multiplier = multiplier + discount.delta
-    return elapsedMinutes * multiplier * COST_PER_MINUTE
+this function computes the bill amount from a ride and a list of all percentageDeltas implemented in the system.
+
+    function computeBillAmount(ride: Ride, discounts: PercentageDelta[]):
+        let multiplier = 1;
+        let elapsedMinutes = (Time.now() - ride.startTime).totalMinutes
+        if ride.car.parkedIn is a RechargingStationArea then:
+            wait first of new Timer(5, "minute") or ride.car.status == "charging"
+        for discount in discounts:
+            if discount.canBeApplyed(ride) then:
+                multiplier = multiplier + discount.delta
+        return elapsedMinutes * multiplier * COST_PER_MINUTE
 
 ### Getting the MULTIPOLYGON representation of a Path ###
 It is assumed that a path is an ordered set of segments, as such it cannot have duplicate items.
@@ -122,4 +125,3 @@ This procedure will assign the correct mark to target
 1. If *target* is marked as "fill" and *source* is marked as "fill", then mark *target* as "hole"
 2. If *target* is marked as "hole" and *source* is marked as "fill", then mark *target* as "fill"
 3. Otherwise, do nothing
-
