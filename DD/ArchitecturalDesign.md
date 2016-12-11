@@ -20,6 +20,9 @@ Each component is connected only to the _server_ component. In this way it is po
 
 The _monitoring system_ actually is part neither of the _presentation layer_ nor of the _application logic layer_, as it represents only a kind of _sensor layer_. By the way, it only interacts with the _server_ component in a event-driven architectural style. 
 
+## DataBase structure
+![Alt ER](http://localhost/powerenjoy/DD/images/ER.svg "ER diagram")
+
 ## Component view
 ![Alt Server Component Diagram](http://localhost/powerenjoy/DD/images/servcomp.svg "Server component  diagram")
 
@@ -81,6 +84,8 @@ The token mentioned in the /users/{id}/login must be have the following features
 ***INCLUDE***
 
 ###Messages
+Messages are exchanged using a protocol based on TCP TLS.
+
 ####StatusReport####
 This message is sent by the car system, to communicate variations of the car status.
 It is sent immediatly after the status or the number of passengers change or the batteryLevel drops more than 5% or the batteryLevel reaches its minimum or maximum value,
