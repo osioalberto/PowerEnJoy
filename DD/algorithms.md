@@ -1,5 +1,8 @@
-Assuming time subtraction yields a time offset and PercentageDelta.delta are normalized in the interval [-1, 1]
-This function computes the bill amount from a ride and a list of all percentageDeltas implemented in the system
+The algorithms listed here can be useful, but it is not mandatory to implement exactly the following algorithms as long as the result is equivalent
+
+### Computing the bill amount ###
+Assuming time subtraction yields a time offset and PercentageDelta.delta are normalized in the interval [-1, 1],
+this function computes the bill amount from a ride and a list of all percentageDeltas implemented in the system
 function computeBillAmount(ride: Ride, discounts: PercentageDelta[]):
     let multiplier = 1;
     let elapsedMinutes = (Time.now() - ride.startTime).totalMinutes
@@ -8,6 +11,42 @@ function computeBillAmount(ride: Ride, discounts: PercentageDelta[]):
             multiplier = multiplier + discount.delta
     return elapsedMinutes * multiplier * COST_PER_MINUTE
 
+### Getting the MULTIPOLYGON representation of a Path ###
+It is assumed that a path is an ordered set of segments, as such it cannot have duplicate items.
+The entry point for this algorithm is **getMultiPolyRepresentation**.
+
+**getMultiPolyRepresentation**(*path*: Path): Path[][]
+This algorithm converts a generic path to a multipolygon representation suitable for storing in a dbms or to apply simpler algorithm
+1. Let *polygons* be an empty sequence
+2. Iterate over the **complex polygons of *path***, at each time
+    1. Let *simplePolygons* be the **simple polygons of the *current polygon***
+    2. Iterate over *simplePolygons*, at each time
+        1. Let *point* be one random interior point of the *current simple polygon*
+        2. Apply the even-odd algorithm (https://drive.google.com/file/d/0BzPnfgeA6pjZLVRqNHdWdXNRUVE/view) to the *current complex polygon* and *point*
+        3. If the *point* is outside the *complex polygon*, then mark the *current simple polygon* as "hole"
+        4. Otherwise, mark the *current simple polygon* as "fill"
+        5. **Insert the *current simple polygon* inside *polygons***
+3. Iterate over *polygons*, at each time
+    1. Iterate over the remaining part of *polygons*, at each time
+        1. If the *two polygons* have at least a segment in common and all the common segments are contiguos, then
+            1. Remove from *polygons* the *two polygons*
+            2. **Insert inside *polygons* the sequence containing only *merged polygon***
+            3. Repeat 3.1
+        2. Otherwise, do nothing
+4. Iterate over *polygons*, at each time
+    1. Let *fill* be the current polygon
+    2. If *fill* is marked as "hole", then skip this polygon
+    3. Let holes be an empty sequence
+    4. Iterate over the remaining part of *polygons*, at each time
+        1. Let *newHole* be the *current polygon*
+        2. If *newHole* is not contained inside *fill* or it is marked as "fill", then skip this polygon
+        3. Iterate over *holes*, at each time
+            1. If *newHole* is contained by the *current hole polygon*, then go to the next iteration of 4.4
+            2. If *newHole* contains the *current hole polygon*, then remove the *current hole polygon* from *holes*
+        4. Add *newHole* to *holes*
+    5. Prepend *fill* to *holes*
+    6. Append *holes* to *result*
+5. Return *result*
 
 **getComplexPolygons**(*path*: Path): Path[]
 This algorithm returns a sequence of complex polygons from a single path object
@@ -42,39 +81,6 @@ This algorithm returns a sequence of simple polygons starting from a complex pol
             4. Replace *second* with *secondSplit* in *segments*
 3. Let *newPath* be a path constructed from *segments*
 4. Return the **complex polygons from *newPath***, these are not complex anymore
-
-**getMultiPolyRepresentation**(*path*: Path): Path[][]
-This algorithm converts a generic path to a multipolygon representation suitable for storing in a dbms or to apply simpler algorithm
-1. Let *polygons* be an empty sequence
-2. Iterate over the **complex polygons of *path***, at each time
-    1. Let *simplePolygons* be the **simple polygons of the *current polygon***
-    2. Iterate over *simplePolygons*, at each time
-        1. Let *point* be one random interior point of the *current simple polygon*
-        2. Apply the even-odd algorithm (https://drive.google.com/file/d/0BzPnfgeA6pjZLVRqNHdWdXNRUVE/view) to the *current complex polygon* and *point*
-        3. If the *point* is outside the *complex polygon*, then mark the *current simple polygon* as "hole"
-        4. Otherwise, mark the *current simple polygon* as "fill"
-        5. **Insert the *current simple polygon* inside *polygons***
-3. Iterate over *polygons*, at each time
-    1. Iterate over the remaining part of *polygons*, at each time
-        1. If the *two polygons* have at least a segment in common and all the common segments are contiguos, then
-            1. Remove from *polygons* the *two polygons*
-            2. **Insert inside *polygons* the sequence containing only *merged polygon***
-            3. Repeat 3.1
-        2. Otherwise, do nothing
-4. Iterate over *polygons*, at each time
-    1. Let *fill* be the current polygon
-    2. If *fill* is marked as "hole", then skip this polygon
-    3. Let holes be an empty sequence
-    4. Iterate over the remaining part of *polygons*, at each time
-        1. Let *newHole* be the *current polygon*
-        2. If *newHole* is not contained inside *fill* or it is marked as "fill", then skip this polygon
-        3. Iterate over *holes*, at each time
-            1. If *newHole* is contained by the *current hole polygon*, then go to the next iteration of 4.4
-            2. If *newHole* contains the *current hole polygon*, then remove the *current hole polygon* from *holes*
-        4. Add *newHole* to *holes*
-    5. Prepend *fill* to *holes*
-    6. Append *holes* to *result*
-5. Return *result*
 
 **insertSimplePolygonToSequence**(*polygon*: Path, *sequence*: Path[])
 This algorithm adds the polygon to the sequence preventing any violation of the property of the multipolygon representation

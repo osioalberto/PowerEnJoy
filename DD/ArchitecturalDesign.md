@@ -71,19 +71,26 @@ This diagram shows the interaction between components involved in the insertion 
 There are two different kinds of interfaces: RESTful APIs are used with client-server architectural style, and Messages are used in event-driven interactions
 
 ###RESTful APIs
+The token mentioned in the /users/{id}/login must be have the following features:
+
+* It must provide an expiration time
+* It must univocally identify a user without quering the database
+* It must provide the user type (employee, user) without quering the database
+* It must be secure and thus it cannot be easily changed or guessed
+
 ***INCLUDE***
 
 ###Messages
 ####StatusReport####
 This message is sent by the car system, to communicate variations of the car status.
 It is sent immediatly after the status or the number of passengers change or the batteryLevel drops more than 5% or the batteryLevel reaches its minimum or maximum value,
-or every 15 minutes if the batteryLevel changes by less than 5% and nothing else happens in the meantime
+or every 15 minutes if the batteryLevel changes by less than 5% and nothing else happens in the meantime.
 |Field|Type|Description|
 |-----|----|-----------|
 |batteryLevel|float|The normalized percentage of the battery charge level|
 |status|CarStatus|The status of the car|
 |passengers|integer|The number of persons that the car has detected inside|
-|position|Position|The current position of the car
+|position|Position|The current position of the car|
 
 ####Unlock####
 This message is sent by management system to the car system in order to unlock the car.
@@ -102,10 +109,15 @@ There are two different architectural styles used to build the architucture of t
 
 * __RESTful APIs__ 
   
-  RESTful APIs were implemented over the HTTPS protocol used in client-server interaction. This was chosen in order to have a clean and neat API, that is easier to understand, extend and mantain.
+  + RESTful API are implemented using JAX-RS.
+  + RESTful APIs are implemented over the HTTPS protocol used in client-server interaction. This was chosen in order to have a clean and neat API, that is easier to understand, extend and mantain.
+  + The content could have been formatted using XML or JSON; for this application the two standards provide the same capability but we opted for JSON since it is easier to be used on client side
+  + To allow future changes of the API that will be incompatible with the one defined, all the url of the RESTful API are relative to a version qualifier path "v1/"
 
 ##Other design decisions
-
+A possible implementation of the shape of an Area was to use a table with the following columns (_areaid_,_order_,latitude,longitude),
+but then all the query requesting in which area was a point would have required the scan of the whole table and this was not acceptable, so we opted to use
+a column named **polygons** in the entity **Area** of type MULTIPOLYGON (http://dev.mysql.com/doc/refman/5.7/en/gis-class-multipolygon.html) as such it can store any geometrical shape composed of segments, and can also be indexed.
 ### Framework selection
 
   Java Enterprise Edition was selected for the implementation of the server components, because we can easily build reliable and scalable application modeling the components as Enterprise Java Beans, and using Java Server Pages for building dynamical user interfaces. Moreover, Java Persistence APIs can be used for the interaction with the DBMS.
@@ -116,14 +128,14 @@ There are two different architectural styles used to build the architucture of t
 
 ### Security
   
-  Passwords are not stored in plain text, but are hashed and salted with strong cryptographic functions. 
-
-  Payments security is granted by the external system for payments processing.
+  * Passwords are not stored in plain text, but are hashed and salted with strong cryptographic functions. 
+  * Payments security is granted by the external system for payments processing.
+  * Remote communications are carried out using TLS.
 
 ### Service providers
 
 #### Maps generation and address translation
-The system uses _Google Maps (https://maps.google.it)_ to carry out map rendering and address translation (into geographical coordinates) in a reliable, well-known and well-tested way. Moreover, this can save the huge cost of the implementation of a new system and of the collection of data.
+The system uses _Google Maps (https://maps.google.com)_ to carry out map rendering and address translation (into geographical coordinates) in a reliable, well-known and well-tested way. Moreover, this can save the huge cost of the implementation of a new system and of the collection of data.
 
 #### Driving licence validation
 The system uses _Il portale dell'automobilista (www.ilportaledellautomobilista.it)_ for validating the driving licence numbers. This was the only feasible solution to have access to a updated data source.
