@@ -1,0 +1,2775 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Design Document</title>
+        <style>
+.rest-item> table {
+	border-collapse: collapse;
+}
+.rest-item>table td {
+	border: 1px solid #E0E0E0;
+	padding: 2px 8px;
+	text-align: left;
+	color: #3a3a3a;
+}
+.rest-item>table th {
+	border: 1px solid #E0E0E0;
+	padding: 4px 8px;
+	background-color: #F5F5F5;
+	font-weight: bold;
+	color: #3a3a3a;
+}
+.rest-item code {
+    padding: 2px 4px;
+    color: #d14;
+    white-space: nowrap;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 3px;
+}
+.rest-item .rest-deep-spacer {
+	display:inline-block;
+	width: 1em;
+}
+.rest-item .rest-tag-optional {
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: #999999;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 14px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    vertical-align: baseline;
+    white-space: nowrap;
+    float:right;
+}
+.rest-item .rest-tag-optional::before {
+	content: 'optional';
+}
+.rest-item .rest-parameters-title>td, .rest-item .rest-fields-title>td, .rest-item .rest-return-title>td, .rest-item .rest-error-title>td{
+    font-weight: 600;
+    font-size: 18px;
+    padding: 20px 0px 10px 0px;
+    border:none;
+}
+.rest-item .rest-method {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    background-color: #3387CC;
+    color: #ffffff;
+    margin-right: 1em;
+    font-family: Arial;
+}
+.rest-item .rest-url {
+ font-family: Monospace;
+ font-size: 1.5em;
+}
+.rest-item {
+ margin-top:40px;
+}
+.rest-item:first-child{
+ margin-top:0px;
+}
+
+.rest-item {
+	page-break-inside:avoid;
+}
+
+</style>
+                    <style>
+                /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
+
+/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Correct the line height in all browsers.
+ * 3. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
+ */
+
+/* Document
+   ========================================================================== */
+
+html {
+  font-family: sans-serif; /* 1 */
+  line-height: 1.15; /* 2 */
+  -ms-text-size-adjust: 100%; /* 3 */
+  -webkit-text-size-adjust: 100%; /* 3 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in IE.
+ */
+
+figcaption,
+figure,
+main { /* 1 */
+  display: block;
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+
+a {
+  background-color: transparent; /* 1 */
+  -webkit-text-decoration-skip: objects; /* 2 */
+}
+
+/**
+ * Remove the outline on focused links when they are also active or hovered
+ * in all browsers (opinionated).
+ */
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+/**
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+ */
+
+b,
+strong {
+  font-weight: inherit;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font style in Android 4.3-.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+audio,
+video {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+
+img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: sans-serif; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+html [type="button"], /* 1 */
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Change the border, margin, and padding in all browsers (opinionated).
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * 1. Add the correct display in IE 9-.
+ * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ */
+
+details, /* 1 */
+menu {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Scripting
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+canvas {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in IE.
+ */
+
+template {
+  display: none;
+}
+
+/* Hidden
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10-.
+ */
+
+[hidden] {
+  display: none;
+}            </style>
+                    <style>
+    
+
+                /*
+	Reserved class starts always with a book- prefix
+	IT IS FORBIDDEN TO have selectors that matches a span element with tagSelector or with a pseudo-class and alter:
+		- display
+		- padding-*
+		- margin-*
+		- font-*
+		- overflow-*
+
+	In particular:
+		- .book-no-index: 			it tells that an element of heading do not want a section number prefixed
+		- .book-no-toc:				it tells that an element of heading do not want a section number nor be present in the TOC
+		- .book-toc:				it represents the TOC element
+		- .book-toc-title:			it is the text written in the toc after the section number and before leaders or page number
+		- .book-toc-index:			it is the section number for a single toc entry
+		- .book-toc-page:			it is the page number for a single toc entry
+		- .book-leaders:			it is the leaders (series of dots)
+		- .book-break-always:		it is an element for which a page break is always inserted after it
+		- .book-break-avoid:		it is an element for which a page break cannot happen inside
+		- .book-page				it is a single page of a book
+		- .book-splitted-copy		it is a part of an element that was cloned
+		- .book-splitted-reference 	it is a part of an element that was cloned, this is the starting of this element
+*/
+
+
+body {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11pt;
+}
+p {
+	text-indent: -1em;
+	padding-left: 1em;
+}
+p.book-splitted-copy {
+	text-indent: 0px;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+figure {
+	page-break-inside: avoid;
+}
+pre table {
+	page-break-inside: auto;
+}
+.book-leaders {
+	font-family: monospace;
+	float: right;
+	opacity:0.6;
+}
+h1:not(.book-no-index), h2:not(.book-no-index), h3:not(.book-no-index), h4:not(.book-no-index), h5:not(.book-no-index), h6:not(.book-no-index) {
+	page-break-after: avoid;
+	page-break-inside: avoid;
+}
+h1:not(.book-no-index) {
+	page-break-before: always;
+}
+li.book-splitted-copy {
+	list-style-type: none;
+}
+.book-toc {
+	page-break-after: always;
+	page-break-inside: auto;
+}
+.book-toc > table {
+	page-break-inside: : auto;
+	width: 100%;
+	border-collapse: collapse;
+}
+.book-toc td {
+	padding: 0px;
+}
+.book-toc .book-toc-title {
+	white-space: nowrap;
+}
+.book-toc td>a{
+	display:block;
+}
+.book-toc-index {
+	padding-right:0.3cm;
+}
+.book-toc .book-toc-title{
+	padding-right: 0.3cm;
+}
+.book-toc .book-toc-page{
+	padding-left: 0.3cm;
+}
+.book-break-always {
+	page-break-after: always;
+}
+.book-break-avoid {
+	page-break-inside: avoid;
+}
+.book-page {
+	page-break-inside: avoid;
+	page-break-after: always;
+	overflow: hidden;
+	position: relative;
+}
+.book-page>.book-page-heading {
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+}
+.book-page>.book-page-footer {
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	right:0px;
+}
+img {
+	max-width: 100%;
+}
+
+    </style>
+                            <script>
+ 
+
+var pageinfo = {
+	size: 'A4',
+	margin: {
+		left: '0.19685in',
+		right: '0.19685in',
+		top: '0.393701in',
+		bottom: '0.393701in'
+	},
+	footer: function(page, cumulativeIndex, totalPages){
+		var el = document.createElement('div');
+		el.textContent = cumulativeIndex+1;
+		el.style.textAlign = 'center';
+		el.style.lineHeight = pageinfo.margin.bottom+'px';
+		el.style.height = pageinfo.margin.bottom+'px';
+		return el;
+	}
+};
+function convertToPixel(s){
+	var m = s.match(/^([0-9]*(?:\.[0-9]*)?)(px|cm|mm|in)$/);
+	if(!m){
+		return null;
+	}
+	var v = parseFloat(m[1]);
+	switch(m[2]){
+		case 'px':
+			return v;
+		case 'cm':
+			v *= 10;
+		case 'mm':
+			v *= 0.0393700787;
+		case 'in':
+			return v*96;
+
+	}
+}
+function computePageInfo(pi){
+	var sizes = {
+		'A4': {
+			width: '8.26in',
+			height: '11.68in'
+		}
+	};
+	var pageinfo = {
+		size: {
+			width: 0,
+			height: 0,
+		},
+		margin: {
+			left:0,
+			right:0,
+			top:0,
+			bottom:0
+		},
+		footer: function(page, cumulativeIndex, totalPages){},
+		heading: function(page, cumulativeIndex, totalPages){}
+	};
+	if(typeof(pi.size) === 'string'){
+		var s = sizes[pi.size];
+		pageinfo.size.width = convertToPixel(s.width);
+		pageinfo.size.height = convertToPixel(s.height);
+	}
+	else {
+		pageinfo.size.width = convertToPixel(pi.size.width);
+		pageinfo.size.height = convertToPixel(pi.size.height);
+	}
+	if(pi.hasOwnProperty('margin')){
+		if(typeof(pi.margin) === 'string'){
+			var s = convertToPixel(pi.margin);
+			pageinfo.margin.left = s;
+			pageinfo.margin.right = s;
+			pageinfo.margin.top = s;
+			pageinfo.margin.bottom = s;
+		}
+		else {
+			pageinfo.margin.left = convertToPixel(pi.margin.left);
+			pageinfo.margin.right = convertToPixel(pi.margin.right);
+			pageinfo.margin.top = convertToPixel(pi.margin.top);
+			pageinfo.margin.bottom = convertToPixel(pi.margin.bottom);
+		}
+	}
+	if(pi.hasOwnProperty('footer')){
+		pageinfo.footer = pi.footer;
+	}
+	if(pi.hasOwnProperty('heading')){
+		pageinfo.heading = pi.heading;
+	}
+	//prepare page info
+	pageinfo.size.width = pageinfo.size.width - pageinfo.margin.left - pageinfo.margin.right;
+	pageinfo.size.height = pageinfo.size.height - pageinfo.margin.top - pageinfo.margin.bottom;
+
+	return pageinfo;
+}
+
+function layoutAll(){
+	pageinfo = computePageInfo(pageinfo);
+	document.body.style.width = pageinfo.size.width + 'px';
+
+	generateToc();
+	while(true){
+		var pages = document.createElement('div');
+		pages.style.position = 'absolute';//no layout interfering
+
+		fixMediaSize();
+
+		var mapping;
+		var reference;
+		{
+			let temp = copyContent();
+			mapping = temp.mapping;
+			reference = temp.reference;
+		}
+
+		var stack = new Stack();
+
+		normalizeDocument();
+		preNormalization();
+
+		stack.pushAll(Array.from(document.body.childNodes).reverse());
+		document.body.appendChild(pages);//used only to do some measurements;
+
+		var previousPage = null;
+		while(!stack.isEmpty()){
+			previousPage = layoutPage(pages, previousPage, stack);
+		}
+
+		setupPages(pages);
+		while(pages.firstChild){
+			document.body.appendChild(pages.firstChild);
+		}
+
+		postNormalization(stack);
+		document.body.removeChild(pages);
+		//mappings can be updated
+		for(let orig of Array.from(mapping.keys())){
+			let mapTo = mapping.get(orig);
+			mapping.set(orig, stack.getSplittedElement(mapTo)[0]);
+		}
+
+		//pages can be updated
+		if(updatePageNumbers(reference, mapping)){
+			//an update happened, this means pages must be rebuilt
+			while(document.body.firstChild){
+				document.body.firstChild.remove();
+			}
+			document.body.appendChild(reference);
+		}
+		else {
+			break;
+		}
+	}
+	setPagesHeight();
+	setHeadingAndFooter();
+	fixTocSize();
+	setLeaders();
+}
+function setHeadingAndFooter(){
+	var pages = document.body.children;
+	for(var i=0;i<pages.length; ++i){
+		var t = pageinfo.heading(pages[i], i, pages.length);
+		if(t!==undefined && t!==null){
+			var h = document.createElement('div');
+			h.classList.add('book-page-heading');
+			if(!(t instanceof Node)){
+				t = document.createTextNode(t + '');
+			}
+			h.appendChild(t);
+			pages[i].insertBefore(h, pages[i].firstChild);
+		}
+		t = pageinfo.footer(pages[i], i, pages.length);
+		if(t!==undefined && t!==null){
+			var h = document.createElement('div');
+			h.classList.add('book-page-footer');
+			if(!(t instanceof Node)){
+				t = document.createTextNode(t + '');
+			}
+			h.appendChild(t);
+			pages[i].appendChild(h);
+		}
+	}
+}
+function fixTocSize(){
+	var toc = document.querySelector('.book-toc>table');
+	var rows = toc.children;
+	var fixedSizes = new Array(8).fill(0);
+	for(var i=0;i<rows.length; ++i){
+		var row = rows[i];
+		var cells = row.children;
+		var cellIndex = 0;
+		for(var j=0;j<cells.length; ++j){
+			var colspan = cells[j].hasAttribute('colspan')?(cells[j].getAttribute('colspan')|0):1;
+			var cellElement = cells[j].firstElementChild;
+			if(colspan === 1 && cellElement){
+				var display = cellElement.style.display;
+				cellElement.style.setProperty('display', 'inline', 'important');
+				var cellSize = cellElement.offsetWidth;
+				cellElement.style.display = display;
+				if(cellSize > fixedSizes[cellIndex]){
+					fixedSizes[cellIndex] = cellSize;
+				}
+			}
+			cellIndex += colspan;
+		}
+	}
+	var totalSpace = toc.parentNode.offsetWidth;
+	//fill space for a column
+	console.log('totalWidth: '+totalSpace)
+	for(var i=0;i<fixedSizes.length; ++i){
+		totalSpace -= fixedSizes[i];
+	}
+	console.log('availSpace: '+totalSpace);
+	for(var i=0;i<fixedSizes.length; ++i){
+		if(fixedSizes[i] === 0){
+			fixedSizes[i] = totalSpace;
+			break;
+		}
+	}
+
+	var colgroup = document.createElement('colgroup');
+	for(var i=0;i<fixedSizes.length; ++i){
+		var col = document.createElement('col');
+		col.style.setProperty('width', fixedSizes[i]+'px', 'important');
+		colgroup.appendChild(col);
+	}
+	toc.insertBefore(colgroup, toc.firstChild);
+}
+function setPagesHeight(){
+	var pages = document.body.children;
+	for(var i=0;i<pages.length; ++i){
+		pages[i].style.setProperty('height', pageinfo.size.height+'px','important');
+	}
+}
+function copyContent(){
+	var docCopy = document.createDocumentFragment();
+	var mapping = new Map();
+
+	var children = Array.from(document.body.childNodes);
+	for(var i=0;i<children.length;++i){
+		var copy = children[i].cloneNode(true);
+		mapping.set(children[i], copy);
+
+		if(copy.nodeType === 1){
+			var allChild = children[i].getElementsByTagName('*');
+			var allCopyChild = copy.getElementsByTagName('*');
+			for(var j=0;j<allChild.length;++j){
+				mapping.set(allChild[j], allCopyChild[j]);
+			}
+		}
+
+		docCopy.appendChild(children[i]);
+		document.body.appendChild(copy);
+	}
+	return {
+		mapping: mapping,
+		reference: docCopy
+	};
+}
+function normalizeDocument(){
+	document.normalize();
+	//now get any textNode from the document
+	var nodes = Array.from(document.body.childNodes);
+	while(nodes.length){
+		var node = nodes.pop();
+		if(node.nodeType === 3){
+			var parent = node.parentNode;
+			var wrapper = document.createElement('span');
+			parent.insertBefore(wrapper, node);
+			wrapper.appendChild(node);
+			var rect = wrapper.getBoundingClientRect();
+			if(rect.width !== 0 || rect.height !== 0){
+				parent.insertBefore(node, wrapper);
+			}
+			parent.removeChild(wrapper);
+		}
+		else {
+			var nnodes = Array.from(node.childNodes);
+			for(let x of nnodes){
+				nodes.push(x);
+			}
+		}
+	}
+}
+function layoutPage(pages, previousPage, stack){
+	var page = createPage(pages, stack);
+	removePageBreakAlways(page, stack);
+	removePageBreakAlways(page, stack);
+
+	while(true){
+		switch(removePageBreakAvoid(previousPage, page, stack)){
+			case 0:
+				//TODO is this really necessary?
+				if(!page.firstChild){
+					pages.removeChild(page);
+				}
+				return;
+			case 1://need to redo this step
+			break;
+			case -1:
+				page = createPage(pages, stack);
+				removePageBreakAlways(page, stack);
+				removePageBreakAlways(page, stack);
+				break;
+		}
+	}
+	return page;
+}
+function Stack(){
+	var self = this;
+	var splitContext = new Map();
+	var splitMain = new Map();
+	var mergedNodes = new Set();
+	var nodes = [];
+	var allNodes = [nodes];
+	var fragment = document.createDocumentFragment();
+
+	function addSplit(prev, next){
+		var ctxKey = splitMain.get(next);
+		if(!ctxKey){
+			ctxKey = next;
+			splitMain.set(ctxKey, next);
+			splitContext.set(ctxKey, [next]);
+		}
+		splitMain.set(prev, ctxKey);
+		var arr = splitContext.get(ctxKey);
+		arr.splice(arr.indexOf(next), 0, prev);
+	}
+
+	this.splitTextNode = function(textNode, originalParent){
+		//first wrap that node into a span, so that it can be measured
+		var wrapper = document.createElement('span');
+		var parent = textNode.parentNode;
+		wrapper.appendChild(textNode);
+		parent.appendChild(wrapper);
+		var expectedRect = wrapper.getClientRects()[0];
+		var allText = textNode.textContent;
+		var index = 0;
+		wrapper.removeChild(textNode);
+		while(true){
+			++index;
+			wrapper.textContent = allText.substring(0, index);
+			var newRect = wrapper.getClientRects()[0];
+			//0.01 is an epsilon consant, changing it makes it more precise...
+			if(Math.abs(newRect.width - expectedRect.width)<0.01){
+				break;
+			}
+		}
+		//now we know the point to split the text
+		parent.removeChild(wrapper);
+		var otherText = document.createTextNode(wrapper.textContent);
+		parent.appendChild(otherText);
+		//replace node with the new value
+		textNode.textContent = allText.substring(index);
+		originalParent.appendChild(textNode);
+
+		addSplit(otherText, textNode);
+		return otherText;
+	};
+
+	this.removeClone = function(node){
+		var main = splitMain.get(node);
+		if(main && main !== node){
+			var arr = splitContext.get(main);
+			if(node.nodeType === 3){
+				//text node need a special treatment, textContent must be joint
+				var index = arr.indexOf(node);
+				if(index !== arr.length - 1){
+					arr[index + 1].textContent = node.textContent + arr[index + 1].textContent;
+				}
+				else if(index !== 0) {
+					arr[index - 1].textContent += node.textContent;
+				}
+			}
+			if(arr.length === 2){
+				if(main.nodeType === 1) main.classList.remove('book-splitted-copy','book-splitted-reference');
+				splitContext.delete(main);
+				splitMain.delete(main);
+			}
+			else {
+				arr.splice(arr.indexOf(node), 1);
+				if(main.nodeType === 1){
+					arr[0].classList.add('book-splitted-reference');
+					arr[0].classList.remove('book-splitted-copy');
+				}
+			}
+			splitMain.delete(node);
+		}
+	};
+	this.cloneNode = function(node){
+		var copy = node.cloneNode(false);
+		if(copy.tagName.toLowerCase() === 'table'){
+			var els = node.children;
+			for(var i=0;i<els.length;++i){
+				if(els[i].tagName.toLowerCase() === 'colgroup'){
+					copy.appendChild(els[i].cloneNode(true));
+				}
+			}
+		}
+		if(copy.hasAttribute('id')){
+			copy.removeAttribute('id');
+		}
+		if(!node.classList.contains('book-splitted-copy')){
+			node.classList.remove('book-splitted-reference');
+			node.classList.add('book-splitted-copy');
+			copy.classList.add('book-splitted-reference');
+		}
+		addSplit(copy, node);
+		return copy;
+	};
+	this.mergeAll = function(){
+		//merge subrutine, it will merge node with the same parent node recursively, until a fixed point is meet
+		var changed = true;
+		while(changed){
+			changed = false;
+			var cleanable = [];
+			for(let entry of splitContext.entries()){
+				var node = entry[0];
+				var pieces = entry[1];
+				var prevParent = (pieces[0]||{parentNode:null}).parentNode;
+				var isTable = node.nodeType === 1 && node.tagName.toLowerCase() === 'table';
+				for(var i=1;i<pieces.length; ++i){
+					//if can be merged
+					if(prevParent === pieces[i].parentNode){
+						changed = true;
+						if(pieces[i - 1] !== node){
+							mergedNodes.add(pieces[i-1]);
+							if(node.nodeType === 3){
+								pieces[i].textContent = pieces[i-1].textContent + pieces[i].textContent;
+							}
+							else {
+								//transfer all childnodes of prev to this
+								var refNode = pieces[i].firstChild;
+								var iterNode = refNode;
+								while(iterNode) {
+									if(iterNode.nodeType === 1 && iterNode.tagName.toLowerCase() === 'colgroup'){
+										refNode = iterNode.nextSibling;
+									}
+									iterNode = iterNode.nextSibling;
+								}
+								while(pieces[i - 1].lastChild){
+									var c = pieces[i-1].lastChild;
+									if(isTable && c.nodeType === 1 && c.tagName.toLowerCase() === 'colgroup'){
+										pieces[i-1].removeChild(c);
+									}
+									else {
+										pieces[i].insertBefore(c, refNode);
+										refNode = c;
+									}
+								}
+								if(!pieces[i - 1].classList.contains('book-splitted-copy')){
+									pieces[i].classList.remove('book-splitted-copy');
+									pieces[i].classList.add('book-splitted-reference');
+								}
+							}
+							//prev is not used anymore
+							splitMain.delete(pieces[i - 1]);
+							pieces[i - 1].remove();
+							pieces.splice(i - 1, 1);
+							--i;
+						}
+						else {
+							mergedNodes.add(pieces[i]);
+							if(node.nodeType === 3){
+								pieces[i - 1].textContent = pieces[i - 1].textContent + pieces[i].textContent;
+							}
+							else {
+								//transfer all childnodes of this to prev
+								while(pieces[i].firstChild){
+									var c = pieces[i].firstChild;
+									if(isTable && c.nodeType === 1 && c.tagName.toLowerCase() === 'colgroup'){
+										pieces[i].removeChild(c);
+									}
+									else {
+										pieces[i - 1].appendChild(c);
+									}
+								}
+								if(!pieces[i].classList.contains('book-splitted-copy')){
+									pieces[i - 1].classList.remove('book-splitted-copy');
+									pieces[i - 1].classList.add('book-splitted-reference');
+								}
+							}
+							//next is not used anymore!
+							splitMain.delete(pieces[i]);
+							pieces[i].remove();
+							pieces.splice(i, 1);
+							--i;
+						}
+					}
+					else {
+						prevParent = pieces[i].parentNode;
+					}
+				}
+
+				if(pieces.length === 1){
+					cleanable.push(node);
+				}
+			}
+			for(let node of cleanable){
+				if(node.nodeType === 1){
+					node.classList.remove('book-splitted-copy', 'book-splitted-reference');
+				}
+				splitMain.delete(node);
+				splitContext.delete(node);
+			}
+		}
+	};
+	this.push = function(value){
+		nodes.push(value);
+		if(allNodes.length===1) fragment.appendChild(value);
+		return self;
+	};
+	this.pop = function(){
+		var result;
+		do {
+			result = nodes.pop();
+		} while(result && mergedNodes.has(result));
+		return result;
+	};
+	this.peek = function(){
+		var item = self.pop();
+		if(item){
+			self.push(item);
+		}
+		return item;
+	}
+	this.isEmpty = function(){
+		return !self.peek();
+	}
+	this.clear = function(){
+		nodes.splice(0, nodes.length);
+		return self;
+	}
+	this.pushAll = function(x){
+		for(let i of x){
+			nodes.push(i);
+			if(allNodes.length===1) fragment.appendChild(i);
+		}
+		return self;
+	}
+	this.newLevel = function(){
+		var x = [];
+		allNodes.push(x);
+		nodes = x;
+		return self;
+	}
+	this.rebase = function(){
+		var x = allNodes[0];
+		allNodes = [x];
+		nodes = x;
+		return self;
+	}
+	this.getSplittedElements = function(){
+		var result = [];
+		for(let x of splitContext.values()){
+			if(x.length > 1){
+				result.push(x);
+			}
+		}
+		return result;
+	}
+	this.getSplittedElement = function(x){
+		var main = splitMain.get(x);
+		if(!main){
+			return [x];
+		}
+		return splitContext.get(main);
+	}
+}
+function fixMediaSize(){
+	var els = document.querySelectorAll('img, audio, video');
+	for(var i=0;i<els.length;++i){
+		els[i].style.setProperty('height', els[i].offsetHeight+'px', 'important');
+		els[i].style.setProperty('width', els[i].offsetWidth+'px', 'important');
+	}
+}
+function createPage(pages, stack){
+	var page = document.createElement('div');
+	page.style.width = pageinfo.size.width+'px';
+	page.classList.add('book-page');
+	pages.appendChild(page);
+
+	var insertionParent = page;
+
+	while(!stack.isEmpty()){
+		var node = stack.peek();
+		var parent = node.parentNode;
+		insertionParent.appendChild(node);
+		if(isTooLarge(page)){
+			//handle here image resizing
+			var single = getSingleElement(node);
+			if(single && single.tagName.toLowerCase() === 'img'){
+				var maxSpace = pageinfo.size.height - (page.getBoundingClientRect().height - node.getBoundingClientRect().height);
+				if(maxSpace > 0.75*pageinfo.size.height){
+					single.style.setProperty('height', (maxSpace-5)+'px', 'important');
+					stack.pop();
+					stack.rebase();
+
+					return page;
+				}
+			}
+			if(canBeSplitted(node)){
+				var copy;
+				if(node.nodeType === 3){
+					copy = stack.splitTextNode(node, parent);
+				}
+				else {
+					copy = stack.cloneNode(node);
+					insertionParent.removeChild(node);
+					parent.insertBefore(node, parent.firstChild);
+					insertionParent.appendChild(copy);
+				}
+				if(isTooLarge(page)){
+					insertionParent.removeChild(copy);
+					stack.removeClone(copy);
+					//remove empty hierarchy of cloned nodes
+					while(!insertionParent.firstChild && insertionParent !== page){
+						var oldParent = insertionParent;
+						insertionParent = insertionParent.parentNode;
+						insertionParent.removeChild(oldParent);
+						stack.removeClone(oldParent);
+					}
+					stack.rebase();
+					return page;
+				}
+				stack.newLevel();
+				stack.pushAll(Array.from(node.childNodes).reverse());
+				insertionParent = copy;
+			}
+			else {
+				//must be inserted in the next page...
+				//unless it is a single element
+				if(isSingleElement(page, insertionParent)){
+					stack.pop();
+					stack.rebase();
+					/*while(true){
+						if(stack.peek()){
+							stack.pop();
+						}
+						if(!stack.peek()){ stack.rebase(); }
+						else { break; }
+					}*/
+					return page;
+				}
+				else {
+					insertionParent.removeChild(node);
+					parent.insertBefore(node, parent.firstChild);
+					while(insertionParent !== page && insertionParent.childNodes.length === 0){
+						var temp = insertionParent.parentNode;
+						temp.removeChild(insertionParent);
+						stack.removeClone(insertionParent);
+						insertionParent = temp;
+					}
+					stack.rebase();
+					return page;
+				}
+			}
+		}
+		else {
+			stack.pop();
+		}
+	}
+	stack.rebase();
+	return page;
+}
+
+function removePageBreakAlways(page, stack){
+	var beforeNode = null;
+	var afterNode = null;
+	var others = Array.from(page.childNodes).reverse();
+	while(others.length){
+		var current = others.pop();
+		var pageBreakType = getPageBreakType(current);
+		switch(pageBreakType){
+			case 'before':
+				if(!beforeNode) { beforeNode = current; }
+				others = [ ];
+				break;
+			case 'after':
+				afterNode = current;
+				others = [ ];
+				//intended fall to default
+			default:
+				var cnode = current.childNodes;
+				for(var i = cnode.length - 1; i >= 0; --i){
+					others.push(cnode[i]);
+				}
+				break;
+		}
+	}
+	var current = beforeNode || afterNode;
+	if(!current){
+		return;
+	}
+	//There is a page-break!
+	var pageBreakType = beforeNode? 'before': 'after';
+	//We get all the parent chain until page is found
+	var parentList = [ current, current.parentNode ];
+	var isSingle = true;
+	var hasPrevious = current.previousSibling;
+	var hasNext = current.nextSibling;
+	while(parentList[parentList.length - 1]!==page){
+		if(!hasPrevious){
+			hasPrevious = parentList[parentList.length - 1].previousSibling;
+		}
+		if(!hasNext){
+			hasNext = parentList[parentList.length - 1].nextSibling;
+		}
+		if(parentList[parentList.length - 1].childNodes.length>1){
+			isSingle = false;
+		}
+		parentList.push(parentList[parentList.length - 1].parentNode);
+	}
+	parentList.pop();//remove page
+
+	if((pageBreakType === 'before' && !hasPrevious)||(pageBreakType==='after' && !hasNext)){
+		current.style.setProperty('page-break-'+pageBreakType, 'auto', 'important');
+		return;
+	}
+
+	//We need to remove the next elements because they are not part of this page
+	var node = parentList[parentList.length - 1];
+	while(page.lastChild !== node){
+		let t = page.lastChild;
+		page.removeChild(t);
+		stack.push(t);
+	}
+	if(isSingle && pageBreakType === 'before'){
+		page.removeChild(node);
+		stack.push(node);
+	}
+
+	if(!isSingle) {
+		//Now we must clone the elements
+		var cloned = [];
+		for(var i=1; i<parentList.length; ++i){
+			cloned.push(stack.cloneNode(parentList[i]));
+			while(parentList[i].firstChild !== parentList[i - 1]){
+					cloned[i - 1].appendChild(parentList[i].firstChild);
+			}
+			if(i===1 && pageBreakType !== 'before'){
+				cloned[i - 1].appendChild(current);
+			}
+			if(i > 1){
+				cloned[i - 1].appendChild(cloned[i - 2]);
+			}
+		}
+		//now add the cloned and remove the originals
+		page.insertBefore(cloned[cloned.length - 1], parentList[parentList.length - 1]);
+		stack.push(parentList[parentList.length - 1]);
+	}
+	current.style.setProperty('page-break-'+pageBreakType, 'auto', 'important');
+	stack.mergeAll();
+}
+
+function removePageBreakAvoid(previousPage, page, stack){
+	var beforeNode = null;
+	var afterNode = null;
+	var others = Array.from(page.childNodes).reverse();
+	while(others.length){
+		var current = others.pop();
+		var pageBreakType = getPageNoBreakType(current);
+		switch(pageBreakType){
+			case 'before':
+				if(!beforeNode) { beforeNode = current; }
+				break;
+			case 'after':
+				afterNode = current;
+				break;
+			default:
+				var cnode = current.childNodes;
+				for(var i = cnode.length - 1; i >= 0; --i){
+					others.push(cnode[i]);
+				}
+				break;
+		}
+	}
+	var current = beforeNode || afterNode;
+	if(!current){
+		return 0;
+	}
+	var pageBreakType = beforeNode ? 'before': 'after';
+	//after avoid means that the element after this needs to exist, unless a forced break has occurred...
+	//before avoid means that the element before this needs to exist, unless a forced break has occurred...
+
+	//if there is no page before this one, 'before avoid' is meet with no extra check	
+	if(pageBreakType === 'before' && !previousPage){
+		current.style.setProperty('page-break-before', 'auto', 'important');
+		return 1;
+	}
+	var needsRemoval = false;
+	if(pageBreakType === 'after'){
+		//check for next elements, if no one is found, then remove this element from the page
+		var iter = current;
+		while(!iter.nextSibling && iter !== page){
+			iter = iter.parentNode;
+		}
+		needsRemoval = iter === page;
+	}
+	if(pageBreakType === 'before'){
+		//check for prev elements, if no one is found, then remove this element from the page
+		var iter = current;
+		while(!iter.previousSibling && iter !== page){
+			iter = iter.parentNode;
+		}
+		needsRemoval = iter === page;
+	}
+	current.style.setProperty('page-break-'+pageBreakType, 'auto', 'important');
+	if(!needsRemoval) {
+		return 1;
+	}
+	if(pageBreakType === 'after'){
+		current.style.setProperty('page-break-before', 'always', 'important');
+		removePageBreakAlways(page, stack);
+		return 1;
+	}
+	else if(pageBreakType === 'before'){
+		//previous element must page-break-before forced
+		var lastElement = previousPage;
+		while(lastElement.lastElementChild){
+			lastElement = lastElement.lastElementChild;
+		}
+		lastElement.style.setProperty('page-break-before', 'always', 'important');
+		current.style.setProperty('page-break-before', 'auto', 'important');
+
+		while(page.lastChild){
+			stack.push(page.lastChild);
+		}
+		//page is discarted
+		page.parentNode.removeChild(page);
+		//merge stack and rebuild previous page
+		stack.mergeAll();
+		removePageBreakAlways(previousPage, stack);
+		return -1;
+	}
+}
+
+function setupPages(pages){
+	var c = pages.children;
+	for(var i=0;i<c.length;++i){
+		c[i].setAttribute('data-book-page-number', i+1);
+		c[i].style.paddingLeft = pageinfo.margin.left+'px';
+		c[i].style.paddingTop = pageinfo.margin.top+'px';
+		c[i].style.paddingRight = pageinfo.margin.right+'px';
+		c[i].style.paddingBottom = pageinfo.margin.bottom+'px';
+	}
+}
+
+function getPageBreakType(node){
+	if(node.nodeType !== 1){ return null; }
+	var style = document.defaultView.getComputedStyle(node, null);
+	if(style.pageBreakBefore === 'always'){ return 'before'; }
+	if(style.pageBreakAfter === 'always'){ return 'after'; }
+	return null;
+}
+function getPageNoBreakType(node){
+	if(node.nodeType !== 1){ return null; }
+	var style = document.defaultView.getComputedStyle(node, null);
+	if(style.pageBreakBefore === 'avoid'){ return 'before'; }
+	if(style.pageBreakAfter === 'avoid'){ return 'after'; }
+	return null;
+}
+function getSingleElement(node){
+	while(true){
+		switch(node.childNodes.length){
+			case 0:
+				return node.nodeType === 1?node:null;
+			case 1:
+				node = node.firstChild;
+				break;
+			default:
+				return null;
+		}
+	}
+}
+function isSingleElement(page, currentNode){
+	while(currentNode !== page){
+		if(currentNode.childNodes.length > 1){
+			return false;
+		}
+		currentNode = currentNode.parentNode;
+	}
+	return currentNode.childNodes.length <= 1;
+}
+function canBeSplitted(node){
+	if(node.nodeType !== 1){
+		return true;
+	}
+	var name = node.tagName.toLowerCase();
+	//table rows, cells cannot be splitted
+	if(name === 'tr' || name === 'td' || name === 'th') {
+		return false;
+	}
+	//multimedia element cannot be splitted
+	if(name === 'img' || name === 'audio' || name === 'video' || name === 'embed' || name === 'object' || name === 'canvas' || name === 'area'){
+		return false;
+	}
+	//frames cannot be split
+	if(name === 'frame' || name === 'iframe'){
+		return false;
+	}
+	//form inputs cannot be split
+	if(name === 'input' || name === 'select' || name === 'progress' || name === 'button'){
+		return false;
+	}
+	if(name === 'br' || name === 'hr'){
+		return false;
+	}
+	//cannot split a block with page-break-inside: avoid
+	return document.defaultView.getComputedStyle(node, null).pageBreakInside !== 'avoid';
+}
+function preNormalization(){
+	var nodes = Array.from(document.getElementsByTagName('*'));
+	var groups = new Map();
+	for(let node of nodes){
+		var name = node.tagName.toLowerCase();
+		var group = groups.get(name);
+		if(!group){
+			group = [];
+			groups.set(name, group);
+		}
+		group.push([node]);
+	}
+	for(let normalTuple of normalizations){
+		var normalizer = normalTuple[normalTuple.length - 1];
+		for(var i=0;i<normalTuple.length - 1; ++i){
+			var group = groups.get(normalTuple[0]);
+			if(group){
+				for(let tuple of group){
+					normalizer(tuple, true);
+				}
+			}
+		}
+	}
+}
+function postNormalization(stack){
+	var groups = new Map();
+	for(let tuple of stack.getSplittedElements()){
+		if(tuple[0].nodeType !== 1){
+			continue;
+		}
+		var name = tuple[0].tagName.toLowerCase();
+		var group = groups.get(name);
+		if(!group){
+			group = [];
+			groups.set(name, group);
+		}
+		group.push(tuple);
+	}
+	for(let normalTuple of normalizations){
+		var normalizer = normalTuple[normalTuple.length - 1];
+		for(var i=0;i<normalTuple.length - 1; ++i){
+			var group = groups.get(normalTuple[i]);
+			if(group){
+				for(let tuple of group){
+					normalizer(tuple, false);
+				}
+			}
+		}
+	}
+}
+var normalizations = [
+	['ul', 'ol', function(tuple, isPrenormalization){
+		if(isPrenormalization){
+			return;
+		}
+		var items = [];
+		var main = tuple[0];
+
+		var value = main.hasAttribute('start') ? (main.getAttribute('start')|0) : 1;
+		var increment = main.hasAttribute('reversed') ? -1 : 1;
+
+		for(var i=0;i<tuple.length;++i){
+			var child = tuple[i].children;
+			for(var j=0;j<child.length;++j){
+				if(!child[j].classList.contains('book-splitted-copy')){
+					items.push(child[j]);
+				}
+			}
+			tuple[i].removeAttribute('start');
+			tuple[i].removeAttribute('reversed');
+		}
+		//items contains all the li elements unique, so that number can be assigned easily
+		for(var i=0;i<items.length;++i){
+			if(items[i].hasAttribute('value')){
+				value = items[i].getAttribute('value')|0;
+			}
+			else {
+				items[i].setAttribute('value', value);
+			}
+			value += increment;
+		}
+	}],
+	['table', function(tuple, isPrenormalization){
+		if(!isPrenormalization){
+			return;
+		}
+		//tuple is an array of 1 element
+		//compute the columns width, so that we do normalization without redoing page-creation
+		var items = [];
+		var child = tuple[0].children;
+		var originalGroup = null;
+		for(var i=0;i<child.length;++i){
+			switch(child[i].tagName.toLowerCase()){
+				case 'tr':
+					items.push(child[i]);
+					break;
+				case 'thead':
+				case 'tbody':
+				case 'tfoot':
+					var child2 = child[i].children;
+					for(var j=0;j<child2.length;++j){
+						if(child2[j].tagName.toLowerCase() === 'tr'){
+							items.push(child2[j]);
+						}
+					}
+					break;
+				case 'colgroup':
+					originalGroup = child[i];
+					break;
+			}
+		}
+		//now we have all the rows we need
+		//and we can compute the columns width
+		var columnCount = 0;
+		for(var i=0;i<items.length; ++i){
+			var cells = items[i].children;
+			var tempCount = 0;
+			for(var j=0;j<cells.length;++j){
+				var cell = cells[j];
+				if(cell.hasAttribute('colspan')){
+					tempCount += cell.getAttribute('colspan')|0;
+				}
+				else {
+					++tempCount;
+				}
+			}
+			if(tempCount>columnCount){
+				columnCount = tempCount;
+			}
+		}
+		if(originalGroup && originalGroup.children.length === columnCount){
+			return;
+		}
+
+		//now we need to measure the columns
+		var row = document.createElement('tr');
+		var colgroup = document.createElement('colgroup');
+
+		for(var i=0;i<columnCount;++i){
+			row.appendChild(document.createElement('td'));
+		}
+		tuple[0].appendChild(row);
+		for(var i=0;i<columnCount;++i){
+			var col = document.createElement('col');
+			col.style.setProperty('width', row.children[i].getBoundingClientRect().width + 'px', 'important');
+			colgroup.appendChild(col);
+		}
+		tuple[0].removeChild(row);
+		if(originalGroup){
+			originalGroup.remove();
+		}
+		tuple[0].insertBefore(colgroup, tuple[0].firstChild);
+	}],
+];
+function isTooLarge(page){
+	var box = page.getBoundingClientRect();
+	return box.height > pageinfo.size.height;
+}
+
+function setLeaders(){
+	var els = document.getElementsByClassName('book-leaders');
+	for(var i=0;i<els.length; ++i){
+		var e = els[i];
+		var parent = e.parentNode;
+		var f = e.style.float;
+		e.style.setProperty('float', 'none', 'important');
+		var normalSize = parent.offsetWidth;
+		while(true){
+			var t = e.textContent;
+			e.textContent = t + '.';
+			if(parent.offsetWidth !== normalSize){
+				console.log('normal was: '+normalSize+', reached: '+parent.offsetWidth);
+				e.textContent = t;
+				break;
+			}
+		}
+	//	e.style.float = f;
+	}
+}
+
+function generateToc(){
+	var els = document.querySelectorAll('h1:not(.book-no-toc),h2:not(.book-no-toc),h3:not(.book-no-toc),h4:not(.book-no-toc),h5:not(.book-no-toc),h6:not(.book-no-toc)');
+	var result = document.querySelector('.book-toc');
+	var table = document.createElement('table');
+	result.appendChild(table);
+	var level = 0;
+	var levels = [0, 0, 0, 0, 0, 0];
+	var levelSizes = [0, 0, 0, 0, 0, 0, 0, 0];
+	var maxTextSize = 0;
+
+	for(var i=0;i<els.length;++i){
+		var e = els[i];
+		var newLevel = e.tagName.charAt(1) - '1';
+		var link = extractLink(e);
+		if(newLevel > level+1) throw 'Wrong document structure';
+		var row = document.createElement('tr');
+		
+		++levels[newLevel];
+		for(var j = newLevel + 1; j < levels.length; ++j) {
+			levels[j] = 0;
+		}
+		level = newLevel;
+
+		if(level != 0){
+			var spacer = document.createElement('td');
+			spacer.setAttribute('colspan', level);
+			row.appendChild(spacer);
+		}
+		
+		var indexNumber = makeIndexString(levels, level);
+		var indexSpan = document.createElement('span');
+		indexSpan.classList.add('book-toc-index');
+		indexSpan.textContent = indexNumber;
+		row.appendChild(makeLink(link, indexSpan));
+		var titleContent = document.createElement('span');
+		titleContent.classList.add('book-toc-title');
+		titleContent.appendChild(document.createTextNode(e.textContent));
+		var leaders = document.createElement('span');
+		leaders.classList.add('book-leaders');
+		var partialContent = document.createDocumentFragment();
+		partialContent.appendChild(titleContent);
+		partialContent.appendChild(leaders);
+		var title = makeLink(link, partialContent);
+		title.setAttribute('colspan', levels.length - level);
+		row.appendChild(title);
+
+		var pageSpan = document.createElement('span');
+		pageSpan.classList.add('book-toc-page');
+		var page = makeLink(link, pageSpan);
+		row.appendChild(page);
+
+		if(!e.classList.contains('book-no-index')){
+			insertNumber(e, indexNumber);
+		}
+		table.appendChild(row);
+		/*taking measures to compute columns widths*/
+		var t = indexSpan.getBoundingClientRect().width + 2;
+		if(t > levelSizes[level]){
+			levelSizes[level] = t;
+		}
+	}
+	var group = document.createElement('colgroup');
+	var totalSize = table.offsetWidth;
+	for(var i=0;i<levelSizes.length; ++i){
+		var col = document.createElement('col');
+		totalSize -= levelSizes[i];
+		if(i === levelSizes.length -2){
+			levelSizes[i] = totalSize;
+		}
+		col.style.width = levelSizes[i]+'px';
+		group.appendChild(col);
+	}
+	table.insertBefore(group, table.firstChild);
+}
+
+function extractLink(e){
+	if(!e.hasAttribute('id')){
+		throw 'Found an heading supposed to be inside the toc, but has no id';
+	}
+	return '#' + e.getAttribute('id');
+}
+function insertNumber(e, number){
+	var span = document.createElement('span');
+	span.classList.add('book-toc-index');
+	span.appendChild(document.createTextNode(number));
+	e.insertBefore(span, e.firstChild);
+}
+function makeLink(link, content){
+	var l = document.createElement('a');
+	l.setAttribute('href', link);
+	if(content) l.appendChild(content);
+
+	var cell = document.createElement('td');
+	cell.appendChild(l);
+	return cell;
+}
+function makeIndexString(levels, level){
+	var result = '';
+	for(var i=0;i<level;++i){
+		result += levels[i] + '.';
+	}
+	return result + levels[level];
+}
+function updatePageNumbers(fragment, mapping){
+	var items = fragment.querySelectorAll('.book-toc a[href]>.book-toc-page');
+	var changed = false;
+	var newSize = 0;
+	for(var i=0; i<items.length; ++i){
+		var link = items[i].parentNode;
+		var dest = fragment.getElementById(link.getAttribute('href').substring(1));
+		var span = items[i];
+		if(dest){
+			dest = mapping.get(dest);
+			var newPageNum = getPageNumber(dest);
+			if(span.textContent != newPageNum){
+				changed = true;
+				span.textContent = newPageNum;
+				mapping.get(span).textContent = newPageNum;
+			}
+			var t = mapping.get(span).getBoundingClientRect().width + 2;
+			if(t>newSize){
+				newSize = t;
+			}
+		}
+	}
+	if(changed){
+		var cols = fragment.querySelector('.book-toc>table>colgroup').children;
+		var textCol = cols[cols.length - 2];
+		var pageCol = cols[cols.length - 1];
+		var pageSize = parseFloat(pageCol.style.width);
+		var textSize = parseFloat(textCol.style.width);
+		if(Math.abs(newSize - pageSize) > 0.01){
+			pageCol.style.width = newSize + 'px';
+			textCol.style.width = (textSize + pageSize - newSize) + 'px';
+		}
+
+	}
+	return changed;
+}
+function getPageNumber(e){
+	while(!e.classList.contains('book-page')){
+		e = e.parentNode;
+	}
+	return e.getAttribute('data-book-page-number')|0;
+}
+
+
+window.addEventListener('load', layoutAll);            </script>
+            </head>
+    <body>
+<h2 id="book-heading-1" class="book-no-toc book-no-index" style="text-align:center;margin-top:200px;">Software Engineering 2: PowerEnJoy</h2>
+
+<h1 id="book-heading-2" class="book-no-toc book-no-index" style="text-align:center;">Design Document</h1>
+
+<h3 id="book-heading-3" class="book-no-toc book-no-index" style="text-align:center;">Nardo Loris, Osio Alberto</h3>
+
+<h4 id="book-heading-4" class="book-no-toc book-no-index" style="page-break-after:always;text-align:center;">Politecnico di Milano</h4>
+
+<div class="book-toc"></div>
+
+<h1 id="book-heading-5">Introduction</h1>
+
+<h2 id="book-heading-6">Purpose</h2>
+
+<p>This is the Design Document for the PowerEnJoy system. Its aim is to completely describe the logical and physical architecture of the system, along with some guidelines for most critical algorithms and some dynamic views of the system. This document will present content using mainly UML standards, along with textual descriptions.This document does not include mock ups of the application, as they were already included in the Requirements Analysis and Specification Document.
+This document is written for project managers, developers, testers, and Quality Assurance people.</p>
+
+<h2 id="book-heading-7">Scope</h2>
+
+<p>The system is an electrical car sharing management system. Its main goal is to provide easy access to the service for the end user and to incetivize virtuous behaviours of the same users.</p>
+
+<p>The system addresses to two types of users:</p>
+
+<ul>
+<li>PowerEnjoy employee (Employee)</li>
+<li>Generic people (User)</li>
+</ul>
+
+<p>Users must be allowed to reserve and use cars, employees must be allowed to manage the parameters of the service (geographical regions and safe areas).</p>
+
+<p>This document is written in the context defined in the RASD, and aims at mapping requirements defined in the same RASD on software components which are to be deployed on real machines. Components must be designed as to have the highest possible cohesion and the lowest possible coupling, so they must encapsulate a single functionality. This also leads to high reusability of the same modules.</p>
+
+<p>Design patterns and architectural styles will be used for solving architectural problems in order to achieve good performances of the system and to build a highly maintanable and modular system.</p>
+
+<h2 id="book-heading-8">Definitions, acronyms and abbreviations</h2>
+
+<ul>
+<li><strong>System</strong>: the system to be developed for PowerEnJoy</li>
+<li><strong>User</strong>: a generic person interacting with the system</li>
+<li><strong>Employee</strong>: a person who works for PowerEnJoy</li>
+<li><strong>Actor</strong>: can refer to both users and employees</li>
+<li><strong>Car</strong>: an electric vehicle owned by the company</li>
+<li><strong>Bill</strong>: an amount of money a user has to pay. It is related to only a single ride</li>
+<li><strong>Pending bill</strong>: a bill that the user has not paid yet</li>
+<li><strong>Paid bill</strong>: a bill that the user has already paid for</li>
+<li><strong>Area</strong>: a space delimited by a polygonal line whose vertices are a set of geographical coordinates</li>
+<li><strong>Geographical coordinates</strong>: a tuple of latitute and longitude describing a location on Earth</li>
+<li><strong>Geographical region</strong>: an area where a user can reserve at most one car. They do not overlap</li>
+<li><strong>Safe area</strong>: an area where it is possible to park a car and optionally to recharge it, in order to make it available for another user</li>
+<li><strong>Safe parking area</strong>: a special safe area where it is not possible to recharge the car</li>
+<li><strong>Recharging station area</strong>: a special safe area where it is possible to plug the car for recharging its battery</li>
+<li><strong>Registered user</strong>: a user who has completed the sign up process</li>
+<li><strong>Logged user</strong>: a user who has completed the log in process and has not yet started the log out process</li>
+<li><strong>Banned user</strong>: a registered user who cannot reserve a car until all his pending bills are estinguished</li>
+<li><strong>Reservor user</strong>: the user who has made a reservation for the specific car. A user is considered the reservor user of a car until the reservation expires or the user is charged with the bill</li>
+<li><strong>Available car</strong>: a locked car for which no reservation exists</li>
+<li><strong>Reserved car</strong>: a locked car for which it exists a user who has reserved it</li>
+<li><strong>Becoming available car</strong>: an unlocked car is said to be "becoming available" as soon as all the passengers and the driver of this car exits the car, the doors of the car are closed and it is parked in a safe area</li>
+<li><strong>In maintenance car</strong>: a locked car is said to be "in maintenance" as soon as its battery level is below 20%, the car cannot be reserved</li>
+<li><strong>In use car</strong>: an unlocked car which is not becoming available</li>
+<li><strong>GPS</strong>: A system capable of providing the location of a receiver device with a good precision (5 meters)</li>
+<li><strong>Overlapping areas</strong>: Two areas are said to be overlapping if there exists at least one geographical coordinates which is contained inside the two areas</li>
+<li><strong>Expiration of a car reservation</strong>: when a reservation expires, the car becomes available again, the reservor user loses his reservation and he is charged a fee of 1€</li>
+<li><strong>Percentage delta</strong>: a discount or a raise based on percentage</li>
+<li><strong>Applying a raise</strong> or <strong>a discount</strong>: The operation of increasing or reducing the amount of a bill for a specific reason. The amount is computed just before the system charges the user of a bill, and then all those amounts (each one related to a specific reason) are algebraically added to the same bill.</li>
+<li><strong>RASD</strong>: Requirements Analysis and Specification Document</li>
+<li><strong>DBMS</strong>: DataBase Management System</li>
+</ul>
+
+<h2 id="book-heading-9">Reference Documents</h2>
+
+<ol>
+<li>Project rules of the Software Engineering 2 project</li>
+<li>Template for the Design Document</li>
+<li>Requirement Analysis and Specification Document (previous deliverable)</li>
+</ol>
+
+<h2 id="book-heading-10">Document structure</h2>
+
+<p>The document is organized in six sections:</p>
+
+<ol>
+<li><strong>Introduction</strong>: describes the overall structure of the whole document</li>
+<li><strong>Architectural design</strong>: describes both the logical architecture and the deployment of the system, along with some dynamical views of the presented components</li>
+<li><strong>Algorithm design</strong>: describes some guidelines for the implementation of the most critical algorithms</li>
+<li><strong>User interface design</strong>: describes a UX model for the user interface (both for users and employees)</li>
+<li><strong>Requirements traceability</strong>: presents a mapping of functional and non functional requirements on described components and architectural decisions</li>
+<li><strong>Appendix</strong>: contains informations about the effort spent in writing this document and about the references from which further documentation can be obtained.</li>
+</ol>
+
+<h1 id="book-heading-11">Architectural design</h1>
+
+<h2 id="book-heading-12">Overview</h2>
+
+<p><img src="http://localhost/powerenjoy/DD/images/compdiag.png" alt="Alt Global Component Diagram" title="Global Component Diagram" /></p>
+
+<p>The picture shows a representation of the proposed logical architecture. The system is composed of five main components:</p>
+
+<ul>
+<li>A <em>DataBase Management System (DBMS)</em> used to access data related to cars, reservations, payments, geographical regions and safe areas in a reliable and efficient way</li>
+<li>A <em>Server</em> component that implements the application logic both for user-related and employee related features</li>
+<li>A <em>User Application</em> component, that takes care of user-related functionalities, making them available to the same users</li>
+<li>A <em>Employee Application</em> component, that takes care of employee-related functionalities, making them available to the employees</li>
+<li>A <em>Car Monitoring System</em> which models the monitoring system actually installed on cars</li>
+</ul>
+
+<p>Each component is connected only to the <em>server</em> component. In this way it is possibile to keep clearly distinguished three logical levels:</p>
+
+<ol>
+<li>The <em>DBMS</em>, which represents the <em>data layer</em> of the system</li>
+<li>The <em>server</em>, which represents the <em>application logic layer</em> of the system. It is the only component to interact with the <em>DBMS</em>, as to grant data security and privacy.</li>
+<li>The <em>user application</em> and the <em>employee application</em>, which represent the <em>presentation layer</em> of the system. They carry out all the tasks related with interaction with end users (both users of the service and employees). They are connected only with the <em>server</em> as to preserve data security. Moreover, they are modeled as thin clients, as no application logic function is delegated to them. This was chosen for security reasons, as it is very easy to attack functions delegated to a client living in a browser.</li>
+</ol>
+
+<p>The <em>monitoring system</em> actually is part neither of the <em>presentation layer</em> nor of the <em>application logic layer</em>, as it represents only a kind of <em>sensor layer</em>. By the way, it only interacts with the <em>server</em> component in a event-driven architectural style.</p>
+
+<h2 id="book-heading-13">DataBase structure</h2>
+
+<p><img src="http://localhost/powerenjoy/DD/images/ER.svg" alt="Alt ER" title="ER diagram" /></p>
+
+<h2 id="book-heading-14">Component view</h2>
+
+<p><img src="http://localhost/powerenjoy/DD/images/servcomp.svg" alt="Alt Server Component Diagram" title="Server component  diagram" /></p>
+
+<p>The picture shows the logical architecture for the <em>Server</em> component. The architecture is made up of several different components, each one devoted to a specific task:</p>
+
+<ul>
+<li><strong>Router</strong> component dispatches all the requests coming from the <em>User Application</em> and <em>Employee application</em> to the business component that can handle it. It multiplexes the parts of the interfaces of the different business components in two "virtual" interfaces, the former dedicated to user interaction, the latter to employee interaction.</li>
+<li><strong>Monitoring controller</strong> represents the broker of the event-driven architectural style used to collect data from cars</li>
+<li><strong>Car controller</strong> controls the state of each car and to trigger transitions between car states according to the state chart defined in the Requirements Analysis and Specification Document.</li>
+<li><strong>Bill controller</strong> handles tasks related to the storage of pending bills and to the interaction with the external system for payments processing</li>
+<li><strong>User controller</strong> controls the state of each user according to the state chart defined in the RASD. In particular, it provides all the functionalities needed for authenticating users and employees.</li>
+<li><strong>Geographical areas controller</strong> provides an API that can be used to retrive and manipulate data related to geographical areas boundaries</li>
+<li><strong>Safe areas controller</strong> provides an API with methods used to retrive and manipulate data about safe areas (both safe parking areas and recharging stations)</li>
+<li><strong>Reservations controller</strong> provides the functionalites needed for creating and canceling a reservation and for "using" a reservation to actually take the reserved car</li>
+<li><strong>Ride controller</strong> controls each ride in progress in the given instant of time, monitors the state of the car during the ride (in particular, the number of passengers and the battery level) and computes the bill at the end of the ride, applying proper discounts or raises on the calculated fee.</li>
+</ul>
+
+<h2 id="book-heading-15">Deployment view</h2>
+
+<p><img src="http://localhost/powerenjoy/DD/images/deploy.svg" alt="Alt Deployment Diagram" title="Deployment Diagram" />
+This picture shows how the system should be deployed.
+The database server and the application server are deployed on two different physical machines, in order to have more security for data and to achieve a decoupled architecture that can be replicated for reliability reasons. This way we can have a main application server, and a backup application server, that are almost identical as of deployed components. The HTTPS protocol, and the routing IP protocol beside it, are configured so as to send all the request to the main application server, and if that server is not available, to the backup application server. This also gives the possibility to carry out maintenance tasks on the system without bringing it completely down, just working on a server at a time. Finally, the DBMS server is not replicated for the money saving reasons. It is not so likely that an attacker can gain access to the DBMS server, and so there is no need of invest money in a distributed DBMS.</p>
+
+<h2 id="book-heading-16">Runtime view</h2>
+
+<p>This section describes several interesting dynamic behaviours of the system.</p>
+
+<h3 id="book-heading-17">Login</h3>
+
+<p><img src="http://localhost/powerenjoy/DD/images/seq_login.svg" alt="Alt Login Sequence Diagram" title="Login Sequence Diagram" />
+This diagram describes the interaction between the components involved in user login. The "actor" lifeline models the human actor (both employee and final user) trying to login to the system.</p>
+
+<h3 id="book-heading-18">Car reservation</h3>
+
+<p><img src="http://localhost/powerenjoy/DD/images/seq_reserve.svg" alt="Alt Reservation Sequence Diagram" title="Reservation Sequence Diagram" />
+This diagram describes the interaction between the components involved in the reservation of a car. The "user" lifeline models a human user trying to reserve a car. Error conditions are modeled as <em>break</em> frames</p>
+
+<h3 id="book-heading-19">Car unlock</h3>
+
+<p><img src="http://localhost/powerenjoy/DD/images/seq_unlock.svg" alt="Alt Unlock Sequence Diagram" title="Unlock Sequence Diagram" />
+This diagram describes the interaction between components involved in the procedure of unlocking a car. The "user" lifeline models the human user trying to unlock a car. The procedures searches for a reservation which maps to the car requested by the user (this is the meaning of the "getReservationForRequestedCar" message), and then sends to the car a <em>Unlock</em> event throw the event-driven monitoring system connection (invoked by the car controller). During the procedure a new ride entity is created to model the incipent ride. For details about the creation of this ride entity refer to the next sequence diagram.</p>
+
+<h3 id="book-heading-20">Ride entity creation and ride start</h3>
+
+<p><img src="http://localhost/powerenjoy/DD/images/seq_rideinit.svg" alt="Alt Init Ride Sequence Diagram" title="Init Ride Sequence Diagram" />
+This diagram shows the interaction between components involved in the creation of a new ride entity and in the starting procedure of that same ride. No human actor appears here, just because this is an interaction that is fully carried out inside the <em>server</em> component. The first part of the diagram is aimed at specifying the steps involved in the entity creation and consequent subscription to events sent by the car. The second part specifies the interaction aimed at handling the event relative to the engine ignition (and, as of the RASD, to the ride start).</p>
+
+<h3 id="book-heading-21">Ride conclusion and bill computation</h3>
+
+<p><img src="http://localhost/powerenjoy/DD/images/seq_rideend.svg" alt="Alt Ride End Sequence Diagram" title="Ride End Sequence Diagram" />
+This diagram refers to the situation in which the car is parked in a safe area and not in a recharching station (otherwise, a timeout of 5 minutes should be added before locking the car). This diagram shows the interaction between components involved in the conclusion of a ride. The interaction is triggered by an event sent from the car, that signals that all passengers have got off the car. The <em>ride</em> entity models the ride that is listening on that event, and that will end. At ride end, a new bill is created and charged to the user whom the ride is referred to, and then the ride unsubscribes from the events sent by the car, as they are of no interest anymore.</p>
+
+<h3 id="book-heading-22">Insertion of a new safe area</h3>
+
+<p><img src="http://localhost/powerenjoy/DD/images/seq_employee.svg" alt="Alt Employee Sequence Diagram" title="Employee Sequence Diagram" />
+This diagram shows the interaction between components involved in the insertion of a new safe area. It can be seen as a general model for all the interaction involving an employee, as all of them follow the same message pattern (adapted to the operation being carried out).</p>
+
+<h2 id="book-heading-23">Component interfaces</h2>
+
+<p>There are two different kinds of interfaces: RESTful APIs are used with client-server architectural style, and Messages are used in event-driven interactions</p>
+
+<h3 id="book-heading-24">RESTful APIs</h3>
+
+<p>The token mentioned in the /users/{id}/login must be have the following features:</p>
+
+<ul>
+<li>It must provide an expiration time</li>
+<li>It must univocally identify a user without quering the database</li>
+<li>It must provide the user type (employee, user) without quering the database</li>
+<li>It must be secure and thus it cannot be easily changed or guessed</li>
+</ul>
+
+<div class="rest-items"><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/users/{id}/login</span></div><div class="rest-description">It allows a user or an employee to login, the returned token must be used to access all the other api except for <code>/users/{id}/register</code>. It is subject to expiration after a predefined amount of time</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>String</td><td>The username preceded by <code>user:</code></td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>password</td><td>String</td><td>The password associated to the account</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>token</td><td>String</td><td>The token which grant access to the other api</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>UserOrPasswordInvalid</td><td colspan="2">The username or the password is invalid</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">POST</span><span class="rest-url">/users/{id}/register</span></div><div class="rest-description">It allows an unregistered user to register</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>String</td><td>The username preceded by <code>user:</code></td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>password</td><td>String</td><td>The password associated to the account</td></tr><tr class="rest-field"><td>name</td><td>String</td><td>The real first and last name</td></tr><tr class="rest-field"><td>dateOfBirth</td><td>String</td><td>The date of birth in <code>dd-MM-yyyy</code> format</td></tr><tr class="rest-field"><td>creditCard</td><td>Object</td><td>The credit card information</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>number</td><td>String</td><td>The credit card number</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>owner</td><td>String</td><td>The credit card owner</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>cvv</td><td>String</td><td>The credit card cvv</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>expiration</td><td>String</td><td>The credit card expiration in <code>dd-MM-yyyy</code> format</td></tr><tr class="rest-field"><td>drivingLicenceNumber</td><td>String</td><td>The driving licence number</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>UsernameAlreadyExists</td><td colspan="2">There is already a user with such a username</td></tr><tr class="rest-error"><td>InvalidDrivingLicence</td><td colspan="2">The driving licence inserted is invalid or it is not associated to this user</td></tr><tr class="rest-error"><td>InvalidCreditCard</td><td colspan="2">The credit card inserted is invalid or expired</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/users/{id}/bills</span></div><div class="rest-description">It retrives all the pending bills a user has still to pay</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>String</td><td>The username preceded by <code>user:</code> or <code>me</code> for the current user</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>bills</td><td>Object[]</td><td>An array of pending bills</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>dateTime</td><td>String</td><td>The datetime in <code>dd-MM-yyyyThh:mm:ss</code> format</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>amount</td><td>String</td><td>The amount in Euro the user must pay, the fractional part is preceded by a <code>.</code></td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">DELETE</span><span class="rest-url">/users/me/bills</span></div><div class="rest-description">It allows a user to pay the pending bills in a non defined order, if the user cannot pay all the pending bills there is no rollback</div><table></table></div><div class="rest-item"><div><span class="rest-method">POST</span><span class="rest-url">/users/{id}/reservations</span></div><div class="rest-description">It allows a user or an employee to reserve a car</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>String</td><td>The username preceded by <code>user:</code> or <code>me</code></td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>car</td><td>String</td><td>The plate associated with the car the user wants to reserve</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>CarUnavailable</td><td colspan="2">The car for some reason is not available, or the plate is not valid</td></tr><tr class="rest-error"><td>QuotaExceeded</td><td colspan="2">The user has already reserved a car in the same geographical area</td></tr><tr class="rest-error"><td>UserBanned</td><td colspan="2">The user is banned and thus he cannot reserve any car</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/users/{id}/reservations</span></div><div class="rest-description">It allows a user or an employee to obtain the list of the reservation made by the user</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>String</td><td>The username preceded by <code>user:</code> or <code>me</code> or <code>all</code></td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>position<span class="rest-tag-optional"></span></td><td>Object</td><td>The center to search for reservations</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of the position</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of the position</td></tr><tr class="rest-field"><td>radius<span class="rest-tag-optional"></span></td><td>Number</td><td>The maximum distance in meters from the position to search for reservations</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>reservations</td><td>Object[]</td><td>An array of all the reservations in the search area for the specified user</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>car</td><td>String</td><td>The plate of the car</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>position</td><td>Object</td><td>The position where the car is located</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>creationTime</td><td>String</td><td>The datetime in <code>dd-MM-yyyyThh:mm:ss</code> format</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/users/{id}/reservations/{plate}</span></div><div class="rest-description">It allows a user or an employee to obtain information about a specific reservation</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>String</td><td>The username preceded by <code>user:</code> or <code>me</code> or <code>all</code></td></tr><tr class="rest-parameter"><td>plate</td><td>String</td><td>The plate of the car for which the user expressed by the<br>id parameter has made a reservation</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>reservations</td><td>Object</td><td>The information for the specific reservation</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>car</td><td>String</td><td>The plate of the car</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>position</td><td>Object</td><td>The position where the car is located</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>creationTime</td><td>String</td><td>The datetime in <code>dd-MM-yyyyThh:mm:ss</code> format</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoReservationFound</td><td colspan="2">There is no reservation for this tuple of parameters</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/cars</span></div><div class="rest-description">It allows a user or an employee to obtain a list of all cars in an area.In the case of a user, the <code>position</code> or the <code>location</code> and <code>radius</code> field are mandatory. The <code>position</code> and <code>location</code> are mutually exclusive</div><table><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>position<span class="rest-tag-optional"></span></td><td>Object</td><td>The center to search for cars</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of the position</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of the position</td></tr><tr class="rest-field"><td>location<span class="rest-tag-optional"></span></td><td>String</td><td>The location expressed as a string suitable for geocoding</td></tr><tr class="rest-field"><td>radius<span class="rest-tag-optional"></span></td><td>Number</td><td>The maximum distance in meters from the position to search for cars</td></tr><tr class="rest-field"><td>status</td><td>String[]</td><td>The admissible status of the cars returned</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>cars</td><td>Object[]</td><td>An array of cars</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>position</td><td>Object</td><td>The position where the car is located</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>status</td><td>String</td><td>The status of the car</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>plate</td><td>String</td><td>The plate of the car</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>batteryChargeLevel</td><td>Number</td><td>The normalized percentage (0-1), of the battery charge</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>geographicalLocation</td><td>Number</td><td>The identifier of a geographical region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>parkingLocation<span class="rest-tag-optional"></span></td><td>Number</td><td>The identifier of a safe area where the car is parked</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/cars/{plate}</span></div><div class="rest-description">It allows a user or an employee to obtain information about a specific car</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>plate</td><td>String</td><td>The plate of the car to search for</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>cars</td><td>Object</td><td>The car whoose plate is the same as the parameter</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>position</td><td>Object</td><td>The position where the car is located</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of the position</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>status</td><td>String</td><td>The status of the car</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>plate</td><td>String</td><td>The plate of the car</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>batteryChargeLevel</td><td>Number</td><td>The normalized percentage (0-1), of the battery charge</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>geographicalLocation</td><td>Number</td><td>The identifier of a geographical region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>parkingLocation<span class="rest-tag-optional"></span></td><td>Number</td><td>The identifier of a safe area where the car is parked</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoCarFound</td><td colspan="2">The plate is not associated with a car</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">PATCH</span><span class="rest-url">/cars/{plate}/unlock</span></div><div class="rest-description">It allows a user to unlock the specific car</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>plate</td><td>String</td><td>The plate of the car to unlock</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>position</td><td>Object</td><td>The position where the user is located</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of the position</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of the position</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoCarFound</td><td colspan="2">The plate is not associated with a car</td></tr><tr class="rest-error"><td>FarUser</td><td colspan="2">The user is too far from the car</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/area/geographicals</span></div><div class="rest-description">It allows an employee to obtain the list of all the geographical regions</div><table><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>areas</td><td>Object[]</td><td>An array of all the defined geographical region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>id</td><td>Number</td><td>The identifier of this region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>path</td><td>Object[]</td><td>The path of this geographical region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/area/geographicals/{id}</span></div><div class="rest-description">It allows an employee to obtain information about a specific geographical region</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>Number</td><td>The identifier of a geographical region</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>area</td><td>Object</td><td>The geographical region whoose id matches the one in the parameters</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>id</td><td>Number</td><td>The identifier of this region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>path</td><td>Object[]</td><td>The path of this geographical region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoRegionFound</td><td colspan="2">The identifier is not associated with a valid geographical region</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">PATCH</span><span class="rest-url">/area/geographicals/{id}/split</span></div><div class="rest-description">It allows an employee to split a geographical region</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>Number</td><td>The identifier of a geographical region</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>path</td><td>Object[]</td><td>The path used to split the region</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>areas</td><td>Object[]</td><td>The new geographical regions replacing the one splitted</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>id</td><td>Number</td><td>The identifier of this region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>path</td><td>Object[]</td><td>The path of this geographical region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoRegionFound</td><td colspan="2">The identifier is not associated with a valid geographical region</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">PATCH</span><span class="rest-url">/area/geographicals/{id}/merge</span></div><div class="rest-description">It allows an employee to merge two geographical regions</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>Number</td><td>The identifier of a geographical region</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>id</td><td>Number</td><td>The identifier of the region to be merged with this one</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>area</td><td>Object</td><td>The new geographical region replacing the two merged</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>id</td><td>Number</td><td>The identifier of this region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>path</td><td>Object[]</td><td>The path of this geographical region</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoRegionFound</td><td colspan="2">The identifier is not associated with a valid geographical region</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/area/safes</span></div><div class="rest-description">It allows an employee to obtain the list of all safe areas</div><table><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>areas</td><td>Object[]</td><td>An array of all the defined safe areas</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>id</td><td>Number</td><td>The identifier of this area</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>path</td><td>Object[]</td><td>The path of this safe area</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>numberOfPlugs<span class="rest-tag-optional"></span></td><td>Number</td><td>The number of plugs if it is a recharging station area</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>availablePlugs<span class="rest-tag-optional"></span></td><td>Number</td><td>The number of plugs if it is a recharging station area that are not in use</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">GET</span><span class="rest-url">/area/safes/{id}</span></div><div class="rest-description">It allows an employee to obtain information about a specific safe area</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>Number</td><td>The identifier of the safe area</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>areas</td><td>Object[]</td><td>An array of all the defined safe areas</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>id</td><td>Number</td><td>The identifier of this area</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>path</td><td>Object[]</td><td>The path of this safe area</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>numberOfPlugs<span class="rest-tag-optional"></span></td><td>Number</td><td>The number of plugs if it is a recharging station area</td></tr><tr class="rest-return"><td><span class="rest-deep-spacer"></span>availablePlugs<span class="rest-tag-optional"></span></td><td>Number</td><td>The number of plugs if it is a recharging station area that are not in use</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoSafeAreaFound</td><td colspan="2">The identifier is not associated with a valid safe area</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">DELETE</span><span class="rest-url">/area/safes/{id}</span></div><div class="rest-description">It allows an employee to remove a safe area</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>Number</td><td>The identifier of the safe area</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>NoSafeAreaFound</td><td colspan="2">The identifier is not associated with a valid safe area</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">POST</span><span class="rest-url">/area/safes</span></div><div class="rest-description">It allows an employee to insert a new safe area</div><table><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>path</td><td>Object[]</td><td>The path of this safe area</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr><tr class="rest-field"><td>numberOfPlugs<span class="rest-tag-optional"></span></td><td>Number</td><td>The number of plugs if it is a recharging station area</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-return-title"><td colspan="3">Success 200</td></tr><tr class="rest-return-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-return"><td>id</td><td>Number</td><td>The identifier of the newly created safe area</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>SafeAreaOverlap</td><td colspan="2">The safe area overlaps with an already present safe area</td></tr></tbody></table></div><div class="rest-item"><div><span class="rest-method">PATCH</span><span class="rest-url">/area/safes/{id}</span></div><div class="rest-description">It allows an employee to modify a safe area</div><table><tbody class="rest-heading-group"><tr class="rest-parameters-title"><td colspan="3">Parameters</td></tr><tr class="rest-parameters-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-parameter"><td>id</td><td>Number</td><td>The identifier of the safe area</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-fields-title"><td colspan="3">Fields</td></tr><tr class="rest-fields-heading"><th>Field</th><th>Type</th><th>Description</th></tr></tbody><tbody><tr class="rest-field"><td>path</td><td>Object[]</td><td>The path of this safe area</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>latitude</td><td>Number</td><td>The latitude of a single position in the path</td></tr><tr class="rest-field"><td><span class="rest-deep-spacer"></span>longitude</td><td>Number</td><td>The longitude of a single position in the path</td></tr><tr class="rest-field"><td>numberOfPlugs<span class="rest-tag-optional"></span></td><td>Number</td><td>The number of plugs if it is a recharging station area</td></tr></tbody><tbody class="rest-heading-group"><tr class="rest-error-title"><td colspan="3">Error 4xx</td></tr><tr class="rest-error-heading"><th>Field</th><th colspan="2">Description</th></tr></tbody><tbody><tr class="rest-error"><td>SafeAreaOverlap</td><td colspan="2">The safe area overlaps with an already present safe area</td></tr></tbody></table></div></div>
+
+<h3 id="book-heading-25">Messages</h3>
+
+<p>Messages are exchanged using a protocol based on TCP TLS.</p>
+
+<h4 id="book-heading-26">StatusReport</h4>
+
+<p>This message is sent by the car system, to communicate variations of the car status.
+It is sent immediatly after the status or the number of passengers change or the batteryLevel drops more than 5% or the batteryLevel reaches its minimum or maximum value,
+or every 15 minutes if the batteryLevel changes by less than 5% and nothing else happens in the meantime.
+<div class="rest-item">
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>batteryLevel</td>
+  <td>float</td>
+  <td>The normalized percentage of the battery charge level</td>
+</tr>
+<tr>
+  <td>status</td>
+  <td>CarStatus</td>
+  <td>The status of the car</td>
+</tr>
+<tr>
+  <td>passengers</td>
+  <td>integer</td>
+  <td>The number of persons that the car has detected inside</td>
+</tr>
+<tr>
+  <td>position</td>
+  <td>Position</td>
+  <td>The current position of the car</td>
+</tr>
+</tbody>
+</table></div></p>
+
+<h4 id="book-heading-27">Unlock</h4>
+
+<p>This message is sent by management system to the car system in order to unlock the car.
+This message has no parameters</p>
+
+<h2 id="book-heading-28">Selected architectural styles and patterns</h2>
+
+<p>There are two different architectural styles used to build the architucture of the system:</p>
+
+<ul>
+<li><strong>Client - Server</strong> style is used in the interaction between <em>user application</em> and <em>employee application</em> and the <em>server</em> component. This architectural style supports the request - response pattern, that is the one that mostly fits the way actors interact with the system: they make a request invoking some services provided by the <em>server</em>, and the <em>server</em> itself provides a response according to the received request.</li>
+<li><p><strong>Event - driven</strong> style is used in the interaction between <em>monitoring system</em> built on the cars and the <em>server</em> component. This architectural style was selected due to two main reasons:</p>
+
+<ul>
+<li><em>Monitoring system</em> collects data about the car status on board, and sends them to the server without waiting for a server response, it justs <em>"sends and forgets"</em></li>
+<li>Different objects living in the server might want to react to events coming from cars</li>
+</ul>
+
+<p>Both these can be reliably achieved with a event-driven architectural style</p></li>
+<li><p><strong>RESTful APIs</strong></p>
+
+<ul>
+<li>RESTful API are implemented using JAX-RS.</li>
+<li>RESTful APIs are implemented over the HTTPS protocol used in client-server interaction. This was chosen in order to have a clean and neat API, that is easier to understand, extend and mantain.</li>
+<li>The content could have been formatted using XML or JSON; for this application the two standards provide the same capability but we opted for JSON since it is easier to be used on client side</li>
+<li>To allow future changes of the API that will be incompatible with the one defined, all the url of the RESTful API are relative to a version qualifier path "v1/"</li>
+</ul></li>
+</ul>
+
+<h2 id="book-heading-29">Other design decisions</h2>
+
+<p>A possible implementation of the shape of an Area was to use a table with the following columns (<em>areaid</em>,<em>order</em>,latitude,longitude),
+but then all the query requesting in which area was a point would have required the scan of the whole table and this was not acceptable, so we opted to use
+a column named <strong>polygons</strong> in the entity <strong>Area</strong> of type MULTIPOLYGON (http://dev.mysql.com/doc/refman/5.7/en/gis-class-multipolygon.html) as such it can store any geometrical shape composed of segments, and can also be indexed.</p>
+
+<h3 id="book-heading-30">Framework selection</h3>
+
+<p>Java Enterprise Edition was selected for the implementation of the server components, because we can easily build reliable and scalable application modeling the components as Enterprise Java Beans, and using Java Server Pages for building dynamical user interfaces. Moreover, Java Persistence APIs can be used for the interaction with the DBMS.</p>
+
+<h3 id="book-heading-31">DBMS selection</h3>
+
+<p>MySQL DBMS was selected because it grants good performance along with no licence cost, in order to reduce system total cost.</p>
+
+<h3 id="book-heading-32">Security</h3>
+
+<ul>
+<li>Passwords are not stored in plain text, but are hashed and salted with strong cryptographic functions.</li>
+<li>Payments security is granted by the external system for payments processing.</li>
+<li>Remote communications are carried out using TLS.</li>
+</ul>
+
+<h3 id="book-heading-33">Service providers</h3>
+
+<h4 id="book-heading-34">Maps generation and address translation</h4>
+
+<p>The system uses <em>Google Maps (https://maps.google.com)</em> to carry out map rendering and address translation (into geographical coordinates) in a reliable, well-known and well-tested way. Moreover, this can save the huge cost of the implementation of a new system and of the collection of data.</p>
+
+<h4 id="book-heading-35">Driving licence validation</h4>
+
+<p>The system uses <em>Il portale dell'automobilista (www.ilportaledellautomobilista.it)</em> for validating the driving licence numbers. This was the only feasible solution to have access to a updated data source.</p>
+
+<h4 id="book-heading-36">Payment information validation and payment processing</h4>
+
+<p>The system uses <em>Paypal (www.paypal.com)</em> to carry out tasks related to payment processing. <em>Paypal</em> was chosen because it is a very well-known and well-tested platform, which provides a lot of guarantees about payments and that is very used, so the majority of users of the PowerEnJoy system already has a Paypal account. Moreover, it provides a well-defined set of APIs to carry out all the required tasks.</p>
+
+<h1 id="book-heading-37">Algorithm design</h1>
+
+<p>The algorithms listed here can be useful, but it is not mandatory to implement exactly the following algorithms as long as the result is equivalent</p>
+
+<h2 id="book-heading-38">Computing the bill amount</h2>
+
+<p>Assuming time subtraction yields a time offset and PercentageDelta.delta are normalized in the interval [-1, 1],
+this function computes the bill amount from a ride and a list of all percentageDeltas implemented in the system</p>
+
+<pre><code>function computeBillAmount(ride: Ride, discounts: PercentageDelta[]):  
+     let multiplier = 1;
+     let elapsedMinutes = (Time.now() - ride.startTime).totalMinutes
+     if ride.car.parkedIn is a RechargingStationArea then:
+         wait first of (new Timer(5, "minute") or ride.car.status == "charging")
+     for discount in discounts:
+        if discount.canBeApplyed(ride) then:
+            multiplier = multiplier + discount.delta
+     return elapsedMinutes * multiplier * COST_PER_MINUTE
+</code></pre>
+
+<h2 id="book-heading-39">Getting the MULTIPOLYGON representation of a Path</h2>
+
+<p>It is assumed that a path is an ordered set of segments, as such it cannot have duplicate items.
+The entry point for this algorithm is <strong>getMultiPolyRepresentation</strong>.</p>
+
+<p><strong>getMultiPolyRepresentation</strong>(<em>path</em>: Path): Path[][]
+This algorithm converts a generic path to a multipolygon representation suitable for storage in a dbms or for application of simpler algorithm</p>
+
+<ol>
+<li>Let <em>polygons</em> be an empty sequence</li>
+<li>Iterate over the <strong>complex polygons of <em>path</em></strong>, at each time
+
+<ol>
+<li>Let <em>simplePolygons</em> be the <strong>simple polygons of the <em>current polygon</em></strong></li>
+<li>Iterate over <em>simplePolygons</em>, at each time
+
+<ol>
+<li>Let <em>point</em> be one random interior point of the <em>current simple polygon</em></li>
+<li>Apply the <a href="https://drive.google.com/file/d/0BzPnfgeA6pjZLVRqNHdWdXNRUVE/view">even-odd algorithm</a> to the <em>current complex polygon</em> and <em>point</em></li>
+<li>If the <em>point</em> is outside the <em>complex polygon</em>, then mark the <em>current simple polygon</em> as "hole"</li>
+<li>Otherwise, mark the <em>current simple polygon</em> as "fill"</li>
+<li><strong>Insert the <em>current simple polygon</em> inside <em>polygons</em></strong></li>
+</ol></li>
+</ol></li>
+<li>Iterate over <em>polygons</em>, at each time
+
+<ol>
+<li>Iterate over the remaining part of <em>polygons</em>, at each time
+
+<ol>
+<li>If the <em>two polygons</em> have at least a segment in common and all the common segments are contiguos, then
+
+<ol>
+<li>Remove from <em>polygons</em> the <em>two polygons</em></li>
+<li><strong>Insert inside <em>polygons</em> the sequence containing only <em>merged polygon</em></strong></li>
+<li>Repeat 3.1</li>
+</ol></li>
+<li>Otherwise, do nothing</li>
+</ol></li>
+</ol></li>
+<li>Iterate over <em>polygons</em>, at each time
+
+<ol>
+<li>Let <em>fill</em> be the current polygon</li>
+<li>If <em>fill</em> is marked as "hole", then skip this polygon</li>
+<li>Let holes be an empty sequence</li>
+<li>Iterate over the remaining part of <em>polygons</em>, at each time
+
+<ol>
+<li>Let <em>newHole</em> be the <em>current polygon</em></li>
+<li>If <em>newHole</em> is not contained inside <em>fill</em> or it is marked as "fill", then skip this polygon</li>
+<li>Iterate over <em>holes</em>, at each time
+
+<ol>
+<li>If <em>newHole</em> is contained by the <em>current hole polygon</em>, then go to the next iteration of 4.4</li>
+<li>If <em>newHole</em> contains the <em>current hole polygon</em>, then remove the <em>current hole polygon</em> from <em>holes</em></li>
+</ol></li>
+<li>Add <em>newHole</em> to <em>holes</em></li>
+</ol></li>
+<li>Prepend <em>fill</em> to <em>holes</em></li>
+<li>Append <em>holes</em> to <em>result</em></li>
+</ol></li>
+<li>Return <em>result</em></li>
+</ol>
+
+<p><strong>getComplexPolygons</strong>(<em>path</em>: Path): Path[]</p>
+
+<p>This algorithm returns a sequence of complex polygons from a single path object</p>
+
+<ol>
+<li>Iterate over the point sequence of <em>path</em>, at each time
+
+<ol>
+<li>If the <em>current point</em> is not marked yet, then mark it</li>
+<li>Otherwise
+
+<ol>
+<li>Collect all marked points in the sequence from the previous occurrence of <em>current point</em> (the one that caused that point to be marked) up to <em>current point</em> (but do not include this occurrence of <em>current point</em>), and name this sequence <em>currentPath</em></li>
+<li>Remove the marking for each point in the <em>currentPath</em> sequence</li>
+<li>Mark the <em>current point</em></li>
+<li><strong>Remove the leaf segments from <em>currentPath</em></strong></li>
+<li>If <em>currentPath</em> is not empty, then add <em>currentPath</em> to the <em>result</em> sequence</li>
+</ol></li>
+</ol></li>
+<li>Return the <em>result</em></li>
+</ol>
+
+<p><strong>removeLeafSegments</strong>(<em>path</em>: Path): Path</p>
+
+<p>This algorithm returns a path where all the trailing segment not connected will be removed from path</p>
+
+<ol>
+<li>Let <em>points</em> be the point sequence of <em>path</em></li>
+<li>Iterate over <em>points</em> except for the last point, at each time
+
+<ol>
+<li>If the <em>current point</em> is equal to the last point in points, then return a path constructed from <em>points</em></li>
+</ol></li>
+<li>Remove the last item from <em>points</em></li>
+<li>If <em>points</em> is empty, then return an empty path</li>
+<li>Repeat the steps from 2</li>
+</ol>
+
+<p><strong>getSimplePolygons</strong>(<em>path</em>: Path): Path[]</p>
+
+<p>This algorithm returns a sequence of simple polygons starting from a complex polygon</p>
+
+<ol>
+<li>Let <em>segments</em> be the segment sequence of <em>path</em></li>
+<li>Iterate over <em>segments</em>, at each time
+
+<ol>
+<li>Let <em>first</em> be the <em>current segment</em></li>
+<li>Iterate over the remaining portion of <em>segments</em>, at each time
+
+<ol>
+<li>Let <em>second</em> be the <em>current segment</em></li>
+<li>If <em>first</em> and <em>second</em> intersects in the point <em>intersectionPoint</em>, then
+
+<ol>
+<li>Let <em>firstSplit</em> be the split of first in two segments by <em>intersectionPoint</em></li>
+<li>Let <em>secondSplit</em> be the split of second in two segments by <em>intersectionPoint</em></li>
+<li>Replace <em>first</em> with <em>firstSplit</em> in <em>segments</em></li>
+<li>Replace <em>second</em> with <em>secondSplit</em> in <em>segments</em></li>
+</ol></li>
+</ol></li>
+</ol></li>
+<li>Let <em>newPath</em> be a path constructed from <em>segments</em></li>
+<li>Return the <strong>complex polygons from <em>newPath</em></strong>, these are not complex anymore</li>
+</ol>
+
+<p><strong>insertSimplePolygonToSequence</strong>(<em>polygon</em>: Path, <em>sequence</em>: Path[])</p>
+
+<p>This algorithm adds the polygon to the sequence preventing any violation of the property of the multipolygon representation</p>
+
+<ol>
+<li>If the same point sequence of <em>polygon</em> is already in <em>sequence</em>, then
+
+<ol>
+<li>Let <em>presentPolygon</em> be the polygon whose point sequence is the same as <em>polygon</em></li>
+<li><strong>Update the mark of <em>presentPolygon</em> with respect to <em>polygon</em></strong></li>
+<li>Return</li>
+</ol></li>
+<li>Let <em>polySequence</em> a sequence containing only <em>polygon</em></li>
+<li><strong>Compute the simple polygon intersection of <em>sequence</em> with <em>polySequence</em></strong></li>
+<li>Iterate over <em>polySequence</em>, at each time
+
+<ol>
+<li><strong>Insert the <em>current polygon</em> inside <em>sequence</em></strong></li>
+</ol></li>
+</ol>
+
+<p><strong>computeSimpleIntersection</strong>(<em>sequence</em>: Path[], <em>simple</em>: Path[])</p>
+
+<p>This algorithm computes the intersection polygons and updates the two sequence inserting these intermediate polygons</p>
+
+<ol>
+<li>Iterate over <em>simple</em>, at each time:</li>
+<li>Let <em>currentSimple</em> be the <em>current polygon</em>
+
+<ol>
+<li>Iterate over <em>sequence</em>, at each time:
+
+<ol>
+<li>Let <em>currentSequence</em> be the <em>current polygon</em></li>
+<li>If <em>currentSequence</em> intersects with <em>currentSimple</em>, then
+
+<ol>
+<li>Remove <em>currentSimple</em> from <em>simple</em></li>
+<li>Remove <em>currentSequence</em> from <em>sequence</em></li>
+<li>Let <em>segments</em> be the union of the segments of <em>currentSimple</em> with <em>currentSequence</em></li>
+<li>Let <em>polySequence</em> be the sequence of <strong>simple polygons of the path constructed by <em>segments</em></strong></li>
+<li>Iterate over <em>polySequence</em>, at each time
+
+<ol>
+<li>call the <strong>addSimpleIntersection</strong>(<em>simple</em>, <em>currentSimple</em>, <em>current polygon</em>)</li>
+<li>call the <strong>addSimpleIntersection</strong>(<em>sequence</em>, <em>currentSequence</em>, <em>current polygon</em>)</li>
+</ol></li>
+</ol></li>
+<li>Otherwise, do nothing</li>
+</ol></li>
+</ol></li>
+</ol>
+
+<p><strong>addSimpleIntersection</strong>(<em>sequence</em>: Path[], <em>originalPolygon</em>: Path, <em>newPolygon</em>: Path):</p>
+
+<p>This procedure adds a copy of newPolygon to sequence if the originalPolygon intersects with the newPolygon</p>
+
+<ol>
+<li>If <em>originalPolygon</em> intersects with <em>newPolygon</em>, then
+
+<ol>
+<li>Let <em>copy</em> be the copy of <em>newPolygon</em></li>
+<li>Set the mark of <em>copy</em> to the same of <em>originalPolygon</em></li>
+<li><strong>Insert <em>copy</em> inside <em>sequence</em></strong></li>
+</ol></li>
+<li>Otherwise, do nothing</li>
+</ol>
+
+<p><strong>updateMark</strong>(<em>target</em>: Path, <em>source</em>: Path)</p>
+
+<p>This procedure will assign the correct mark to target</p>
+
+<ol>
+<li>If <em>target</em> is marked as "fill" and <em>source</em> is marked as "fill", then mark <em>target</em> as "hole"</li>
+<li>If <em>target</em> is marked as "hole" and <em>source</em> is marked as "fill", then mark <em>target</em> as "fill"</li>
+<li>Otherwise, do nothing</li>
+</ol>
+
+<h1 id="book-heading-40">User Interface Design</h1>
+
+<p>This section describes with a standard UX diagram the user interface to be implemented both in <em>User Application</em> and <em>Employee Application</em>. This section does not include any mockup of the final application, as they were already included in the RASD.
+Three diagrams are provided, the first describes login and registration interfaces, the second describes the user interface for the <em>User Application</em>, and the third describes the user interface for the <em>Employee Application</em>. According to RASD, both applications provide breadcrumbs navigation.</p>
+
+<h2 id="book-heading-41">Login and registration</h2>
+
+<p><img src="http://localhost/powerenjoy/DD/images/ux-logreg.svg" alt="Alt UX-logreg" /></p>
+
+<p>The "ok" action of the login form triggers the loading of the appropriate start page, that is modeled with the screen named "SearchCarGPS" for a user, and with the screen named "ViewCars" for an employee</p>
+
+<h2 id="book-heading-42">User application</h2>
+
+<p><img src="http://localhost/powerenjoy/DD/images/ux-user.svg" alt="Alt UX-user" /></p>
+
+<h2 id="book-heading-43">Employee application</h2>
+
+<p><img src="http://localhost/powerenjoy/DD/images/ux-employee.svg" alt="Alt UX-employee" /></p>
+
+<h1 id="book-heading-44">Requirements traceability</h1>
+
+<p>All the decisions written in this document have been taken following functional and non-functional requirements presented in the RASD. Here is a mapping between requirements and design decisions.</p>
+
+<h2 id="book-heading-45">Functional requirements</h2>
+
+<p>Functional requirements have been mapped on different components in the overall architecture. Here is a mapping table.</p>
+
+<div class="rest-item" style="page-break-inside: auto!important;">
+<table>
+<thead>
+<tr>
+  <th>Requirement (RASD)</th>
+  <th>Component (DD)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>[R1.1]: The system can acquire user information for the registration (name, surname, address, birth date, driving licence number, credit card number and CVV)</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R1.2]: The system validates the driving licence number using the external service for driving licence validation</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R1.3]: The system validates the payment information using the external service for payment information validation</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R1.4]: The system is able to verify that no other registered user exists with the same username or driving licence number or payment information</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R1.5]: The system registers this new user only if given information are valid</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R2.1]: The system can acquire user information for login (username and password)</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R2.2]: System is able to check whether a tuple (username, password) is correct, that is whether that tuple matches the information of a registered user or of an employee or not</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R2.3]: The user or the employee logs in if and only if username and password costitute a correct tuple</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R3.1]: The system only allows the logged in user who is not banned to insert the search radius</td>
+  <td>User Application</td>
+</tr>
+<tr>
+  <td>[R3.2]: The system is capable of finding all available cars within the inserted distance from the user’s position</td>
+  <td>Car Controller</td>
+</tr>
+<tr>
+  <td>[R3.3]: The system is able to show to a user a list of cars with their position and battery level</td>
+  <td>User Application</td>
+</tr>
+<tr>
+  <td>[R4.1]: The system only allows the logged in user who is not banned to insert the address on which the search area will be centered</td>
+  <td>User Application</td>
+</tr>
+<tr>
+  <td>[R4.2]: The system is capable of finding all available cars within a distance range from the geographical coordinate of the address</td>
+  <td>Car Controller</td>
+</tr>
+<tr>
+  <td>[R5.1]: The system only allows the logged in user who is not banned to reserve an available car</td>
+  <td>Reservation Controller</td>
+</tr>
+<tr>
+  <td>[R5.2]: The system is able to get the geographical region from the car geographical coordinates</td>
+  <td>Geographical Areas Controller</td>
+</tr>
+<tr>
+  <td>[R5.3]: The system only reserves a car if the logged in user that requests it has no other reservation for the same geographical area in which the car is located</td>
+  <td>Reservation Controller</td>
+</tr>
+<tr>
+  <td>[R6.1]: The system keeps track of the time elapsed since a reservation is made</td>
+  <td>Reservation Controller</td>
+</tr>
+<tr>
+  <td>[R6.2]: If the elapsed time is greater than one hour, then the reservation expires</td>
+  <td>Reservation Controller</td>
+</tr>
+<tr>
+  <td>[R7.1] The system unlocks a car only if distance between the car and the reservor user is less then 8 meters and the reservor user has requested the unlocking</td>
+  <td>Reservation Controller</td>
+</tr>
+<tr>
+  <td>[R8.1] The system can create an empty bill for the reservor user only when the engine is ignited</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R9.1]: The system knows whether a car is in a safe area or not</td>
+  <td>Safe Areas Controller</td>
+</tr>
+<tr>
+  <td>[R9.2]: The system knows the time elapsed since the engine ignition</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R9.3]: The system updates the reservor user bill according to the elapsed time</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R10.1] The system knows the reservor user bill</td>
+  <td>Ride controller</td>
+</tr>
+<tr>
+  <td>[R12.1]: When a car is becoming available and this car is parked in a recharging station area there is a 5 minute window before the system charges the bill to the reservor user</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R12.2]: When a car is becoming available and this car is parked in a safe parking area the system charges immediatly the reservor user with the bill</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R11.1]: When a car is becoming available, if the system detects that this car has had at least two passengers (not including the driver) for all the time of the ride when the engine was ignited, then the system applies a discount of 10% on the bill of the reservor user</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R11.2]: When a car is becoming available, if its battery level is greater or equal to the 50% of the total battery level, the system applies a discount of 20% on the bill of the reservor user</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R11.3]: When a car is becoming available, if it is parked in a recharging station area and it is plugged to the power grid, the system applies a discount of 30% on the bill of the reservor user and the 5 minute window terminates</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R11.4]: When a car is becoming available, if the battery level is less than 20% of the total battery level, the system applies a raise of 30% on the bill of the reservor user</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R11.5]: When a car is becoming available, if it is left more than 3Km away from the nearest recharging station, the system applies a raise of 30% on the bill of the reservor user</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R13.1]: The system knows whether a payment attempt was made for the current car</td>
+  <td>Bill Controller</td>
+</tr>
+<tr>
+  <td>[R13.2]: The system locks the car and makes it available only if the payment attempt was processed, either if the payment is successful or not</td>
+  <td>Ride Controller</td>
+</tr>
+<tr>
+  <td>[R14.1]: The system knows the result of the payment operation</td>
+  <td>Bill Controller</td>
+</tr>
+<tr>
+  <td>[R14.2]: The user is banned only if there exists a pending bill bound to him</td>
+  <td>User Controller</td>
+</tr>
+<tr>
+  <td>[R14.3]: The system marks a bill as paid if and only if a payment operation associated to this bill is successful</td>
+  <td>Bill controller</td>
+</tr>
+<tr>
+  <td>[R14.4]: A user can ask the system to try again to extinguish his pending bills</td>
+  <td>User Application</td>
+</tr>
+<tr>
+  <td>[R14.5]: Only pending bills can be required to be paid</td>
+  <td>Bill Controller</td>
+</tr>
+<tr>
+  <td>[R15.1]: The system only allows a logged in user who is not banned to view his reservations</td>
+  <td>Reservation Controller</td>
+</tr>
+<tr>
+  <td>[R15.2]: The system is capable of finding all the reservation made by the user</td>
+  <td>Reservation Controller</td>
+</tr>
+<tr>
+  <td>[R15.3]: The system is able to show to a user a list of cars with their position, battery level and the expiration time</td>
+  <td>User Application</td>
+</tr>
+<tr>
+  <td>[R16.1]: The system only allows a logged in employee to manage geographical regions</td>
+  <td>Geographical Areas Controller</td>
+</tr>
+<tr>
+  <td>[R16.2]: The system is able to find all the geographical regions already defined</td>
+  <td>Geographical Areas Controller</td>
+</tr>
+<tr>
+  <td>[R16.3]: The system is able to display the geographical regions to the employee</td>
+  <td>Employee Application</td>
+</tr>
+<tr>
+  <td>[R17.1]: The system allows the employee to select a geographical region</td>
+  <td>Employee Application</td>
+</tr>
+<tr>
+  <td>[R17.2]: The system allows the employee to draw a line inside the selected geographical region</td>
+  <td>Employee application</td>
+</tr>
+<tr>
+  <td>[R17.3]: The system is able to compute the new geographical region and store them</td>
+  <td>Geographical Areas Controller</td>
+</tr>
+<tr>
+  <td>[R18.1]: The system allows the employee to select two geographical regions</td>
+  <td>Employee Application</td>
+</tr>
+<tr>
+  <td>[R18.2]: The system merges the two region into one single region and store it, removing the two sources region</td>
+  <td>Geographical Areas Controller</td>
+</tr>
+<tr>
+  <td>[R19.1]: The system only allow a logged in employee to manage safe areas</td>
+  <td>Safe Areas Controller</td>
+</tr>
+<tr>
+  <td>[R19.2]: The system is able to find all the safe areas already defined</td>
+  <td>Safe Areas Controller</td>
+</tr>
+<tr>
+  <td>[R19.3]: The system is able to display the safe areas to the employee</td>
+  <td>Employee Application</td>
+</tr>
+<tr>
+  <td>[R20.1]: The system allows the employee to select a safe area</td>
+  <td>Employee application</td>
+</tr>
+<tr>
+  <td>[R20.2]: The system removes a selected safe area</td>
+  <td>Safe Areas Controller</td>
+</tr>
+<tr>
+  <td>[R22.1]: The system allows the employee to select a safe area</td>
+  <td>Employee application</td>
+</tr>
+<tr>
+  <td>[R21.1]: The system can acquire from the employee the type of safe area, its shape as a sequence of coordinate, and eventually the number of plugs of the recharging station area</td>
+  <td>Employee application</td>
+</tr>
+<tr>
+  <td>[R22.2]: The system is able to check if the defined safe area will overlap with the already defined safe areas except for the selected one</td>
+  <td>Safe Areas Controller</td>
+</tr>
+<tr>
+  <td>[R22.3]: The system updates the selected safe area only if it is not overlapping</td>
+  <td>Safe Areas Controller</td>
+</tr>
+<tr>
+  <td>[R23.1]: The system only allows a logged in employee to view the list of in maintenance cars</td>
+  <td>Car Controller</td>
+</tr>
+<tr>
+  <td>[R23.2]: The system is capable of finding all the in maintenance cars</td>
+  <td>Car Controller</td>
+</tr>
+</tbody>
+</table></div>
+
+<h2 id="book-heading-46">Non functional requirements</h2>
+
+<div class="rest-item">
+<table>
+<thead>
+<tr>
+  <th>Requirement (RASD)</th>
+  <th>Design decision (DD)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Reliability</td>
+  <td>Presence of a backup server</td>
+</tr>
+<tr>
+  <td>Availability</td>
+  <td>Presence of a backup server</td>
+</tr>
+<tr>
+  <td>Security</td>
+  <td>Strong cryptographic functions</td>
+</tr>
+<tr>
+  <td>Portability</td>
+  <td>Web Standards and J2EE framework</td>
+</tr>
+</tbody>
+</table></div>
+
+<h1 id="book-heading-47">Appendix</h1>
+
+<h2 id="book-heading-48">Effort spent</h2>
+
+<ul>
+<li>Nardo Loris: 18 hours of work</li>
+<li>Osio Alberto: 22 hours of work</li>
+</ul>
+
+<h2 id="book-heading-49">References</h2>
+
+<ul>
+<li><p>http://www.ibm.com/developerworks/rational/library/3101.html</p>
+
+<p>For "break" frame semantics in sequence diagrams</p></li>
+<li><p>http://dev.mysql.com/doc/refman/5.7/en/gis-class-multipolygon.html</p>
+
+<p>For <em>multipolygon</em> data type definition</p></li>
+</ul>
+
+<h2 id="book-heading-50">Software and tools used</h2>
+
+<ul>
+<li>Github (https://github.com) for version control</li>
+<li>StarUML (http://staruml.io/) for UML diagrams</li>
+<li>Draw.io (http://www.draw.io/) for UX and ER diagrams</li>
+</ul>
+    </body>
+</html>
