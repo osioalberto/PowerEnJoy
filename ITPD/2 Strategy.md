@@ -9,10 +9,11 @@ This paragraph provides the criteria that have to be met in order to start the i
 * Integration testing can start only when the estimated
 percentage of completion of every component with respect to its functionalities is:
     * 50% for _User Application_ and _Employee Application_
-    * 100% for _Router_, _Monitoring Controller_, _User Controller_ and _Bill Controller_
+    * 100% _Monitoring Controller_, _User Controller_ and _Bill Controller_
+    * 50% for _Router_
     * 80% for all other components
   
-  Note that some components are required to be fully developed before integration testing starts because they are considered very critical components: they are involved in the majority of the interactions between the system and the external environment, and thus they interact with the majority of the other components.
+  Note that some components are required to be fully developed before integration testing starts because they are very basic components and are used by the majority of the other components. This reflects also the integration order defined by the strategy (see later).
 
   The choice of requiring different completion percentages is taken in order to anticipate as much as possibile the begin of the integration testing, as to speed up the overall system development.
 
@@ -46,15 +47,13 @@ The most complex component is for sure the server component, which is made up of
 The _User application_ and the _Employee application_ are not as complex as the server components as they represent only a user friendly interface that invokes the server APIs. In this context, integration testing is very limited because of the fact there is (almost) no interaction between subcomponents related to different APIs (they are not even specified in the design document).
 
 ## Integration testing strategy
-The approach used in integration testing is a mixture of bottom-up and critical-module-first approaches.
+The approach used in integration testing is a bottom-up approach.
 
 Bottom-up approach is chosen for these reasons:
 
 * It reflects the development process and avoids developing stubs of very simple components as the effort spent in developing the stub would not be so minor than the effort spent in developing the actual component to get a real advantage. 
 * Components like the _DBMS_ or the _Car monitoring system_, which are bought from external companies, are immediatly available in a bottom-up approach without any explicit dependency
-* It exercises real components instead of stubs, allowing the development team to have more precise feedback also on non functional requirements already during the integration testing, and so to detect and correct issues earlier (if a non functional requirement is violated during the integration testing phase then it is extremely unlikely it won't be violated also during the system testing)
-
-Critical-modules-first approach is chosen in order to exercise first those modules that provide application scoped functionalities (routing, billing, user authentication). This allows to test very carefully interactions of all the other components with this very risky ones, and so to test very well those interactions that will be very frequently used at runtime.
+* It exercises real components instead of stubs, allowing the development team to have more precise feedback also on non functional requirements already during the integration testing, and so to detect and correct issues earlier (if a non functional requirement is violated during the integration testing phase then it is extremely unlikely it won't be violated also during the system testing) 
 
 ## Sequence of components / software integration
 This section provides detailed specification of the order in which components must be integrated.
