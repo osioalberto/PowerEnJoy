@@ -6,6 +6,8 @@ This paragraph provides the criteria that have to be met in order to start the i
 
 * The single components that go under integration testing must have been developed at least for the 90% of the functionalities they have to provide, and the developed part must be fully unit tested (a coverage of 95% is required)
 
+* Drivers and stubs as of chapter 5.1 of this document have been fully developed
+
 * Integration testing can start only when the estimated
 percentage of completion of every component with respect to its functionalities is:
     * 50% for _User Application_ and _Employee Application_
