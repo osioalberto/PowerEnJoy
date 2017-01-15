@@ -6,6 +6,8 @@ This paragraph provides the criteria that have to be met in order to start the i
 
 * The single components that go under integration testing must have been developed at least for the 90% of the functionalities they have to provide, and the developed part must be fully unit tested (a coverage of 95% is required)
 
+* Drivers and stubs as of chapter 5.1 of this document have been fully developed
+
 * Integration testing can start only when the estimated
 percentage of completion of every component with respect to its functionalities is:
     * 50% for _User Application_ and _Employee Application_
@@ -112,7 +114,7 @@ We setup the message-driven architecture described in the DD integrating the bro
 
 ![Alt IT2](http://localhost/powerenjoy/ITPD/images/IT2.svg)
 
-and then adding the _car controller_ which provides informations about cars to all other components, interacting in the message-driven architecture.
+and then adding the _car controller_ which provides informations about cars to all other components, interacting on one side in the message-driven architecture and on the other side with the DMBS in order to persist collected information.
 
 ![Alt IT3](http://localhost/powerenjoy/ITPD/images/IT3.svg)
 
