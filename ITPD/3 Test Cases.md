@@ -96,7 +96,7 @@
 | **Test items**           | |
 | **Test description**     | This test ensures that a user or an employee can be autheniticated.|
 | **Input specification**  | The username and the password for a non valid account.|
-| **Output specification** | It must return an error.|
+| **Output specification** | It must return an error, the error must not contain information regarding which field is not valid.|
 | **Environmental needs**  | |
 
 | | |
@@ -110,27 +110,10 @@
 
 
 #Geo area & User & DBMS
+
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | I3T1 |
-| **Test items**           | |
-| **Test description**     | This test ensures that only employee can access these functionality. |
-| **Input specification**  | A valid employee. |
-| **Output specification** | Nothing. |
-| **Environmental needs**  | |
-
-| | |
-|--------------------------|--------------------------|
-| **Test case identifier** | I3T2 |
-| **Test items**           | |
-| **Test description**     | This test ensures that only employee can access these functionality. |
-| **Input specification**  | A non valid employee. |
-| **Output specification** | It must return an error, and no operation must be allowed. |
-| **Environmental needs**  | |
-
-| | |
-|--------------------------|--------------------------|
-| **Test case identifier** | I3T3 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the merge operation behaves correctly. |
 | **Input specification**  | Two regions. |
@@ -139,7 +122,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I3T4 |
+| **Test case identifier** | I3T2 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the split operation behaves correctly. |
 | **Input specification**  | A region and a path within the region. |
@@ -148,7 +131,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I3T5 |
+| **Test case identifier** | I3T3 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the split operation behaves correctly. |
 | **Input specification**  | A region and a path outside the region. |
@@ -157,7 +140,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I3T6 |
+| **Test case identifier** | I3T4 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the search operation behaves correctly. |
 | **Input specification**  | A position and a radius. |
@@ -165,27 +148,10 @@
 | **Environmental needs**  | |
 
 #safe area & user & dbms
+
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | I4T1 |
-| **Test items**           | |
-| **Test description**     | This test ensures that only employee can access these functionality. |
-| **Input specification**  | A valid employee. |
-| **Output specification** | Nothing. |
-| **Environmental needs**  | |
-
-| | |
-|--------------------------|--------------------------|
-| **Test case identifier** | I4T2 |
-| **Test items**           | |
-| **Test description**     | This test ensures that only employee can access these functionality. |
-| **Input specification**  | A non valid employee. |
-| **Output specification** | It must return an error, and no operation must be allowed. |
-| **Environmental needs**  | |
-
-| | |
-|--------------------------|--------------------------|
-| **Test case identifier** | I4T3 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the remove operation behaves correctly. |
 | **Input specification**  | A safe area. |
@@ -194,7 +160,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I4T4 |
+| **Test case identifier** | I4T2 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the add operation behaves correctly. |
 | **Input specification**  | Data to create a valid safe area. |
@@ -203,7 +169,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I4T5 |
+| **Test case identifier** | I4T3 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the add operation behaves correctly. |
 | **Input specification**  | Data to create a safe area with an overlapping. |
@@ -212,7 +178,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I4T6 |
+| **Test case identifier** | I4T4 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the edit operation behaves correctly. |
 | **Input specification**  | Valid data to update a safe area. |
@@ -221,7 +187,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I4T7 |
+| **Test case identifier** | I4T5 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the eidt operation behaves correctly. |
 | **Input specification**  | Non valid data to update a safe area. |
@@ -230,7 +196,7 @@
 
 | | |
 |--------------------------|--------------------------|
-| **Test case identifier** | I4T8 |
+| **Test case identifier** | I4T6 |
 | **Test items**           | |
 | **Test description**     | This test ensures that the search operation behaves correctly. |
 | **Input specification**  | A position and a radius. |
@@ -300,6 +266,16 @@
 | **Test description**     | This test ensures that only reserved car can be put in use. |
 | **Input specification**  | Some MessageStatus reporting a InUse status and the cars sending them.  |
 | **Output specification** | Only reserved cars must be put in use. |
+| **Environmental needs**  | |
+
+
+| | |
+|--------------------------|--------------------------|
+| **Test case identifier** | I6T5 |
+| **Test items**           | |
+| **Test description**     | This test ensures that only in use car can be put in available. |
+| **Input specification**  | Some MessageStatus reporting a InUse status, with engine turned off and the cars sending them.  |
+| **Output specification** | Only in use cars whose position is inside a safe area must be put in the available status. |
 | **Environmental needs**  | |
 
 # add a stub for the bill
@@ -382,9 +358,9 @@
 |--------------------------|--------------------------|
 | **Test case identifier** | I8T4 |
 | **Test items**           | |
-| **Test description**     | This test ensures that a reservation lasts only for 1 hour. |
+| **Test description**     | This test ensures that a reservation can trigger an expiration, for the purpose of this test the expiration may be set to a time interval different from the production one (1 hour) |
 | **Input specification**  | A car and a user who wants to reserve the car. |
-| **Output specification** | After 1 hour, the reservation must be removed, a bill must be processed for a 1€ fee. |
+| **Output specification** | After the defined time interval, the reservation must be removed, a bill must be processed for a 1€ fee. |
 | **Environmental needs**  | |
 
 | | |
@@ -403,4 +379,49 @@
 | **Test description**     | This test ensures that a request to a non existent controller method behaves gracefully. |
 | **Input specification**  | A request for which no controller method is associated. |
 | **Output specification** | An error must be returned. |
+| **Environmental needs**  | |
+
+| | |
+|--------------------------|--------------------------|
+| **Test case identifier** | I9T3 |
+| **Test items**           | |
+| **Test description**     | This test ensures that requests for employee services are granted only to employees. |
+| **Input specification**  | A request issued by a user for an employee service. |
+| **Output specification** | An error must be returned. |
+| **Environmental needs**  | |
+
+| | |
+|--------------------------|--------------------------|
+| **Test case identifier** | I9T4 |
+| **Test items**           | |
+| **Test description**     | This test ensures that requests for user services are granted only to users. |
+| **Input specification**  | A request issued by an employee for a user service. |
+| **Output specification** | An error must be returned. |
+| **Environmental needs**  | |
+| | |
+|--------------------------|--------------------------|
+| **Test case identifier** | I9T5 |
+| **Test items**           | |
+| **Test description**     | This test ensures that requests can be processed fast enough to meet our performance requirements. |
+| **Input specification**  | Multiple concurrent request. |
+| **Output specification** | Request must be processed within the time specified in the performance requirements. |
+| **Environmental needs**  | |
+
+| | |
+|--------------------------|--------------------------|
+| **Test case identifier** | SI1T1 |
+| **Test items**           | |
+| **Test description**     | This test ensures that web request are correctly processed. |
+| **Input specification**  | Some HTTPS request issued by the web browser. |
+| **Output specification** | The correct page is displayed. |
+| **Environmental needs**  | |
+
+
+| | |
+|--------------------------|--------------------------|
+| **Test case identifier** | SI1T2 |
+| **Test items**           | |
+| **Test description**     | This test ensures that web requests can be processed fast enough to meet our performance requirements. |
+| **Input specification**  | Multiple concurrent HTTPS request. |
+| **Output specification** | Request must be processed within the time specified in the performance requirements. |
 | **Environmental needs**  | |
