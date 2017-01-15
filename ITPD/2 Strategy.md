@@ -114,7 +114,7 @@ We setup the message-driven architecture described in the DD integrating the bro
 
 ![Alt IT2](http://localhost/powerenjoy/ITPD/images/IT2.svg)
 
-and then adding the _car controller_ which provides informations about cars to all other components, interacting on one side in the message-driven architecture and on the other side with the DMBS in order to persist collected information.
+and then adding the _car controller_ which provides informations about cars to all other components, interacting on one side in the message-driven architecture and on the other side with the DMBS in order to persist collected information, the safe areas controller in order to detect whether a car is parked in a safe area or not, and the geographical region controller, in order to associate each car with the geographical region it is parked in.
 
 ![Alt IT3](http://localhost/powerenjoy/ITPD/images/IT3.svg)
 
