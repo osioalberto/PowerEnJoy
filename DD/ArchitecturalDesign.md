@@ -30,7 +30,7 @@ The picture shows the logical architecture for the _Server_ component. The archi
 
 * __Router__ component dispatches all the requests coming from the _User Application_ and _Employee application_ to the business component that can handle it. It multiplexes the parts of the interfaces of the different business components in two "virtual" interfaces, the former dedicated to user interaction, the latter to employee interaction.
 * __Monitoring controller__ represents the broker of the event-driven architectural style used to collect data from cars
-* __Car controller__ controls the state of each car and to trigger transitions between car states according to the state chart defined in the Requirements Analysis and Specification Document.
+* __Car controller__ controls the state of each car and triggers transitions between car states according to the state chart defined in the Requirements Analysis and Specification Document.
 * __Bill controller__ handles tasks related to the storage of pending bills and to the interaction with the external system for payments processing
 * __User controller__ controls the state of each user according to the state chart defined in the RASD. In particular, it provides all the functionalities needed for authenticating users and employees.
 * __Geographical areas controller__ provides an API that can be used to retrive and manipulate data related to geographical areas boundaries
@@ -99,6 +99,10 @@ or every 15 minutes if the batteryLevel changes by less than 5% and nothing else
 
 ####Unlock####
 This message is sent by management system to the car system in order to unlock the car.
+This message has no parameters
+
+####Lock####
+This message is sent by management system to the car system in order to lock the car.
 This message has no parameters
 
 ##Selected architectural styles and patterns

@@ -22,10 +22,10 @@ Registered users are allowed to reserve a single car in each geographic area at 
 The system allows the employee to manage safe areas and geographical regions to improve the overall offered service. Employees are also allowed to monitor the status of the car, so that when a car has a low battery charge an employee can move the car to a recharging station and plug the car or go and recharge the car on site.
 
 ## Goals ##
-### Goals.md ###
+@INCLUDE Goals.md@
 
 ## Glossary ##
-### Glossary.md ###
+@INCLUDE Glossary.md@
 
 ## References ##
 This document refers to the rules of the Software Engineering 2 project and to the RASD Assignment.

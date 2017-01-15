@@ -13,3 +13,7 @@ or every 15 minutes if the batteryLevel changes by less than 5% and nothing else
 #Unlock#
 This message is sent by management system to the car system in order to unlock the car.
 This message has no parameters
+
+#Lock#
+This message is sent by management system to the car system in order to lock the car.
+This message has no parameters
