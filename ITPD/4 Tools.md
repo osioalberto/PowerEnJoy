@@ -12,6 +12,8 @@ In order to achieve this goal, two main tools are going to be uses: __JUnit fram
 
 Not all tests can however be automated, for example GUI related components cannot be completely tested in a automatic way. Another tool is then required, and it is __manual testing__. This tool has the great disadvantage of not being automatically reproducible, but it is the only viable tool to test some features of the application. Moreover, the intire activity of designing the test suit and implement the proper drivers and oracles has to be carried out manually.
 
+During the integration of the system it may happen that some interactions are tested and then used during other tests. When this interactions involve external services, they must be tested against the real service in the dedicated tests, but then external services should be mocked in order to avoid to query them uselessly. A tool that grants this possibility is __mock server__.
+
 In order to test _user application_ and _employee application_ interaction with the server component, the __Chrome developer tools__ may come very useful, as they provide functions to inspect both web requests and responses and interal components' state (other web browsers provide similar tools, but this is the most complete and flexible tool, according to developer's experience). Because of the fact that this needs to be a cross-browser application, it should be tested on all the major modern browsers, which include:
 
 * Google Chrome

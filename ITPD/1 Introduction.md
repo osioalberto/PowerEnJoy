@@ -58,4 +58,7 @@ The content of this document is mainly organized in four sections:
 * Requirement Analysis and Specification Document for PowerEnJoy car sharing system
 * Design Document for PowerEnJoy car sharing system
 * The Integration Test Plan Example document
-* ___TODO___ add reference of doc of tools used for testing
+* Testing tools  
+  * Mock server: [http://www.mock-server.com](http://www.mock-server.com)
+  * JUnit: [http://junit.org/junit4](http://junit.org/junit4)
+  * Arquillian: [http://arquillian.org](http://arquillian.org)
