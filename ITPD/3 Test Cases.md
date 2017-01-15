@@ -13,7 +13,7 @@
 | **Test case identifier** | I1T2 |
 | **Test items**           | Bill Controller &rarr; DBMS |
 | **Test description**     | This test ensures that only valid bills will be stored into the database.|
-| **Input specification**  | A non valid bill. |
+| **Input specification**  | A non valid bill (past date, negative amount...). |
 | **Output specification** | It must return an error, no record must be stored in the database. |
 | **Environmental needs**  | |
 
@@ -59,7 +59,7 @@
 | **Test case identifier** | I2T4 |
 | **Test items**           | External payment processing system &rarr; Bill Controller, DBMS |
 | **Test description**     | This test ensures that the bill controller communicates with the external payment processing system. |
-| **Input specification**  | Non valid credit card data, bill. |
+| **Input specification**  | Non valid credit card data (CVV non correct, non existing credit card number), valid bill. |
 | **Output specification** | The payment must be rejected, and an error must be returned. |
 | **Environmental needs**  | |
 
@@ -86,7 +86,7 @@
 |--------------------------|--------------------------|
 | **Test case identifier** | I3T3 |
 | **Test items**           | User Controller &rarr; DBMS |
-| **Test description**     | This test ensures that a user or an employee can be autheniticated.|
+| **Test description**     | This test ensures that a user or an employee can be authenticated.|
 | **Input specification**  | The username and the password for a valid account.|
 | **Output specification** | It must return a valid authentication token.|
 | **Environmental needs**  | |
@@ -95,7 +95,7 @@
 |--------------------------|--------------------------|
 | **Test case identifier** | I3T4 |
 | **Test items**           | User Controller &rarr; DBMS |
-| **Test description**     | This test ensures that a user or an employee can be autheniticated.|
+| **Test description**     | This test ensures that a user or an employee can be authenticated.|
 | **Input specification**  | The username and the password for a non valid account.|
 | **Output specification** | It must return an error, the error must not contain information regarding which field is not valid.|
 | **Environmental needs**  | |
@@ -115,8 +115,17 @@
 | **Test case identifier** | I4T1 |
 | **Test items**           | External driving licence validation service &rarr; User Controller,  DBMS |
 | **Test description**     | This test ensures that ensures that this component is able to communicate with the external driving licence validation service. |
-| **Input specification**  | Some user data with valid and non valid driving licence. |
-| **Output specification** | Only user with a valid driving licence must be inserted into the database. |
+| **Input specification**  | Some user data with valid and driving licence. |
+| **Output specification** | User is inserted in the database |
+| **Environmental needs**  | |
+
+| | |
+|--------------------------|--------------------------|
+| **Test case identifier** | I4T2 |
+| **Test items**           | External driving licence validation service &rarr; User Controller,  DBMS |
+| **Test description**     | This test ensures that ensures that this component is able to communicate with the external driving licence validation service. |
+| **Input specification**  | Some user data with non valid driving licence (non existing driving licence number, outdated driving licence number). |
+| **Output specification** | No operation is performed on the database |
 | **Environmental needs**  | |
 
 ## Integration test case I5
@@ -126,7 +135,7 @@
 | **Test items**           | Geographical areas controller &rarr; DBMS |
 | **Test description**     | This test ensures that the merge operation behaves correctly. |
 | **Input specification**  | Two regions. |
-| **Output specification** | The two region must be merged, the database must reflect this change. |
+| **Output specification** | The two region must be merged, the database must reflect this change, hence it must not contain the input region and must contain a new region which is the union of the two. |
 | **Environmental needs**  | |
 
 | | |
@@ -135,7 +144,7 @@
 | **Test items**           | Geographical areas controller &rarr; DBMS |
 | **Test description**     | This test ensures that the split operation behaves correctly. |
 | **Input specification**  | A region and a path within the region. |
-| **Output specification** | The region is split using the path and the database must reflect this change. |
+| **Output specification** | The region is split using the path and the database must reflect this change, hence it must not contain the input region and must contain two regions whose union corresponds to the input region, and that have as a part of their boundary the given path |
 | **Environmental needs**  | |
 
 | | |
@@ -153,7 +162,7 @@
 | **Test items**           | Geographical areas controller &rarr; DBMS |
 | **Test description**     | This test ensures that the search operation behaves correctly. |
 | **Input specification**  | A position and a radius. |
-| **Output specification** | It must return all the regions whose polygon intersect a circle centered in position with the given radius.|
+| **Output specification** | It must return all and only the regions whose polygon intersects a circle centered in the given position with the given radius.|
 | **Environmental needs**  | |
 
 ## Integration test case I6
@@ -172,7 +181,7 @@
 | **Test items**           | Safe areas controller &rarr; DBMS |
 | **Test description**     | This test ensures that the add operation behaves correctly. |
 | **Input specification**  | Data to create a valid safe area. |
-| **Output specification** | A new safe area must be inserted inside the database. |
+| **Output specification** | A new safe area must be inserted in the database. |
 | **Environmental needs**  | |
 
 | | |
@@ -180,7 +189,7 @@
 | **Test case identifier** | I6T3 |
 | **Test items**           | Safe areas controller &rarr; DBMS |
 | **Test description**     | This test ensures that the add operation behaves correctly. |
-| **Input specification**  | Data to create a safe area with an overlapping. |
+| **Input specification**  | Data to create a safe area that overlaps with another, already existing, safe area. |
 | **Output specification** | No operation must be performed, an error must be returned.|
 | **Environmental needs**  | |
 
@@ -198,7 +207,7 @@
 | **Test case identifier** | I6T5 |
 | **Test items**           | Safe areas controller &rarr; DBMS |
 | **Test description**     | This test ensures that the edit operation behaves correctly. |
-| **Input specification**  | Non valid data to update a safe area. |
+| **Input specification**  | Non valid data to update a safe area (open boundary, negative number of plugs for recharging stations, ...). |
 | **Output specification** | No operation must be performed, an error must be returned.|
 | **Environmental needs**  | |
 
@@ -208,7 +217,7 @@
 | **Test items**           | Safe areas controller &rarr; DBMS |
 | **Test description**     | This test ensures that the search operation behaves correctly. |
 | **Input specification**  | A position and a radius. |
-| **Output specification** | It must return all the safe areas whose polygon intersect a circle centered in position with the given radius.|
+| **Output specification** | It must return all the safe areas whose polygon intersects a circle centered in the given position with the given radius.|
 | **Environmental needs**  | |
 
 
@@ -247,7 +256,7 @@
 | **Test case identifier** | I8T1 |
 | **Test items**           | Car controller &rarr; Monitoring controller, DBMS |
 | **Test description**     | This test ensures that only available cars can be reserved. |
-| **Input specification**  | Some cars to be reserved. |
+| **Input specification**  | Some cars to be reserved (this test must be run several times, sometimes use an available car, some other times use a non available one). |
 | **Output specification** | Only available cars must be reserved. |
 | **Environmental needs**  | |
 
@@ -256,8 +265,8 @@
 | **Test case identifier** | I8T2 |
 | **Test items**           | Car controller &rarr; Monitoring controller, DBMS |
 | **Test description**     | This test ensures that low battery cars are put in maintenance. |
-| **Input specification**  | A StatusMessage reporting a low (< 20%) battery level. |
-| **Output specification** | The car sending the message must be put into maintenence. |
+| **Input specification**  | A StatusMessage reporting a low (< 20%) battery level and the car parked somewhere. |
+| **Output specification** | The car sending the message must be put in maintenence. |
 | **Environmental needs**  | |
 
 | | |
@@ -284,7 +293,7 @@
 |--------------------------|--------------------------|
 | **Test case identifier** | I9T1 |
 | **Test items**           | Car controller &rarr; Monitoring controller, DBMS, Safe areas controller, Geographical areas controller |
-| **Test description**     | This test ensures that only in use car can be put in available. |
+| **Test description**     | This test ensures that only in use car can be put in available status. |
 | **Input specification**  | Some MessageStatus reporting a InUse status, with engine turned off and the cars sending them.  |
 | **Output specification** | Only in use cars whose position is inside a safe area must be put in the available status, its geographical area must be updated accordingly. |
 | **Environmental needs**  | |
@@ -378,7 +387,7 @@
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | I12T1 |
-| **Test items**           | Router -> all the components of the server |
+| **Test items**           | Router &rarr; all the components of the server |
 | **Test description**     | This test ensures that requests are routed correctly. |
 | **Input specification**  | Some request for different services. |
 | **Output specification** | The corresponding controller is actived with the data received in the request. |
@@ -387,8 +396,8 @@
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | I12T2 |
-| **Test items**           | Router -> all the components of the server |
-| **Test description**     | This test ensures that a request to a non existent controller method behaves gracefully. |
+| **Test items**           | Router &rarr; all the components of the server |
+| **Test description**     | This test ensures that a request to a non existent controller method fails gracefully. |
 | **Input specification**  | A request for which no controller method is associated. |
 | **Output specification** | An error must be returned. |
 | **Environmental needs**  | |
@@ -396,7 +405,7 @@
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | I12T3 |
-| **Test items**           | Router -> all the components of the server |
+| **Test items**           | Router &rarr; all the components of the server |
 | **Test description**     | This test ensures that requests for employee services are granted only to employees. |
 | **Input specification**  | A request issued by a user for an employee service. |
 | **Output specification** | An error must be returned. |
@@ -405,7 +414,7 @@
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | I12T4 |
-| **Test items**           | Router -> all the components of the server |
+| **Test items**           | Router &rarr; all the components of the server |
 | **Test description**     | This test ensures that requests for user services are granted only to users. |
 | **Input specification**  | A request issued by an employee for a user service. |
 | **Output specification** | An error must be returned. |
@@ -414,7 +423,7 @@
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | I12T5 |
-| **Test items**           | Router -> all the components of the server |
+| **Test items**           | Router &rarr; all the components of the server |
 | **Test description**     | This test ensures that requests can be processed fast enough to meet our performance requirements. |
 | **Input specification**  | Multiple concurrent request. |
 | **Output specification** | Request must be processed within the time specified in the performance requirements. |
@@ -424,7 +433,7 @@
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | SI1T1 |
-| **Test items**           | Web browser -> Web server |
+| **Test items**           | Web browser &rarr; Web server |
 | **Test description**     | This test ensures that web request are correctly processed. |
 | **Input specification**  | Some HTTPS request issued by the web browser. |
 | **Output specification** | The correct page is displayed. |
@@ -433,7 +442,7 @@
 | | |
 |--------------------------|--------------------------|
 | **Test case identifier** | SI1T2 |
-| **Test items**           | Web browser -> Web server |
+| **Test items**           | Web browser &rarr; Web server |
 | **Test description**     | This test ensures that web requests can be processed fast enough to meet our performance requirements. |
 | **Input specification**  | Multiple concurrent HTTPS request. |
 | **Output specification** | Request must be processed within the time specified in the performance requirements. |
