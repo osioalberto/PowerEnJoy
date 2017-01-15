@@ -80,7 +80,10 @@ This section provides detailed specification of the order in which components mu
 ### Software integration
 This section describes the order of integration of subsystem to build a highest-level component. Because of already explained reasons we focus on the _server_ component testing.
 
-Stilistic note: as we'll focus on one component at a time, that component will be highlighted in light grey.
+Stilistic notes: 
+
+* As we'll focus on one component at a time, that component will be highlighted in light grey.
+* External systems will be highlighted in yellow
 
 #### End user subsystem
 According to the bottom-up integration approach, the first subsystem to be integrated is the _end user subsystem_. It only depends on the DBMS as an external component.
@@ -89,7 +92,15 @@ First of all, we test the integration between the _DBMS_ and the _bill controlle
 
 ![Alt IT1](http://localhost/powerenjoy/ITPD/images/IT1.svg)
 
-Then we can add the _user controller_, which depends both on the _DBMS_ and the previosly added _bill controller_
+Then, we must test the interaction with the external system for payment processing
+
+![Alt IT2](http://localhost/powerenjoy/ITPD/images/IT2.svg)
+
+Then we can add the _user controller_, which depends primarly on the _DBMS_ and on the _bill controller_
+
+![Alt IT3](http://localhost/powerenjoy/ITPD/images/IT3.svg)
+
+Now we can focus on the interaction with the external components for driving licence validation
 
 ![Alt IT4](http://localhost/powerenjoy/ITPD/images/IT4.svg)
 
@@ -112,28 +123,28 @@ This is the most complex subsystem, and it is the last in the integration order 
 First of all, we exercise the integration with the external system that monitors cars onboard.
 We setup the message-driven architecture described in the DD integrating the broker
 
-![Alt IT2](http://localhost/powerenjoy/ITPD/images/IT2.svg)
+![Alt IT7](http://localhost/powerenjoy/ITPD/images/IT7.svg)
 
 and then adding the _car controller_ which provides informations about cars to all other components, interacting on one side in the message-driven architecture and on the other side with the DMBS in order to persist collected information, the safe areas controller in order to detect whether a car is parked in a safe area or not, and the geographical region controller, in order to associate each car with the geographical region it is parked in.
 
-![Alt IT3](http://localhost/powerenjoy/ITPD/images/IT3.svg)
+![Alt IT8](http://localhost/powerenjoy/ITPD/images/IT8.svg)
 
 Now we can test integration of the two main business components. Due to the bottom-up approach and the dependency of reservations on rides, we must test first the integration of the _ride controller_
 
-![Alt IT7](http://localhost/powerenjoy/ITPD/images/IT7.svg)
+![Alt IT9](http://localhost/powerenjoy/ITPD/images/IT9.svg)
 
 Then the last component of this subsystem is the _reservation controller_
 
-![Alt IT8](http://localhost/powerenjoy/ITPD/images/IT8.svg)
+![Alt IT10](http://localhost/powerenjoy/ITPD/images/IT10.svg)
 
 #### Router
 The very last component to integrate is the _router_, which works on top of all the other subsystems and so can only be added as the very last component of the _server_. Components from different subsystems have different colors.
 
-![Alt IT9](http://localhost/powerenjoy/ITPD/images/IT9.svg)
+![Alt IT11](http://localhost/powerenjoy/ITPD/images/IT11.svg)
 
 
 #### Fully integrated _server_ component
-Now we are ready to integrate all subcomponents to form the _server_ high-level component.
+Now we are ready to integrate all subcomponents to form the _server_ high-level component (external dependencies are not included).
 
 ![Alt subsys](http://localhost/powerenjoy/ITPD/images/Server-subsys.svg)
 
