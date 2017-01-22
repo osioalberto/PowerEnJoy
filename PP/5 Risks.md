@@ -1,0 +1,36 @@
+#Risk management
+Risks must be taken into consideration in a project planning.  
+Even if it is not possible to foresee any possible risk, a good risk strategy for the most probable risks must be taken into consideration. Three main risk categories are described in the following part of this section of the document.
+
+- **Project risks**: these risks involve the project plan itself, leading to raise in cost or to deadline missing.
+- **Technical risks**: these risks involve the implementation of the project and they affect the overall quality of the software we have to develop.
+- **Business risks**: these risks involve the company developing the software itself.
+
+##Project risks
+| Risk | Level | Description|
+|-|-|-|
+|**Too optimistic schedules** | Critical | The project may require additional time. If this is the case, we can release an incomplete but working version (e.g. without the ability for employee to define the geographical areas, or with a simplier user interface). However, in order to mitigate this risk, some slack time is inserted in the schedule. This is considered critical as our schedule has not mush slack|
+|**Too pessimistic schedules** | Less critical | The project may require much less time. If this is the case, we can propose our client some additional services for free (e.g. extended support). For this reason, we do not consider this as a critical risk.|
+|**Requirements change**| Moderately critical | This risk can be mitigated by designing the system (from requirements analysis up to actual implementation) in a conscious way, so that it is easy to extend or change it. When implementation is in progress, basic principles of OOP (coding to an interface, polymorphism, ...) must be carefully and consistently applied in the whole project and verified with code inspections on the most critical pars. This risk is considered moderately critical because, even if we apply the best design techniques, we cannot predict all changes that may come up|
+|**Team collaboration issues**| Less critical | Misunderstanding or things left as intended may lead to an incorrect repartition of tasks. This can be mitigated with meetings and a complete and precise task assignment. We consider this less critical because we inserted in the schedule frequent meetings|
+|**Turnover in development team**| Moderately critical | Since the IT job market is quite flexible, this is always risk to be considered, that can be mitigated by splitting responisibilities among people of the company. We evaluate this risk factor as moderately critical, because given our staff it is extremely unlikely that key members quit the company during the project development, but we cannot avoid it. If happens, we plan to pay extra hours to other members in order to reschedule tasks assigned to those people|
+|**Illness of key members**| Moderately critical | The classification of this factor is really similar to that of the previous one|
+|**Gold plating**| Less critical | A software product is never perfect, but this does not mean it cannot be released. Successive releases may refine some aspects. This risk is avoided if deadlines for task assignment are defined and enforced, and for this reasons we classify it as less critical |
+|**Misunderstanding in requirements**| Moderately critical | This is always a very serious problem, but can be mitigated by deeply involving stakeholders in requirements analysis, asking for frequent feedbacks and organizing frequent meetings. We consider this a moderately critical risk because we put in the schedule frequent meetings|
+
+##Technical risks
+| Risk | Level | Description |
+|-|-|-|
+|**Lack of experience in programming with Java EE**| Moderately critical| This must be taken into consideration in the early stages of planning (e.g. adding a timespan devoted to learning of this technology or expanding the time related to the actual coding of the software project). |
+|**Server downtime**| Critical| Downtimes are often indicators that the software is not scalable or that the hardware running the server components is not enough powerful. To prevent this, one must design the software with scalability in mind from the early stages of the DD, and choose the appropriate hardware. This is considered critical because can only be detected during system testing, which is performed at the very end of the development of the product. |
+|**Security flaws**| Critical | The application may be susceptible to security issues and to data leaks if not well designed. All the raccomandation from OWASP must be followed, thus the user input must be correctly handled; tests must be done to ensure that most common flaws are handled (e.g. XSS, CSRF, SQL Injection, &hellip;). This is considered critical because it is not easy to discover even with a careful system testing. |
+|**Data loss**| Moderately ritical | Data loss can occure because of hardware fault or software errors. This problem can be mitigated enforcing periodic backups. Our company performs daily backups archivied both locally and on a cloud service, so it is extremely unikely that this happens|
+|**Unstructured code**| Moderately critical | With the growth of the project and the approaching deadline the code may become badly structured, with repetitions. This problem can be mitigated performing  periodical code inspections. We have allocated a quite long time period to perfomr code inspections, so we can consider this moderately critical|
+|**Component integration failure**| Less critical| After having implemented some components, a test may fail and this can require to rewrite large portions of some component. This risk is mitigated by specifying the contracts and interfaces of each component and by starting integration tests earlier so that there is still time to fix problems. As we start integration testing as early as possible, this is considered less critical|
+
+##Business risks
+| Risk | Level | Description |
+|-|-|-|
+|**Competitors**| Critical | Other companies might develop and release a similar software product before us. A possible solution for this problem is to continuosly enhance the software product, to highlight peculiarities, or to provide better non functional requirements or designing a most attractive user interface. We consider this a critical risk because we cannot anticipate it in any way.|
+|**Bankruptcy**| Less critical| While the income for this project is known, its cost is not, a good feasibility study helps to avoid this situation. We consider this less critical because we have carried out a very accurate feasibility study.|
+|**PowerEnJoy may violete some future laws**| Less critical| Local and State regulators can change some rules and this can lead to unpredictable impact. This risk cannot be avoided, but the problematic portion of the product can be disabled temporarily and the team must work to adapt to the new regulations as soon as possible. This is a future risk, and so it is unlikely that it causes schedule shifts|
