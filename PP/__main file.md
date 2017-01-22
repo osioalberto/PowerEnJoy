@@ -20,10 +20,27 @@ In the following paragraphs, we are going to evaluate both scale factors and cos
 @INCLUDE PP - cocomo_cd_1.md@
 
 ###Effort estimation
-__TODO__
+From scale factor evaluation we get a coefficient
+~~~
+E = 1.0772
+~~~
+
+From cost driver evaluation we get a overall multiplier of
+~~~
+M = 0.6393
+~~~
+
+Hence the overall extimation yields a value of
+~~~
+Effort = A x (size^E) x M ~ 27.5 Person / Months
+size = 11.926
+A = 2.94
+~~~
 
 @INCLUDE PP - schedule.md@
 
 @INCLUDE PP - resource allocation.md@
 
 @INCLUDE PP - risks.md@
+
+@INCLUDE PPappendix.md@
