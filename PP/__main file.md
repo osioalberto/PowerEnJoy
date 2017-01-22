@@ -20,10 +20,36 @@ In the following paragraphs, we are going to evaluate both scale factors and cos
 @INCLUDE PP - cocomo_cd_1.md@
 
 ###Effort estimation
-__TODO__
+From scale factor evaluation we get a coefficient
+~~~
+E = 1.0772
+~~~
+From cost driver evaluation we get a overall multiplier of
+~~~
+M = 0.6393
+~~~
+Hence the overall extimation yields a value of
+~~~
+PM = A x (sizeᴱ) x M ≈ 27.5 Person / Months
+where A = 2.94, size = 11.926
+~~~
+
+###Duration
+COCOMO provides a simple schedule estimation capability. This estimation is based on the following equation
+<div style="font-family:monospace">
+TDEV = [C x PM<sup> D+0.2x(E-B)</sup>] x 
+<span style="display:inline-table;vertical-align:middle;text-align:center;">
+<span style="display:table-row;"><span style="display:table-cell;border-bottom:1px solid;">SCED%</span></span>
+<span style="display:table-row;><span style="display:table-cell;">100</span></span>
+</span> ≈ 10.5 Months
+<br>where C = 3.67, D = 0.28, B = 0.91, PM and E are the values calculated in the previous paragraph
+</div>
+This estimation is anyway too pessimistic and provides an upper bound of the time needed, it uses the pessimistic code size and it does not take into consideration that some part of the code needed can be found in already available libraries and some part of the development is carried out in parallel so our final estimation is 6 month.
 
 @INCLUDE PP - schedule.md@
 
 @INCLUDE PP - resource allocation.md@
 
 @INCLUDE PP - risks.md@
+
+@INCLUDE PPappendix.md@
