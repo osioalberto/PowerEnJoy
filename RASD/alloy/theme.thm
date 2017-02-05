@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<alloy>
+
+<view nodetheme="Martha">
+
+<defaultnode/>
+
+<defaultedge/>
+
+<node>
+   <type name="DiscountBatteryHigh"/>
+   <type name="DiscountCarPlugged"/>
+   <type name="DiscountManyPeople"/>
+   <type name="False"/>
+   <type name="PaidBill"/>
+   <type name="PendingBill"/>
+   <type name="RaiseBatteryLow"/>
+   <type name="RaiseFarCar"/>
+   <type name="RejectedBill"/>
+   <type name="SafeArea"/>
+   <type name="String"/>
+   <type name="True"/>
+   <type name="univ"/>
+   <type name="seq/Int"/>
+</node>
+
+<node color="Blue">
+   <type name="Reservation"/>
+</node>
+
+<node color="Gray">
+   <type name="Area"/>
+   <type name="User"/>
+</node>
+
+<node color="Green">
+   <type name="Position"/>
+</node>
+
+<node color="Red">
+   <type name="Bill"/>
+   <type name="Ride"/>
+</node>
+
+<node color="Yellow">
+   <type name="Plate"/>
+</node>
+
+<node shape="Box">
+   <type name="ExpirationBill"/>
+</node>
+
+<node shape="Ellipse" color="Yellow">
+   <type name="Car"/>
+</node>
+
+<node shape="Hexagon" color="Black">
+   <type name="PaymentInformation"/>
+</node>
+
+<node shape="Inv House">
+   <type name="RechargingStationArea"/>
+</node>
+
+<node shape="Inv Trapezoid">
+   <type name="SafeParkingArea"/>
+</node>
+
+<node shape="Inv Triangle">
+   <type name="GeographicalRegion"/>
+</node>
+
+<node shape="Lined Diamond" color="White">
+   <type name="ManagementSystem"/>
+</node>
+
+<node shape="Parallelogram" color="Green">
+   <type name="Credential"/>
+</node>
+
+<node shape="Trapezoid">
+   <type name="RideBill"/>
+</node>
+
+<node style="Bold" label="r">
+   <set name="$show_r" type="Ride"/>
+</node>
+
+<node style="Bold" label="r&apos;">
+   <set name="$show_r&apos;" type="RideBill"/>
+</node>
+
+<node visible="no">
+   <type name="BillStatus"/>
+   <type name="Boolean"/>
+   <type name="Int"/>
+   <type name="ordering/Ord"/>
+</node>
+
+<node visible="no" color="Blue">
+   <type name="PercentageDelta"/>
+</node>
+
+<edge color="Gray" constraint="no">
+   <relation name="Next"> <type name="ordering/Ord"/> <type name="BillStatus"/> <type name="BillStatus"/> </relation>
+</edge>
+
+<edge color="Gray" visible="no" attribute="yes" constraint="no">
+   <relation name="beforeGettingBanned"> <type name="Ride"/> <type name="Boolean"/> </relation>
+   <relation name="closed"> <type name="Car"/> <type name="Boolean"/> </relation>
+   <relation name="First"> <type name="ordering/Ord"/> <type name="BillStatus"/> </relation>
+   <relation name="ignited"> <type name="Car"/> <type name="Boolean"/> </relation>
+   <relation name="locked"> <type name="Car"/> <type name="Boolean"/> </relation>
+   <relation name="logged"> <type name="User"/> <type name="Boolean"/> </relation>
+   <relation name="percentageDeltas"> <type name="RideBill"/> <type name="PercentageDelta"/> </relation>
+   <relation name="status"> <type name="Bill"/> <type name="BillStatus"/> </relation>
+</edge>
+
+<edge visible="no" attribute="yes">
+   <relation name="amount"> <type name="Bill"/> <type name="Int"/> </relation>
+   <relation name="chargeLevel"> <type name="Car"/> <type name="Int"/> </relation>
+   <relation name="costPerMinute"> <type name="Car"/> <type name="Int"/> </relation>
+   <relation name="delta"> <type name="PercentageDelta"/> <type name="Int"/> </relation>
+   <relation name="elapsedMinutes"> <type name="Reservation"/> <type name="Int"/> </relation>
+   <relation name="elapsedMinutes"> <type name="Ride"/> <type name="Int"/> </relation>
+   <relation name="latitude"> <type name="Position"/> <type name="Int"/> </relation>
+   <relation name="longitude"> <type name="Position"/> <type name="Int"/> </relation>
+   <relation name="maxPlugs"> <type name="RechargingStationArea"/> <type name="Int"/> </relation>
+   <relation name="passengers"> <type name="Car"/> <type name="Int"/> </relation>
+   <relation name="passengersFromBegin"> <type name="Ride"/> <type name="Int"/> </relation>
+</edge>
+
+</view>
+
+</alloy>

@@ -1,5 +1,3 @@
-#### TODO Front Page ####
-# Chapter 1 #
 # Introduction #
 ## Purpose ##
 This document is the Requirement Analysis and Specification Document for
@@ -22,10 +20,10 @@ Registered users are allowed to reserve a single car in each geographic area at 
 The system allows the employee to manage safe areas and geographical regions to improve the overall offered service. Employees are also allowed to monitor the status of the car, so that when a car has a low battery charge an employee can move the car to a recharging station and plug the car or go and recharge the car on site.
 
 ## Goals ##
-@INCLUDE Goals.md@
+@INCLUDE RASD - Goals.md@
 
 ## Glossary ##
-@INCLUDE Glossary.md@
+@INCLUDE RASD - Glossary.md@
 
 ## References ##
 This document refers to the rules of the Software Engineering 2 project and to the RASD Assignment.
@@ -36,7 +34,6 @@ This document is structured in three parts:
 * **Chapter 2: Overall description** It provides a general perspective over the main system features, constraints and assumptions about the users and the environment
 * **Chapter 3: Specific requirements** It focuses in the functional and non-functional requirements.
 
-# Chapter 2 #
 # Overall description #
 ## Product perspective ##
 ### User interfaces ###
@@ -97,7 +94,9 @@ The system is not used in life-critical applications.
 * The position of in use cars must be visible only to the employee.
 
 ## Assumptions and dependencies ##
-### Domain assumptions.md ###
+
+@INCLUDE RASD - Domain Assumptions.md@
+
 ## Future extensions ##
 The system will be implemented foreseeing the possibility of further extensions. An incomplete list of possible extensions is below:
 * Allow a user to modify the data sent during sign up
@@ -106,7 +105,6 @@ The system will be implemented foreseeing the possibility of further extensions.
 * Provide the users with a money saving option, letting them input their destination and providing informations about where to leave the car, as to provide a better distribution of cars.
 * Keep track of virtuous behaviours of the users, in order to provide the most virtuous users with further discounts.
 
-# Chapter 3 #
 # Specific requirements #
 ## External interface requirements ##
 ### User interfaces ###
@@ -132,7 +130,17 @@ The system requires:
 ### Communications interfaces ###
 Users and employees communicate with the system via HTTPS connection.
 ## System features ##
-### Requirements,Scenario, use cases, etc... as sublist ###
+
+@INCLUDE RASD - Scenarios.md@
+
+@INCLUDE RASD - Use Case Description.md@
+
+@INCLUDE RASD - Diagrams.md@
+
+@INCLUDE RASD - Mockups.md@
+
+@INCLUDE RASD - Requirements.md@
+
 ## Performance requirements ##
 1. There is no limit to the number of registered users
 2. All of the requests must be processed 10 seconds. The majority of them (>90%) must be processed in less than 5 seconds.
@@ -157,4 +165,25 @@ The system must provide a logging functionality for debug purpose.
 The web application being written in Java, will be portable to any OS able to run the JVM and Java class files with major version 51.
 The interface with the employees and the users must be compatible with the last two years version of the major browsers that are Android Browser, Chrome, Chrome for Android, Edge, Firefox, Firefox for Android, IE Mobile, Internet Explorer, Safari, iOS Safari.
 ## Alloy ##
-### alloy.als ###
+
+@INCLUDE RASD - Alloy.md@
+
+# Appendix #
+## Software and tools used ##
+* Github (https://github.com) for version control
+* Alloy (http://http://alloy.mit.edu/alloy/) for model verification
+* StarUML (http://staruml.io/) for UML diagrams (except use case diagram)
+* Signavio (http://www.signavio.com/) for use case diagrams
+* Sublime Text Editor (https://www.sublimetext.com/) for alloy sintax highlighting
+
+## Hours of work ##
+Nardo Loris: 42 hours
+Osio Alberto: 38 hours
+
+## Changelog ##
+|Version|Description|
+|--|--|
+|1.0| Initial release                    |
+!1.1| * Revised pagination style         |
+|   | * Fixed small error in Alloy model |
+|   | * Fixed some typo in the document  !
