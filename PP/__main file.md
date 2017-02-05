@@ -28,10 +28,10 @@ From cost driver evaluation we get a overall multiplier of
 ~~~
 M = 0.6393
 ~~~
-Hence the overall extimation yields a value of
+Hence an overall pessimistic extimation yields a value of
 ~~~
 PM = A x (sizeᴱ) x M ≈ 27.5 Person / Months
-where A = 2.94, size = 11.926
+where A = 2.94, size = 11.926 [KSLOC]
 ~~~
 
 ###Duration
@@ -44,7 +44,7 @@ TDEV = [C x PM<sup> D+0.2x(E-B)</sup>] x
 </span> ≈ 10.5 Months
 <br>where C = 3.67, D = 0.28, B = 0.91, PM and E are the values calculated in the previous paragraph
 </div>
-This estimation is anyway too pessimistic and provides an upper bound of the time needed, it uses the pessimistic code size and it does not take into consideration that some part of the code needed can be found in already available libraries and some part of the development is carried out in parallel so our final estimation is 6 month.
+This estimation is anyway too pessimistic and provides an upper bound of the time needed, it uses the pessimistic code size and it does not take into consideration that some part of the code needed can be found in already available libraries and some part of the development is carried out in parallel so our final estimation is 6 months.
 
 @INCLUDE PP - schedule.md@
 
