@@ -1,3 +1,10 @@
+## Software Engineering 2: PowerEnJoy {.book-no-toc}
+# Requirements Analysis and Specification Document {.book-no-toc}
+###Nardo Loris, Osio Alberto {.book-no-toc}
+####Politecnico di Milano {.book-no-toc}
+
+@TOC@
+
 # Introduction #
 ## Purpose ##
 This document is the Requirement Analysis and Specification Document for
@@ -10,6 +17,7 @@ scenarios for all the users involved.
 The system is an electrical car sharing management system.
 Its main goal is to provide easy access to the service for the end user and to incetivize virtuous behaviours of the same users.
 The system consists in a web application addressed to two types of users:
+
 * PowerEnjoy employee (Employee)
 * Generic people (User)
 
@@ -30,6 +38,7 @@ This document refers to the rules of the Software Engineering 2 project and to t
 
 ## Overview ##
 This document is structured in three parts:
+
 * **Chapter 1: Introduction** It provides an overall description of the system scope and purpose, with some information about this document
 * **Chapter 2: Overall description** It provides a general perspective over the main system features, constraints and assumptions about the users and the environment
 * **Chapter 3: Specific requirements** It focuses in the functional and non-functional requirements.
@@ -40,6 +49,7 @@ This document is structured in three parts:
 The system will present itself as a web application, the interface will be intuitive and responsive.
 ### Hardware interfaces ###
 The system should use the following hardware interfaces:
+
 * GPS interface to obtain the position of car and logged users
 * Car monitoring system to obtain the charge level of the battery, whether the engine is ignited, the number of passengers, whether all the doors are closed.
 
@@ -48,6 +58,7 @@ The system should use the following hardware interfaces:
 
 ## Product functions ##
 The system allows:
+
 * The users to:
 	* Sign up
 	* Login
@@ -72,6 +83,7 @@ The users are responsable of the information provided and for any unlawful behav
 The system must ask the user permission for acquiring, processing and storing personal data.
 ### Hardware limitations ###
 The system has to run under the following worst-case conditions:
+
 * 1 Mb/s Internet connection
 * Viewport size of 320x480 pixels
 
@@ -99,6 +111,7 @@ The system is not used in life-critical applications.
 
 ## Future extensions ##
 The system will be implemented foreseeing the possibility of further extensions. An incomplete list of possible extensions is below:
+
 * Allow a user to modify the data sent during sign up
 * Allow a user to unregister from the system
 * Programmatically assign in maintenance cars to employees
@@ -109,6 +122,7 @@ The system will be implemented foreseeing the possibility of further extensions.
 ## External interface requirements ##
 ### User interfaces ###
 The user interfaces must satisfy the following constraints:
+
 * Web pages must comply with the W3C and ECMA International standards. In particular to the HTML5, CSS and ECMA-262 specification.
 * The first screen must ask the user to login or to sign up in order to begin operations.
 * There must be a menu which lists any functionality available for the user, in order to make the usage of the application simpler
@@ -119,11 +133,13 @@ The user interfaces must satisfy the following constraints:
 
 ### Hardware interfaces ###
 The system should use the following hardware interfaces:
+
 * GPS interface to obtain the position of car and logged users
 * Car monitoring system to obtain the charge level of the battery, whether the engine is ignited, the number of passengers, whether all the doors are closed
 
 ### Software interfaces ###
 The system requires:
+
 * MySQL 5.7
 * Java EE7
 
@@ -183,7 +199,7 @@ Osio Alberto: 38 hours
 ## Changelog ##
 |Version|Description|
 |--|--|
-|1.0| Initial release                    |
 !1.1| * Revised pagination style         |
 |   | * Fixed small error in Alloy model |
 |   | * Fixed some typo in the document  !
+|1.0| Initial release                    |
