@@ -160,5 +160,3 @@
 	- [R23.1]: The system only allows a logged in employee to view the list of in maintenance cars
 	- [R23.2]: The system is capable of finding all the in maintenance cars
 	- [R3.3]
-* [G24]:
-	- [R24.1]: The system only allows a logged in employee or logged in user to log out

@@ -22,4 +22,3 @@
 * [G21] Logged employees are able to add a new safe area
 * [G22] Logged employees are able to update the information of a safe area
 * [G23] Logged employees can view all the cars which are in mantainace and are not plugged into a power grid station
-* [G24] Only logged users or logged employees are able to logout

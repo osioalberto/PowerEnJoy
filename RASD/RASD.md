@@ -174,7 +174,7 @@ The interface with the employees and the users must be compatible with the last 
 * Alloy (http://http://alloy.mit.edu/alloy/) for model verification
 * StarUML (http://staruml.io/) for UML diagrams (except use case diagram)
 * Signavio (http://www.signavio.com/) for use case diagrams
-* Sublime Text Editor (https://www.sublimetext.com/) for alloy sintax highlighting
+* Sublime Text Editor (https://www.sublimetext.com/) for alloy syntax highlighting
 
 ## Hours of work ##
 Nardo Loris: 42 hours
