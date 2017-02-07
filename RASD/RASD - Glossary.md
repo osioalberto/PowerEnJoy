@@ -1,4 +1,5 @@
-### Glossary
+##Glossary
+
 * **System**: the system to be developed for PowerEnJoy
 * **User**: a generic person interacting with the system
 * **Employee**: a person who works for PowerEnJoy

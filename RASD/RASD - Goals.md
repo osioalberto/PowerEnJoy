@@ -1,4 +1,4 @@
-﻿### Goals
+﻿## Goals
 * [G1] Users must be able to sign up to the system entering their name, birth date, address, credit card information and a valid driving license number, in addition to username and password
 * [G2] Only registered users and employee must be able to log in to the system
 * [G3] Logged users must be able to find the location and the level of the battery of available cars within a user defined distance from his current location

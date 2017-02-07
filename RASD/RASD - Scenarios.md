@@ -1,35 +1,36 @@
-### Scenario 1
+### Typical usage scenarios
+#### Scenario 1
 Alice and Bob live in Milan. One afternoon Bob wants to go and meet Alice. Since Bob's car is broken, he decides to take advange of PowerEnJoy car sharing. Then he registers to the system and reserves a car. The reserved car appears in "my reservations" section on the application. He reaches the car, unlocks and ignites it. When he reaches Alice's house, Bob looks for a car park to leave the car. Once he gets out of the car, the system locks it automatically. Bob is happy to discover that, having left the car with less than 50% battery empty, the system has applied a discount on his fee.
 
-### Scenario 2
+#### Scenario 2
 Alice and Bob live in Milan. Bob is very interested in modern art, and asks Alice to go with him to visit an exhibition about Escher. Alice knows that Eve is interested in the exhibition too, and asks her to come with them. The three friends don't want to drive their own car in the center of Milan, so, as Bob is registered to PowerEnJoy car sharing system, they decide to use a shared car of that company. Bob reserves a car in the nearest parking station, and then goes to lunch with Alice and Eve. After lunch, the friends reach the car and drive to the museum. As Bob has brought with him other two people, he is applied a discount on the fee.
 
 ### Scenario 3
 Mallory lives in Milan. Mallory's car is in maintenance, but she is in desperate need of a car because her favourite pop star will meet his fans at the Mediolanum Forum in Assago. She remembers about Bob talking about a very nice car sharing system, so she browses the web and founds PowerEnJoy website. She follows the registration instructions, then accesses the application, searches for the nearest car and reserves it immediately. After that, John calls Mallory to ask her to take part in a match of Mallory's favourite online game. Mallory thinks that she has plenty of time to end the match before meeting her favourite pop star, but the match goes longer and longer. At the end Mallory reaches in a hurry the parking station where the reserved car is located, but she is not able to find any car, as she spent more then one hour since reservation playing that game. Moreover, Mallory is charged of a fee for having reserved and not used a car.
 
-### Scenario 4
+#### Scenario 4
 John invites Mallory to try a match at the nearest _Laser Game_ arena. Since Mallory is registered to PowerEnJoy car sharing system, he proposes to care about reserving a car. 30 minutes before meeting John, Mallory searches for the nearest car and reserves it. Then he goes to the car park, takes up the car and drives first to John's and then to the arena. As the arena is very far from the nearest parking station, the two friends decide to park the car just outside it, though that is not a car park. The system does not stop charging Mallory util the two friends end the game, drive back home and the car is parked again in a safe area.
 
-### Scenario 5
+#### Scenario 5
 Alice wants to go to the fashion outlet to buy the latest dress of her favourite fashion designer. As Alice is very attentive to the environment and only drives electric and shared cars, she is a affectionate user of PowerEnJoy car sharing. Alice opens the application, searches for the nearest car and reserves it. The reserved car appears in the section "my reservations" on the application. When she reaches the supermarket she parks the car in the nearest recharging station and plugs it, as she knows that doing so she will get a discount on last ride.
 
 
-### Scenario 6
+#### Scenario 6
 Mallory lives in Milan. One evening Mallory wants to reach her friends to a new disco that has just opened outside Milan. As usual, one of her friends will care of bring them back as they will be completely drunk, and so she doesn't want to take her car because she would have to leave it at the disco. Mallory decides to take a car from PowerEnJoy car sharing system, and then she drives to the disco. Since the disco is quite far from Mallory's house, when she arrives the car as quite no more batery charge left. When she parks the car, she is charged an additional fee for having left the car far from the nearest recharging station.
 
 
-### Scenario 7
+#### Scenario 7
 Jasper leavs quite far from Milan, and to reach his office he drives to the nearest underground station and then takes the underground train. As there is a PowerEnJoy recharging station just outside the underground station, Jasper choses that company, registers and is able to take a car. When he reaches the station he would like to park in the apposite area, but all plugs are already in use, and so he has to park in usual car parks. The system charges Jasper with an additional fee for not having plugged a quite completely discharged car. 
 
 
-## Scenario 8
+#### Scenario 8
 Professor Talmoto has to take part in an important conference in Florence. He chooses to reach Florence by train. When he is quite near Florence, he opens PowerEnJoy application and searches for a car near the station selecting it basing on left battery charge, in order to have it ready when he gets off the train. He takes the car and drives to the hotel, being pleased by the fact that the car notifies him the current charge on the display. When he reaches the hotel, he parks the car in the nearest parking station, the system locks it and charges the professor with the fee.
 
-## Scenario 9
+#### Scenario 9
 Rose is a very affectionate user of PowerEnJoy car sharing, and she daily use shared cars provided by that company. She is also very inattentive, and never remembers to charge her prepaid card. One day, after having parked her car, she receives a message that tells her it was not possible to complete the payment for her last ride. She knows that she will not be able to reserve and use cars until she pays her last ride, so she runs to the nearest bank to charge her credit card back, then opens her profile on PowerEnJoy's website and pays the ride.
 
-## Scenario 10
+#### Scenario 10
 Mark is an employee of PowerEnJoy. His job includes the responsibility to maintain the list of safe parking areas and recharging areas updated. In order to update the list of those areas, Mark has to connect to the management system with his employee credentials. Then he can open a page with the list of safe parking areas and add, remove or update parking areas. He can also open another page dedicated to recharging stations and update, insert or remove them as well.
 
-## Scenario 11
+#### Scenario 11
 Jack is one of the managers of PowerEnJoy. Jack is in charge of tuning the service in order to best fit user needs. Jack can modify the geographical areas in which users can reserve only one car in order to alter the way users reserve cars, and so the availability of the same cars. To do that, Jack connects to the management system with his company credentials and opens a map which shows how a certain territory is divided in geographical areas, and from here he can modify the boundaries of each area, split an area in two subareas or merge several areas into a single area. When Jack applies the changes, new reservations will be affected, but not old ones.
