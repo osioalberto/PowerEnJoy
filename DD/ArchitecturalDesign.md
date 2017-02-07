@@ -2,9 +2,9 @@
 
 ## Overview
 
-![Alt Global Component Diagram](http://localhost/powerenjoy/DD/images/compdiag.png "Global Component Diagram")
+![Alt Global Component Diagram](http://localhost/powerenjoy/DD/images/compdiag.svg "Global Component Diagram")
 
-The picture shows a representation of the proposed logical architecture. The system is composed of five main components:
+The picture shows a representation of the proposed logical architecture. Yellow components represent external components the system depends on, according to the RASD. The system to be developed is composed of five main components:
 
 * A _DataBase Management System (DBMS)_ used to access data related to cars, reservations, payments, geographical regions and safe areas in a reliable and efficient way
 * A _Server_ component that implements the application logic both for user-related and employee related features
@@ -32,10 +32,10 @@ The picture shows the logical architecture for the _Server_ component. The archi
 * __Monitoring controller__ represents the broker of the event-driven architectural style used to collect data from cars
 * __Car controller__ controls the state of each car and to trigger transitions between car states according to the state chart defined in the Requirements Analysis and Specification Document.
 * __Bill controller__ handles tasks related to the storage of pending bills and to the interaction with the external system for payments processing
-* __User controller__ controls the state of each user according to the state chart defined in the RASD. In particular, it provides all the functionalities needed for authenticating users and employees.
+* __User controller__ controls the state of each user according to the state chart defined in the RASD. In particular, it provides all the functionalities needed for authenticating users and employees. Moreover, it cares of user registration and in particular of driving licence validation, interacting with the proper external system.
 * __Geographical areas controller__ provides an API that can be used to retrive and manipulate data related to geographical areas boundaries
 * __Safe areas controller__ provides an API with methods used to retrive and manipulate data about safe areas (both safe parking areas and recharging stations)
-* __Reservations controller__ provides the functionalites needed for creating and canceling a reservation and for "using" a reservation to actually take the reserved car
+* __Reservations controller__ provides the functionalites needed for creating and canceling a reservation and for "using" a reservation to actually take the reserved car (this implies the interaction with the external system for address translation, in order to geocode addresses)
 * __Ride controller__ controls each ride in progress in the given instant of time, monitors the state of the car during the ride (in particular, the number of passengers and the battery level) and computes the bill at the end of the ride, applying proper discounts or raises on the calculated fee.
 
 ##Deployment view
@@ -81,7 +81,7 @@ The token mentioned in the /users/{id}/login must be have the following features
 * It must provide the user type (employee, user) without quering the database
 * It must be secure and thus it cannot be easily changed or guessed
 
-***INCLUDE***
+@INCLUDE RESTful_generated.md @
 
 ###Messages
 Messages are exchanged using a protocol based on TCP TLS.
@@ -99,6 +99,10 @@ or every 15 minutes if the batteryLevel changes by less than 5% and nothing else
 
 ####Unlock####
 This message is sent by management system to the car system in order to unlock the car.
+This message has no parameters
+
+####Lock####
+This message is sent by management system to the car system in order to lock the car.
 This message has no parameters
 
 ##Selected architectural styles and patterns
