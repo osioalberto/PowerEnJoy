@@ -1,0 +1,3329 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PP</title>
+                    <style>
+                /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
+
+/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Correct the line height in all browsers.
+ * 3. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
+ */
+
+/* Document
+   ========================================================================== */
+
+html {
+  font-family: sans-serif; /* 1 */
+  line-height: 1.15; /* 2 */
+  -ms-text-size-adjust: 100%; /* 3 */
+  -webkit-text-size-adjust: 100%; /* 3 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in IE.
+ */
+
+figcaption,
+figure,
+main { /* 1 */
+  display: block;
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+
+a {
+  background-color: transparent; /* 1 */
+  -webkit-text-decoration-skip: objects; /* 2 */
+}
+
+/**
+ * Remove the outline on focused links when they are also active or hovered
+ * in all browsers (opinionated).
+ */
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+/**
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+ */
+
+b,
+strong {
+  font-weight: inherit;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font style in Android 4.3-.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+audio,
+video {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+
+img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: sans-serif; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+html [type="button"], /* 1 */
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Change the border, margin, and padding in all browsers (opinionated).
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * 1. Add the correct display in IE 9-.
+ * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ */
+
+details, /* 1 */
+menu {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Scripting
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+canvas {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in IE.
+ */
+
+template {
+  display: none;
+}
+
+/* Hidden
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10-.
+ */
+
+[hidden] {
+  display: none;
+}            </style>
+                    <style>
+                                /*
+	Reserved class starts always with a book- prefix
+	IT IS FORBIDDEN TO have selectors that matches a span element with tagSelector or with a pseudo-class and alter:
+		- display
+		- padding-*
+		- margin-*
+		- font-*
+		- overflow-*
+
+	In particular:
+		- .book-no-index: 			it tells that an element of heading do not want a section number prefixed
+		- .book-no-toc:				it tells that an element of heading do not want a section number nor be present in the TOC
+		- .book-toc:				it represents the TOC element
+		- .book-toc-title:			it is the text written in the toc after the section number and before leaders or page number
+		- .book-toc-index:			it is the section number for a single toc entry
+		- .book-toc-page:			it is the page number for a single toc entry
+		- .book-leaders:			it is the leaders (series of dots)
+		- .book-break-always:		it is an element for which a page break is always inserted after it
+		- .book-break-avoid:		it is an element for which a page break cannot happen inside
+		- .book-page				it is a single page of a book
+		- .book-splitted-copy		it is a part of an element that was cloned
+		- .book-splitted-reference 	it is a part of an element that was cloned, this is the starting of this element
+*/
+
+
+body {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11pt;
+}
+p {
+	text-indent: -1em;
+	padding-left: 1em;
+}
+p.book-splitted-copy {
+	text-indent: 0px;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+figure {
+	page-break-inside: avoid;
+}
+pre table {
+	page-break-inside: auto;
+}
+.book-leaders {
+	font-family: monospace;
+	float: right;
+	opacity:0.6;
+}
+h1:not(.book-no-index), h2:not(.book-no-index), h3:not(.book-no-index), h4:not(.book-no-index), h5:not(.book-no-index), h6:not(.book-no-index) {
+	page-break-after: avoid;
+	page-break-inside: avoid;
+}
+h1:not(.book-no-index) {
+	page-break-before: always;
+}
+li.book-splitted-copy {
+	list-style-type: none;
+}
+.book-toc {
+	page-break-after: always;
+	page-break-inside: auto;
+}
+.book-toc > table {
+	page-break-inside: : auto;
+	width: 100%;
+	border-collapse: collapse;
+}
+.book-toc td {
+	padding: 0px;
+}
+.book-toc .book-toc-title {
+	white-space: nowrap;
+}
+.book-toc td>a{
+	display:block;
+}
+.book-toc-index {
+	padding-right:0.3cm;
+}
+.book-toc .book-toc-title{
+	padding-right: 0.3cm;
+}
+.book-toc .book-toc-page{
+	padding-left: 0.3cm;
+}
+.book-break-always {
+	page-break-after: always;
+}
+.book-break-avoid {
+	page-break-inside: avoid;
+}
+.book-page {
+	page-break-inside: avoid;
+	page-break-after: always;
+	overflow: hidden;
+	position: relative;
+}
+.book-page>.book-page-heading {
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+}
+.book-page>.book-page-footer {
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	right:0px;
+}
+img {
+	max-width: 100%;
+}            </style>
+                <style>
+            table {
+                page-break-inside: avoid;
+                border-collapse: collapse;
+                margin-bottom: 0.75cm;
+            }
+            table tr:nth-child(odd)>td, table tr:nth-child(odd)>th {
+                border: 1px solid #E0E0E0;
+                padding: 2px 8px;
+            }
+            table tr:nth-child(even)>td, table tr:nth-child(even)>th {
+                border: 1px solid #E0E0E0;
+                background-color: #F5F5F5;
+                padding: 2px 8px;
+            }
+            div.book-toc table {
+                page-break-inside: initial;
+                border-collapse: initial;
+                margin-bottom: initial;
+            }
+            div.book-toc table tr > td, div.book-toc table tr > th {
+                border: none;
+                padding: none;
+                text-align: left;
+                background-color: white;
+            }
+        </style>
+                    <script>
+                var pageinfo = {
+	size: 'A4',
+	margin: {
+		left: '0.19685in',
+		right: '0.19685in',
+		top: '0.393701in',
+		bottom: '0.393701in'
+	},
+	footer: function(page, cumulativeIndex, totalPages){
+		return cumulativeIndex+1;
+	}
+};
+function convertToPixel(s){
+	var m = s.match(/^([0-9]*(?:\.[0-9]*)?)(px|cm|mm|in)$/);
+	if(!m){
+		return null;
+	}
+	var v = parseFloat(m[1]);
+	switch(m[2]){
+		case 'px':
+			return v;
+		case 'cm':
+			v *= 10;
+		case 'mm':
+			v *= 0.0393700787;
+		case 'in':
+			return v*96;
+
+	}
+}
+function computePageInfo(pi){
+	var sizes = {
+		'A4': {
+			width: '8.26in',
+			height: '11.69in'
+		}
+	};
+	var pageinfo = {
+		size: {
+			width: 0,
+			height: 0,
+		},
+		margin: {
+			left:0,
+			right:0,
+			top:0,
+			bottom:0
+		},
+		footer: function(page, cumulativeIndex, totalPages){},
+		heading: function(page, cumulativeIndex, totalPages){}
+	};
+	if(typeof(pi.size) === 'string'){
+		var s = sizes[pi.size];
+		pageinfo.size.width = convertToPixel(s.width);
+		pageinfo.size.height = convertToPixel(s.height);
+	}
+	else {
+		pageinfo.size.width = convertToPixel(pi.size.width);
+		pageinfo.size.height = convertToPixel(pi.size.height);
+	}
+	if(pi.hasOwnProperty('margin')){
+		if(typeof(pi.margin) === 'string'){
+			var s = convertToPixel(pi.margin);
+			pageinfo.margin.left = s;
+			pageinfo.margin.right = s;
+			pageinfo.margin.top = s;
+			pageinfo.margin.bottom = s;
+		}
+		else {
+			pageinfo.margin.left = convertToPixel(pi.margin.left);
+			pageinfo.margin.right = convertToPixel(pi.margin.right);
+			pageinfo.margin.top = convertToPixel(pi.margin.top);
+			pageinfo.margin.bottom = convertToPixel(pi.margin.bottom);
+		}
+	}
+	if(pi.hasOwnProperty('footer')){
+		pageinfo.footer = pi.footer;
+	}
+	if(pi.hasOwnProperty('heading')){
+		pageinfo.heading = pi.heading;
+	}
+	//prepare page info
+	pageinfo.size.width = pageinfo.size.width - pageinfo.margin.left - pageinfo.margin.right;
+	pageinfo.size.height = pageinfo.size.height - pageinfo.margin.top - pageinfo.margin.bottom;
+
+	return pageinfo;
+}
+
+function layoutAll(){
+	pageinfo = computePageInfo(pageinfo);
+	document.body.style.width = pageinfo.size.width + 'px';
+
+	generateToc();
+	while(true){
+		var pages = document.createElement('div');
+		pages.style.position = 'absolute';//no layout interfering
+
+		fixMediaSize();
+
+		var mapping;
+		var reference;
+		{
+			let temp = copyContent();
+			mapping = temp.mapping;
+			reference = temp.reference;
+		}
+
+		var stack = new Stack();
+
+		normalizeDocument();
+		preNormalization();
+
+		stack.pushAll(Array.from(document.body.childNodes).reverse());
+		document.body.appendChild(pages);//used only to do some measurements;
+
+		var previousPage = null;
+		while(!stack.isEmpty()){
+			previousPage = layoutPage(pages, previousPage, stack);
+		}
+
+		setupPages(pages);
+		while(pages.firstChild){
+			document.body.appendChild(pages.firstChild);
+		}
+
+		postNormalization(stack);
+		document.body.removeChild(pages);
+		//mappings can be updated
+		for(let orig of Array.from(mapping.keys())){
+			let mapTo = mapping.get(orig);
+			mapping.set(orig, stack.getSplittedElement(mapTo)[0]);
+		}
+
+		//pages can be updated
+		if(updatePageNumbers(reference, mapping)){
+			//an update happened, this means pages must be rebuilt
+			while(document.body.firstChild){
+				document.body.firstChild.remove();
+			}
+			document.body.appendChild(reference);
+		}
+		else {
+			break;
+		}
+	}
+	setLeaders();
+	setHeadingAndFooter();
+	setPagesHeight();
+}
+function setHeadingAndFooter(){
+	var pages = document.body.children;
+	for(var i=0;i<pages.length; ++i){
+		var t = pageinfo.heading(pages[i], i, pages.length);
+		if(t!==undefined && t!==null){
+			var h = document.createElement('div');
+			h.classList.add('book-page-heading');
+			if(!(t instanceof Node)){
+				t = document.createTextNode(t + '');
+			}
+			h.appendChild(t);
+			pages[i].insertBefore(h, pages[i].firstChild);
+		}
+		t = pageinfo.footer(pages[i], i, pages.length);
+		if(t!==undefined && t!==null){
+			var h = document.createElement('div');
+			h.classList.add('book-page-footer');
+			if(!(t instanceof Node)){
+				t = document.createTextNode(t + '');
+			}
+			h.appendChild(t);
+			pages[i].appendChild(h);
+		}
+	}
+}
+function setPagesHeight(){
+	var pages = document.body.children;
+	for(var i=0;i<pages.length; ++i){
+		pages[i].style.setProperty('height', pageinfo.size.height+'px','important');
+	}
+}
+function copyContent(){
+	var docCopy = document.createDocumentFragment();
+	var mapping = new Map();
+
+	var children = Array.from(document.body.childNodes);
+	for(var i=0;i<children.length;++i){
+		var copy = children[i].cloneNode(true);
+		mapping.set(children[i], copy);
+
+		if(copy.nodeType === 1){
+			var allChild = children[i].getElementsByTagName('*');
+			var allCopyChild = copy.getElementsByTagName('*');
+			for(var j=0;j<allChild.length;++j){
+				mapping.set(allChild[j], allCopyChild[j]);
+			}
+		}
+
+		docCopy.appendChild(children[i]);
+		document.body.appendChild(copy);
+	}
+	return {
+		mapping: mapping,
+		reference: docCopy
+	};
+}
+function normalizeDocument(){
+	document.normalize();
+	//now get any textNode from the document
+	var nodes = Array.from(document.body.childNodes);
+	while(nodes.length){
+		var node = nodes.pop();
+		if(node.nodeType === 3){
+			var parent = node.parentNode;
+			var wrapper = document.createElement('span');
+			parent.insertBefore(wrapper, node);
+			wrapper.appendChild(node);
+			var rect = wrapper.getBoundingClientRect();
+			if(rect.width !== 0 || rect.height !== 0){
+				parent.insertBefore(node, wrapper);
+			}
+			parent.removeChild(wrapper);
+		}
+		else {
+			var nnodes = Array.from(node.childNodes);
+			for(let x of nnodes){
+				nodes.push(x);
+			}
+		}
+	}
+}
+function layoutPage(pages, previousPage, stack){
+	var page = createPage(pages, stack);
+	removePageBreakAlways(page, stack);
+	removePageBreakAlways(page, stack);
+
+	while(true){
+		switch(removePageBreakAvoid(previousPage, page, stack)){
+			case 0:
+				//TODO is this really necessary?
+				if(!page.firstChild){
+					pages.removeChild(page);
+				}
+				return;
+			case 1://need to redo this step
+			break;
+			case -1:
+				page = createPage(pages, stack);
+				removePageBreakAlways(page, stack);
+				removePageBreakAlways(page, stack);
+				break;
+		}
+	}
+	return page;
+}
+function Stack(){
+	var self = this;
+	var splitContext = new Map();
+	var splitMain = new Map();
+	var mergedNodes = new Set();
+	var nodes = [];
+	var allNodes = [nodes];
+	var fragment = document.createDocumentFragment();
+
+	function addSplit(prev, next){
+		var ctxKey = splitMain.get(next);
+		if(!ctxKey){
+			ctxKey = next;
+			splitMain.set(ctxKey, next);
+			splitContext.set(ctxKey, [next]);
+		}
+		splitMain.set(prev, ctxKey);
+		var arr = splitContext.get(ctxKey);
+		arr.splice(arr.indexOf(next), 0, prev);
+	}
+
+	this.splitTextNode = function(textNode, originalParent){
+		//first wrap that node into a span, so that it can be measured
+		var wrapper = document.createElement('span');
+		var parent = textNode.parentNode;
+		wrapper.appendChild(textNode);
+		parent.appendChild(wrapper);
+		var expectedRect = wrapper.getClientRects()[0];
+		var allText = textNode.textContent;
+		var index = 0;
+		wrapper.removeChild(textNode);
+		while(true){
+			++index;
+			wrapper.textContent = allText.substring(0, index);
+			var newRect = wrapper.getClientRects()[0];
+			//0.01 is an epsilon consant, changing it makes it more precise...
+			if(Math.abs(newRect.width - expectedRect.width)<0.01){
+				break;
+			}
+		}
+		//now we know the point to split the text
+		var otherText = document.createTextNode(wrapper.textContent);
+		parent.insertBefore(otherText, wrapper);
+		parent.removeChild(wrapper);
+		//replace node with the new value
+		textNode.textContent = allText.substring(index);
+
+		originalParent.insertBefore(textNode, originalParent.firstChild);
+
+		addSplit(otherText, textNode);
+		return otherText;
+	};
+
+	this.removeClone = function(node){
+		var main = splitMain.get(node);
+		if(main && main !== node){
+			var arr = splitContext.get(main);
+			if(node.nodeType === 3){
+				//text node need a special treatment, textContent must be joint
+				var index = arr.indexOf(node);
+				if(index !== arr.length - 1){
+					arr[index + 1].textContent = node.textContent + arr[index + 1].textContent;
+				}
+				else if(index !== 0) {
+					arr[index - 1].textContent += node.textContent;
+				}
+			}
+			if(arr.length === 2){
+				if(main.nodeType === 1) main.classList.remove('book-splitted-copy','book-splitted-reference');
+				splitContext.delete(main);
+				splitMain.delete(main);
+			}
+			else {
+				arr.splice(arr.indexOf(node), 1);
+				if(main.nodeType === 1){
+					arr[0].classList.add('book-splitted-reference');
+					arr[0].classList.remove('book-splitted-copy');
+				}
+			}
+			splitMain.delete(node);
+		}
+	};
+	this.cloneNode = function(node){
+		var copy = node.cloneNode(false);
+		if(copy.tagName.toLowerCase() === 'table'){
+			var els = node.children;
+			for(var i=0;i<els.length;++i){
+				if(els[i].tagName.toLowerCase() === 'colgroup'){
+					copy.appendChild(els[i].cloneNode(true));
+				}
+			}
+		}
+		if(copy.hasAttribute('id')){
+			copy.removeAttribute('id');
+		}
+		if(!node.classList.contains('book-splitted-copy')){
+			node.classList.remove('book-splitted-reference');
+			node.classList.add('book-splitted-copy');
+			copy.classList.add('book-splitted-reference');
+		}
+		addSplit(copy, node);
+		return copy;
+	};
+	this.mergeAll = function(){
+		//merge subrutine, it will merge node with the same parent node recursively, until a fixed point is meet
+		var changed = true;
+		while(changed){
+			changed = false;
+			var cleanable = [];
+			for(let entry of splitContext.entries()){
+				var node = entry[0];
+				var pieces = entry[1];
+				var prevParent = (pieces[0]||{parentNode:null}).parentNode;
+				var isTable = node.nodeType === 1 && node.tagName.toLowerCase() === 'table';
+				for(var i=1;i<pieces.length; ++i){
+					//if can be merged
+					if(prevParent === pieces[i].parentNode){
+						changed = true;
+						if(pieces[i - 1] !== node){
+							mergedNodes.add(pieces[i-1]);
+							if(node.nodeType === 3){
+								pieces[i].textContent = pieces[i-1].textContent + pieces[i].textContent;
+							}
+							else {
+								//transfer all childnodes of prev to this
+								var refNode = pieces[i].firstChild;
+								var iterNode = refNode;
+								while(iterNode) {
+									if(iterNode.nodeType === 1 && iterNode.tagName.toLowerCase() === 'colgroup'){
+										refNode = iterNode.nextSibling;
+									}
+									iterNode = iterNode.nextSibling;
+								}
+								while(pieces[i - 1].lastChild){
+									var c = pieces[i-1].lastChild;
+									if(isTable && c.nodeType === 1 && c.tagName.toLowerCase() === 'colgroup'){
+										pieces[i-1].removeChild(c);
+									}
+									else {
+										pieces[i].insertBefore(c, refNode);
+										refNode = c;
+									}
+								}
+								if(!pieces[i - 1].classList.contains('book-splitted-copy')){
+									pieces[i].classList.remove('book-splitted-copy');
+									pieces[i].classList.add('book-splitted-reference');
+								}
+							}
+							//prev is not used anymore
+							splitMain.delete(pieces[i - 1]);
+							pieces[i - 1].remove();
+							pieces.splice(i - 1, 1);
+							--i;
+						}
+						else {
+							mergedNodes.add(pieces[i]);
+							if(node.nodeType === 3){
+								pieces[i - 1].textContent = pieces[i - 1].textContent + pieces[i].textContent;
+							}
+							else {
+								//transfer all childnodes of this to prev
+								while(pieces[i].firstChild){
+									var c = pieces[i].firstChild;
+									if(isTable && c.nodeType === 1 && c.tagName.toLowerCase() === 'colgroup'){
+										pieces[i].removeChild(c);
+									}
+									else {
+										pieces[i - 1].appendChild(c);
+									}
+								}
+								if(!pieces[i].classList.contains('book-splitted-copy')){
+									pieces[i - 1].classList.remove('book-splitted-copy');
+									pieces[i - 1].classList.add('book-splitted-reference');
+								}
+							}
+							//next is not used anymore!
+							splitMain.delete(pieces[i]);
+							pieces[i].remove();
+							pieces.splice(i, 1);
+							--i;
+						}
+					}
+					else {
+						prevParent = pieces[i].parentNode;
+					}
+				}
+
+				if(pieces.length === 1){
+					cleanable.push(node);
+				}
+			}
+			for(let node of cleanable){
+				if(node.nodeType === 1){
+					node.classList.remove('book-splitted-copy', 'book-splitted-reference');
+				}
+				splitMain.delete(node);
+				splitContext.delete(node);
+			}
+		}
+	};
+	this.push = function(value){
+		nodes.push(value);
+		if(allNodes.length===1) fragment.appendChild(value);
+		return self;
+	};
+	this.pop = function(){
+		var result;
+		do {
+			result = nodes.pop();
+		} while(result && mergedNodes.has(result));
+		return result;
+	};
+	this.peek = function(){
+		var item = self.pop();
+		if(item){
+			self.push(item);
+		}
+		return item;
+	}
+	this.isEmpty = function(){
+		return !self.peek();
+	}
+	this.clear = function(){
+		nodes.splice(0, nodes.length);
+		return self;
+	}
+	this.pushAll = function(x){
+		for(let i of x){
+			nodes.push(i);
+			if(allNodes.length===1) fragment.appendChild(i);
+		}
+		return self;
+	}
+	this.newLevel = function(){
+		var x = [];
+		allNodes.push(x);
+		nodes = x;
+		return self;
+	}
+	this.rebase = function(){
+		var x = allNodes[0];
+		allNodes = [x];
+		nodes = x;
+		return self;
+	}
+	this.getSplittedElements = function(){
+		var result = [];
+		for(let x of splitContext.values()){
+			if(x.length > 1){
+				result.push(x);
+			}
+		}
+		return result;
+	}
+	this.getSplittedElement = function(x){
+		var main = splitMain.get(x);
+		if(!main){
+			return [x];
+		}
+		return splitContext.get(main);
+	}
+}
+function fixMediaSize(){
+	var els = document.querySelectorAll('img, audio, video');
+	for(var i=0;i<els.length;++i){
+		els[i].style.setProperty('height', els[i].offsetHeight+'px', 'important');
+		els[i].style.setProperty('width', els[i].offsetWidth+'px', 'important');
+	}
+}
+function createPage(pages, stack){
+	var page = document.createElement('div');
+	page.style.width = pageinfo.size.width+'px';
+	page.classList.add('book-page');
+	pages.appendChild(page);
+
+	var insertionParent = page;
+
+	while(!stack.isEmpty()){
+		var node = stack.peek();
+		var parent = node.parentNode;
+		insertionParent.appendChild(node);
+		if(isTooLarge(page)){
+			if(canBeSplitted(node)){
+				var copy;
+				if(node.nodeType === 3){
+					copy = stack.splitTextNode(node, parent);
+				}
+				else {
+					copy = stack.cloneNode(node);
+					insertionParent.removeChild(node);
+					parent.insertBefore(node, parent.firstChild);
+					insertionParent.appendChild(copy);
+				}
+				if(isTooLarge(page)){
+					insertionParent.removeChild(copy);
+					stack.removeClone(copy);
+					//remove empty hierarchy of cloned nodes
+					while(!insertionParent.firstChild && insertionParent !== page){
+						var oldParent = insertionParent;
+						insertionParent = insertionParent.parentNode;
+						insertionParent.removeChild(oldParent);
+						stack.removeClone(oldParent);
+					}
+					stack.rebase();
+					return page;
+				}
+				stack.newLevel();
+				stack.pushAll(Array.from(node.childNodes).reverse());
+				insertionParent = copy;
+			}
+			else {
+				if(node.tagName.toLowerCase() === 'img'){
+					//image can be resized if needed
+					var maxSpace = pageinfo.size.height - (page.getBoundingClientRect().height - node.getBoundingClientRect().height);
+					if(maxSpace > 0.75*pageinfo.size.height){
+						node.style.setProperty('height', (maxSpace-5)+'px', 'important');
+						stack.pop();
+						stack.rebase();
+						while(true){
+							if(stack.peek()){
+								stack.pop();
+							}
+							if(!stack.peek()){ stack.rebase(); }
+							else { break; }
+						}
+						return page;
+					}
+				}
+				//must be inserted in the next page...
+				//unless it is a single element
+				if(isSingleElement(page, insertionParent)){
+					stack.pop();
+					stack.rebase();
+					while(true){
+						if(stack.peek()){
+							stack.pop();
+						}
+						if(!stack.peek()){ stack.rebase(); }
+						else { break; }
+					}
+					return page;
+				}
+				else {
+					insertionParent.removeChild(node);
+					parent.insertBefore(node, parent.firstChild);
+					while(insertionParent !== page && insertionParent.childNodes.length === 0){
+						var temp = insertionParent.parentNode;
+						temp.removeChild(insertionParent);
+						stack.removeClone(insertionParent);
+						insertionParent = temp;
+					}
+					stack.rebase();
+					return page;
+				}
+			}
+		}
+		else {
+			stack.pop();
+		}
+	}
+	stack.rebase();
+	return page;
+}
+
+function removePageBreakAlways(page, stack){
+	var beforeNode = null;
+	var afterNode = null;
+	var others = Array.from(page.childNodes).reverse();
+	while(others.length){
+		var current = others.pop();
+		var pageBreakType = getPageBreakType(current);
+		switch(pageBreakType){
+			case 'before':
+				if(!beforeNode) { beforeNode = current; }
+				others = [ ];
+				break;
+			case 'after':
+				afterNode = current;
+				others = [ ];
+				//intended fall to default
+			default:
+				var cnode = current.childNodes;
+				for(var i = cnode.length - 1; i >= 0; --i){
+					others.push(cnode[i]);
+				}
+				break;
+		}
+	}
+	var current = beforeNode || afterNode;
+	if(!current){
+		return;
+	}
+	//There is a page-break!
+	var pageBreakType = beforeNode? 'before': 'after';
+	//We get all the parent chain until page is found
+	var parentList = [ current, current.parentNode ];
+	var isSingle = true;
+	var hasPrevious = current.previousSibling;
+	var hasNext = current.nextSibling;
+	while(parentList[parentList.length - 1]!==page){
+		if(!hasPrevious){
+			hasPrevious = parentList[parentList.length - 1].previousSibling;
+		}
+		if(!hasNext){
+			hasNext = parentList[parentList.length - 1].nextSibling;
+		}
+		if(parentList[parentList.length - 1].childNodes.length>1){
+			isSingle = false;
+		}
+		parentList.push(parentList[parentList.length - 1].parentNode);
+	}
+	parentList.pop();//remove page
+
+	if((pageBreakType === 'before' && !hasPrevious)||(pageBreakType==='after' && !hasNext)){
+		current.style.setProperty('page-break-'+pageBreakType, 'auto', 'important');
+		return;
+	}
+
+	//We need to remove the next elements because they are not part of this page
+	var node = parentList[parentList.length - 1];
+	while(page.lastChild !== node){
+		let t = page.lastChild;
+		page.removeChild(t);
+		stack.push(t);
+	}
+	if(isSingle && pageBreakType === 'before'){
+		page.removeChild(node);
+		stack.push(node);
+	}
+
+	if(!isSingle) {
+		//Now we must clone the elements
+		var cloned = [];
+		for(var i=1; i<parentList.length; ++i){
+			cloned.push(stack.cloneNode(parentList[i]));
+			while(parentList[i].firstChild !== parentList[i - 1]){
+					cloned[i - 1].appendChild(parentList[i].firstChild);
+			}
+			if(i===1 && pageBreakType !== 'before'){
+				cloned[i - 1].appendChild(current);
+			}
+			if(i > 1){
+				cloned[i - 1].appendChild(cloned[i - 2]);
+			}
+		}
+		//now add the cloned and remove the originals
+		page.insertBefore(cloned[cloned.length - 1], parentList[parentList.length - 1]);
+		stack.push(parentList[parentList.length - 1]);
+	}
+	current.style.setProperty('page-break-'+pageBreakType, 'auto', 'important');
+	stack.mergeAll();
+}
+
+function removePageBreakAvoid(previousPage, page, stack){
+	var beforeNode = null;
+	var afterNode = null;
+	var others = Array.from(page.childNodes).reverse();
+	while(others.length){
+		var current = others.pop();
+		var pageBreakType = getPageNoBreakType(current);
+		switch(pageBreakType){
+			case 'before':
+				if(!beforeNode) { beforeNode = current; }
+				break;
+			case 'after':
+				afterNode = current;
+				break;
+			default:
+				var cnode = current.childNodes;
+				for(var i = cnode.length - 1; i >= 0; --i){
+					others.push(cnode[i]);
+				}
+				break;
+		}
+	}
+	var current = beforeNode || afterNode;
+	if(!current){
+		return 0;
+	}
+	var pageBreakType = beforeNode ? 'before': 'after';
+	//after avoid means that the element after this needs to exist, unless a forced break has occurred...
+	//before avoid means that the element before this needs to exist, unless a forced break has occurred...
+
+	//if there is no page before this one, 'before avoid' is meet with no extra check	
+	if(pageBreakType === 'before' && !previousPage){
+		current.style.setProperty('page-break-before', 'auto', 'important');
+		return 1;
+	}
+	var needsRemoval = false;
+	if(pageBreakType === 'after'){
+		//check for next elements, if no one is found, then remove this element from the page
+		var iter = current;
+		while(!iter.nextSibling && iter !== page){
+			iter = iter.parentNode;
+		}
+		needsRemoval = iter === page;
+	}
+	if(pageBreakType === 'before'){
+		//check for prev elements, if no one is found, then remove this element from the page
+		var iter = current;
+		while(!iter.previousSibling && iter !== page){
+			iter = iter.parentNode;
+		}
+		needsRemoval = iter === page;
+	}
+	current.style.setProperty('page-break-'+pageBreakType, 'auto', 'important');
+	if(!needsRemoval) {
+		return 1;
+	}
+	if(pageBreakType === 'after'){
+		current.style.setProperty('page-break-before', 'always', 'important');
+		removePageBreakAlways(page, stack);
+		return 1;
+	}
+	else if(pageBreakType === 'before'){
+		//previous element must page-break-before forced
+		var lastElement = previousPage;
+		while(lastElement.lastElementChild){
+			lastElement = lastElement.lastElementChild;
+		}
+		lastElement.style.setProperty('page-break-before', 'always', 'important');
+		current.style.setProperty('page-break-before', 'auto', 'important');
+
+		while(page.lastChild){
+			stack.push(page.lastChild);
+		}
+		//page is discarted
+		page.parentNode.removeChild(page);
+		//merge stack and rebuild previous page
+		stack.mergeAll();
+		removePageBreakAlways(previousPage, stack);
+		return -1;
+	}
+}
+
+function setupPages(pages){
+	var c = pages.children;
+	for(var i=0;i<c.length;++i){
+		c[i].setAttribute('data-book-page-number', i+1);
+		c[i].style.paddingLeft = pageinfo.margin.left+'px';
+		c[i].style.paddingRight = pageinfo.margin.right+'px';
+		c[i].style.paddingTop = pageinfo.margin.top+'px';
+		c[i].style.paddingBottom = pageinfo.margin.bottom+'px';
+	}
+}
+
+function getPageBreakType(node){
+	if(node.nodeType !== 1){ return null; }
+	var style = document.defaultView.getComputedStyle(node, null);
+	if(style.pageBreakBefore === 'always'){ return 'before'; }
+	if(style.pageBreakAfter === 'always'){ return 'after'; }
+	return null;
+}
+function getPageNoBreakType(node){
+	if(node.nodeType !== 1){ return null; }
+	var style = document.defaultView.getComputedStyle(node, null);
+	if(style.pageBreakBefore === 'avoid'){ return 'before'; }
+	if(style.pageBreakAfter === 'avoid'){ return 'after'; }
+	return null;
+}
+function isSingleElement(page, currentNode){
+	while(currentNode !== page){
+		if(currentNode.childNodes.length > 1){
+			return false;
+		}
+		currentNode = currentNode.parentNode;
+	}
+	return currentNode.childNodes.length <= 1;
+}
+function canBeSplitted(node){
+	if(node.nodeType !== 1){
+		return true;
+	}
+	var name = node.tagName.toLowerCase();
+	//table rows, cells cannot be splitted
+	if(name === 'tr' || name === 'td' || name === 'th') {
+		return false;
+	}
+	//multimedia element cannot be splitted
+	if(name === 'img' || name === 'audio' || name === 'video' || name === 'embed' || name === 'object' || name === 'canvas' || name === 'area'){
+		return false;
+	}
+	//frames cannot be split
+	if(name === 'frame' || name === 'iframe'){
+		return false;
+	}
+	//form inputs cannot be split
+	if(name === 'input' || name === 'select' || name === 'progress' || name === 'button'){
+		return false;
+	}
+	if(name === 'br' || name === 'hr'){
+		return false;
+	}
+	//cannot split a block with page-break-inside: avoid
+	return document.defaultView.getComputedStyle(node, null).pageBreakInside !== 'avoid';
+}
+function preNormalization(){
+	var nodes = Array.from(document.getElementsByTagName('*'));
+	var groups = new Map();
+	for(let node of nodes){
+		var name = node.tagName.toLowerCase();
+		var group = groups.get(name);
+		if(!group){
+			group = [];
+			groups.set(name, group);
+		}
+		group.push([node]);
+	}
+	for(let normalTuple of normalizations){
+		var normalizer = normalTuple[normalTuple.length - 1];
+		for(var i=0;i<normalTuple.length - 1; ++i){
+			var group = groups.get(normalTuple[0]);
+			if(group){
+				for(let tuple of group){
+					normalizer(tuple, true);
+				}
+			}
+		}
+	}
+}
+function postNormalization(stack){
+	var groups = new Map();
+	for(let tuple of stack.getSplittedElements()){
+		if(tuple[0].nodeType !== 1){
+			continue;
+		}
+		var name = tuple[0].tagName.toLowerCase();
+		var group = groups.get(name);
+		if(!group){
+			group = [];
+			groups.set(name, group);
+		}
+		group.push(tuple);
+	}
+	for(let normalTuple of normalizations){
+		var normalizer = normalTuple[normalTuple.length - 1];
+		for(var i=0;i<normalTuple.length - 1; ++i){
+			var group = groups.get(normalTuple[i]);
+			if(group){
+				for(let tuple of group){
+					normalizer(tuple, false);
+				}
+			}
+		}
+	}
+}
+var normalizations = [
+	['ul', 'ol', function(tuple, isPrenormalization){
+		if(isPrenormalization){
+			return;
+		}
+		var items = [];
+		var main = tuple[0];
+
+		var value = main.hasAttribute('start') ? (main.getAttribute('start')|0) : 1;
+		var increment = main.hasAttribute('reversed') ? -1 : 1;
+
+		for(var i=0;i<tuple.length;++i){
+			var child = tuple[i].children;
+			for(var j=0;j<child.length;++j){
+				if(!child[j].classList.contains('book-splitted-copy')){
+					items.push(child[j]);
+				}
+			}
+			tuple[i].removeAttribute('start');
+			tuple[i].removeAttribute('reversed');
+		}
+debugger;
+		//items contains all the li elements unique, so that number can be assigned easily
+		for(var i=0;i<items.length;++i){
+			if(items[i].hasAttribute('value')){
+				value = items[i].getAttribute('value')|0;
+			}
+			else {
+				items[i].setAttribute('value', value);
+			}
+			value += increment;
+		}
+	}],
+	['table', function(tuple, isPrenormalization){
+		if(!isPrenormalization){
+			return;
+		}
+		//tuple is an array of 1 element
+		//compute the columns width, so that we do normalization without redoing page-creation
+		var items = [];
+		var child = tuple[0].children;
+		var originalGroup = null;
+		for(var i=0;i<child.length;++i){
+			switch(child[i].tagName.toLowerCase()){
+				case 'tr':
+					items.push(child[i]);
+					break;
+				case 'thead':
+				case 'tbody':
+				case 'tfoot':
+					var child2 = child[i].children;
+					for(var j=0;j<child2.length;++j){
+						if(child2[j].tagName.toLowerCase() === 'tr'){
+							items.push(child2[j]);
+						}
+					}
+					break;
+				case 'colgroup':
+					originalGroup = child[i];
+					break;
+			}
+		}
+		//now we have all the rows we need
+		//and we can compute the columns width
+		var columnCount = 0;
+		for(var i=0;i<items.length; ++i){
+			var cells = items[i].children;
+			var tempCount = 0;
+			for(var j=0;j<cells.length;++j){
+				var cell = cells[j];
+				if(cell.hasAttribute('colspan')){
+					tempCount += cell.getAttribute('colspan')|0;
+				}
+				else {
+					++tempCount;
+				}
+			}
+			if(tempCount>columnCount){
+				columnCount = tempCount;
+			}
+		}
+		if(originalGroup && originalGroup.children.length === columnCount){
+			return;
+		}
+
+		//now we need to measure the columns
+		var row = document.createElement('tr');
+		var colgroup = document.createElement('colgroup');
+
+		for(var i=0;i<columnCount;++i){
+			row.appendChild(document.createElement('td'));
+		}
+		tuple[0].appendChild(row);
+		for(var i=0;i<columnCount;++i){
+			var col = document.createElement('col');
+			col.style.setProperty('width', row.children[i].getBoundingClientRect().width + 'px', 'important');
+			colgroup.appendChild(col);
+		}
+		tuple[0].removeChild(row);
+		if(originalGroup){
+			originalGroup.remove();
+		}
+		tuple[0].insertBefore(colgroup, tuple[0].firstChild);
+	}],
+];
+function isTooLarge(page){
+	var box = page.getBoundingClientRect();
+	return box.height > pageinfo.size.height;
+}
+
+function setLeaders(){
+	var els = document.getElementsByClassName('book-leaders');
+	for(var i=0;i<els.length; ++i){
+		var e = els[i];
+		var parent = e.parentNode;
+		var f = e.style.float;
+		e.style.setProperty('float', 'none', 'important');
+		var w = e.style.wordBreak;
+		e.style.setProperty('word-break', 'break-word', 'important');
+		while(true){
+			var t = e.textContent;
+			e.textContent = t + '.';
+			if(e.getClientRects().length > 1){
+				e.textContent = t;
+				break;
+			}
+		}
+		e.style.wordBreak = w;
+		e.style.float = f;
+	}
+}
+
+function generateToc(){
+	var els = document.querySelectorAll('h1:not(.book-no-toc),h2:not(.book-no-toc),h3:not(.book-no-toc),h4:not(.book-no-toc),h5:not(.book-no-toc),h6:not(.book-no-toc)');
+	var result = document.querySelector('.book-toc');
+	var table = document.createElement('table');
+	result.appendChild(table);
+	var level = 0;
+	var levels = [0, 0, 0, 0, 0, 0];
+	var levelSizes = [0, 0, 0, 0, 0, 0, 0, 0];
+	var maxTextSize = 0;
+
+	for(var i=0;i<els.length;++i){
+		var e = els[i];
+		var newLevel = e.tagName.charAt(1) - '1';
+		var link = extractLink(e);
+		if(newLevel > level+1) throw 'Wrong document structure';
+		var row = document.createElement('tr');
+		
+		++levels[newLevel];
+		for(var j = newLevel + 1; j < levels.length; ++j) {
+			levels[j] = 0;
+		}
+		level = newLevel;
+
+		if(level != 0){
+			var spacer = document.createElement('td');
+			spacer.setAttribute('colspan', level);
+			row.appendChild(spacer);
+		}
+		
+		var indexNumber = makeIndexString(levels, level);
+		var indexSpan = document.createElement('span');
+		indexSpan.classList.add('book-toc-index');
+		indexSpan.textContent = indexNumber;
+		row.appendChild(makeLink(link, indexSpan));
+		var titleContent = document.createElement('span');
+		titleContent.classList.add('book-toc-title');
+		titleContent.appendChild(document.createTextNode(e.textContent));
+		var leaders = document.createElement('span');
+		leaders.classList.add('book-leaders');
+		var partialContent = document.createDocumentFragment();
+		partialContent.appendChild(titleContent);
+		partialContent.appendChild(leaders);
+		var title = makeLink(link, partialContent);
+		title.setAttribute('colspan', levels.length - level);
+		row.appendChild(title);
+
+		var pageSpan = document.createElement('span');
+		pageSpan.classList.add('book-toc-page');
+		var page = makeLink(link, pageSpan);
+		row.appendChild(page);
+
+		if(!e.classList.contains('book-no-index')){
+			insertNumber(e, indexNumber);
+		}
+		table.appendChild(row);
+		/*taking measures to compute columns widths*/
+		var t = indexSpan.getBoundingClientRect().width + 2;
+		if(t > levelSizes[level]){
+			levelSizes[level] = t;
+		}
+	}
+	var group = document.createElement('colgroup');
+	var totalSize = table.offsetWidth;
+	for(var i=0;i<levelSizes.length; ++i){
+		var col = document.createElement('col');
+		totalSize -= levelSizes[i];
+		if(i === levelSizes.length -2){
+			levelSizes[i] = totalSize;
+		}
+		col.style.width = levelSizes[i]+'px';
+		group.appendChild(col);
+	}
+	table.insertBefore(group, table.firstChild);
+}
+
+function extractLink(e){
+	if(!e.hasAttribute('id')){
+		throw 'Found an heading supposed to be inside the toc, but has no id';
+	}
+	return '#' + e.getAttribute('id');
+}
+function insertNumber(e, number){
+	var span = document.createElement('span');
+	span.classList.add('book-toc-index');
+	span.appendChild(document.createTextNode(number));
+	e.insertBefore(span, e.firstChild);
+}
+function makeLink(link, content){
+	var l = document.createElement('a');
+	l.setAttribute('href', link);
+	if(content) l.appendChild(content);
+
+	var cell = document.createElement('td');
+	cell.appendChild(l);
+	return cell;
+}
+function makeIndexString(levels, level){
+	var result = '';
+	for(var i=0;i<level;++i){
+		result += levels[i] + '.';
+	}
+	return result + levels[level];
+}
+function updatePageNumbers(fragment, mapping){
+	var items = fragment.querySelectorAll('.book-toc a[href]>.book-toc-page');
+	var changed = false;
+	var newSize = 0;
+	for(var i=0; i<items.length; ++i){
+		var link = items[i].parentNode;
+		var dest = fragment.getElementById(link.getAttribute('href').substring(1));
+		var span = items[i];
+		if(dest){
+			dest = mapping.get(dest);
+			var newPageNum = getPageNumber(dest);
+			if(span.textContent != newPageNum){
+				changed = true;
+				span.textContent = newPageNum;
+				mapping.get(span).textContent = newPageNum;
+			}
+			var t = mapping.get(span).getBoundingClientRect().width + 2;
+			if(t>newSize){
+				newSize = t;
+			}
+		}
+	}
+	if(changed){
+		var cols = fragment.querySelector('.book-toc>table>colgroup').children;
+		var textCol = cols[cols.length - 2];
+		var pageCol = cols[cols.length - 1];
+		var pageSize = parseFloat(pageCol.style.width);
+		var textSize = parseFloat(textCol.style.width);
+		if(Math.abs(newSize - pageSize) > 0.01){
+			pageCol.style.width = newSize + 'px';
+			textCol.style.width = (textSize + pageSize - newSize) + 'px';
+		}
+
+	}
+	return changed;
+}
+function getPageNumber(e){
+	while(!e.classList.contains('book-page')){
+		e = e.parentNode;
+	}
+	return e.getAttribute('data-book-page-number')|0;
+}
+
+window.addEventListener('load', layoutAll);            </script>
+            </head>
+    <body>
+		<h2 id="book-heading-1" class="book-no-toc">Software Engineering 2: PowerEnJoy</h2>
+
+<h1 id="book-heading-2" class="book-no-toc" style="page-break-before:auto!important">Project Planning Document</h1>
+
+<h3 id="book-heading-3" class="book-no-toc">Nardo Loris, Osio Alberto</h3>
+
+<h4 id="book-heading-4" class="book-no-toc" style="page-break-after:always!important">Politecnico di Milano</h4>
+
+<div class="book-toc"></div>
+
+<h1 id="book-heading-5">Introduction</h1>
+
+<h2 id="book-heading-6">Purpose and Scope</h2>
+
+<p>This is the Project Planning Document for the PowerEnJoy car sharing system. This document has to be read after the Requirements Analysis and Specification Document and the Design Document. It's aim is to provide a (retrospective) analysis of the project complexity, size and effort, and an overview of the steps leading to the realization of the system. This document is intended to be read by the stakeholders, that can find here information about complexity and time required by the project and about risks, and by core development and design team, that can find informations about the activity assigned to them and their schedule.</p>
+
+<h2 id="book-heading-7">Definitions, acronyms and abbreviations</h2>
+
+<ul>
+<li><strong>System</strong>: the system to be developed for PowerEnJoy</li>
+<li><strong>User</strong>: a generic person interacting with the system</li>
+<li><strong>Employee</strong>: a person who works for PowerEnJoy</li>
+<li><strong>Actor</strong>: can refer to both users and employees</li>
+<li><strong>Car</strong>: an electric vehicle owned by the company</li>
+<li><strong>Bill</strong>: an amount of money a user has to pay. It is related to only a single ride</li>
+<li><strong>Pending bill</strong>: a bill that the user has not paid yet</li>
+<li><strong>Paid bill</strong>: a bill that the user has already paid for</li>
+<li><strong>Area</strong>: a space delimited by a polygonal line whose vertices are a set of geographical coordinates</li>
+<li><strong>Geographical coordinates</strong>: a tuple of latitute and longitude describing a location on Earth</li>
+<li><strong>Geographical region</strong>: an area where a user can reserve at most one car. They do not overlap</li>
+<li><strong>Safe area</strong>: an area where it is possible to park a car and optionally to recharge it, in order to make it available for another user</li>
+<li><strong>Safe parking area</strong>: a special safe area where it is not possible to recharge the car</li>
+<li><strong>Recharging station area</strong>: a special safe area where it is possible to plug the car for recharging its battery</li>
+<li><strong>Registered user</strong>: a user who has completed the sign up process</li>
+<li><strong>Logged user</strong>: a user who has completed the log in process and has not yet started the log out process</li>
+<li><strong>Banned user</strong>: a registered user who cannot reserve a car until all his pending bills are estinguished</li>
+<li><strong>Reservor user</strong>: the user who has made a reservation for the specific car. A user is considered the reservor user of a car until the reservation expires or the user is charged with the bill</li>
+<li><strong>Available car</strong>: a locked car for which no reservation exists</li>
+<li><strong>Reserved car</strong>: a locked car for which it exists a user who has reserved it</li>
+<li><strong>Becoming available car</strong>: an unlocked car is said to be "becoming available" as soon as all the passengers and the driver of this car exits the car, the doors of the car are closed and it is parked in a safe area</li>
+<li><strong>In maintenance car</strong>: a locked car is said to be "in maintenance" as soon as its battery level is below 20%, the car cannot be reserved</li>
+<li><strong>In use car</strong>: an unlocked car which is not becoming available</li>
+<li><strong>GPS</strong>: A system capable of providing the location of a receiver device with a good precision (5 meters)</li>
+<li><strong>Overlapping areas</strong>: Two areas are said to be overlapping if there exists at least one geographical coordinates which is contained inside the two areas</li>
+<li><strong>Expiration of a car reservation</strong>: when a reservation expires, the car becomes available again, the reservor user loses his reservation and he is charged a fee of 1€</li>
+<li><strong>Percentage delta</strong>: a discount or a raise based on percentage</li>
+<li><strong>Applying a raise</strong> or <strong>a discount</strong>: The operation of increasing or reducing the amount of a bill for a specific reason. The amount is computed just before the system charges the user of a bill, and then all those amounts (each one related to a specific reason) are algebraically added to the same bill.</li>
+<li><strong>RASD</strong>: Requirements Analysis and Specification Document</li>
+<li><strong>DD</strong>: Design Document</li>
+<li><strong>ITPD</strong>: Integration Test Plan Document</li>
+<li><strong>DBMS</strong>: DataBase Management System</li>
+<li><strong>COTS</strong>: Commercial Off The Shelf</li>
+<li><strong>OWASP</strong>: Open Web Application Security Project <a href="https://www.owasp.org/">https://www.owasp.org/</a></li>
+<li><strong>XSS</strong>: Cross-site Scripting</li>
+<li><strong>CSRF</strong>: Cross-site Request Forgery</li>
+<li><strong>FPs</strong>: Function Points</li>
+</ul>
+
+<h2 id="book-heading-8">Reference documents</h2>
+
+<ul>
+<li>Project rules of the Software Engineering 2 project</li>
+<li>Template for the Design Document</li>
+<li>Requirement Analysis and Specification Document (previous deliverable)</li>
+<li>Design Document (previous deliverable)</li>
+<li>Function Point definition and calculation <a href="http://www.functionpointmodeler.com/">http://www.functionpointmodeler.com/</a></li>
+<li>Function Point constants for estimating SLOC <a href="http://www.qsm.com/resources/function-point-languages-table">http://www.qsm.com/resources/function-point-languages-table</a></li>
+<li>COCOMO II specification <a href="http://csse.usc.edu/csse/research/COCOMOII/cocomo2000.0/CII_modelman2000.0.pdf">http://csse.usc.edu/csse/research/COCOMOII/cocomo2000.0/CII_modelman2000.0.pdf</a></li>
+</ul>
+
+<h2 id="book-heading-9">Document structure</h2>
+
+<p>In the first section of this document we are going to provide first an estimation of the size of the project using Function Points, and right after an estimation of the required effort calculated applying COCOMO II.<br />
+In the second and third sections we are going to provided a detailed schedule of the project and to allocate all the defined activities to out team members.<br />
+In the last section we are goign to carry out a risk analysis for the project and to elaborate a mitigation strategy for each of the risks presented.</p>
+
+<h1 id="book-heading-10">Project size, cost and effort estimation</h1>
+
+<h2 id="book-heading-11">Size estimation: Function Points</h2>
+
+<p>Function Point is an algoritmical methodology aimed at estimating the size of a project, basing on a combination of program characteristics, categorized in:</p>
+
+<ul>
+<li><strong>Internal Logic Files (ILFs)</strong>, which looks at how the program stores the data</li>
+<li><strong>External Interface Files (EIFs)</strong>, which looks at the data used by the system but managed by thirdy parts</li>
+<li><strong>External Inputs (EIs)</strong>, which looks at the elementary operations involved in processing data coming from the users of the system</li>
+<li><strong>External Outputs (EOs)</strong>, which looks at data generated by the system and destinated to the external environment</li>
+<li><strong>External Inquiries (EQs)</strong>, which look at elementary input / output operations</li>
+</ul>
+
+<p>In the following paragraphs we are going to provide both the measuring criteria for each of the cathegories and to apply those criteria to the proposed system for PowerEnJoy car sharing. The measuring criteria come from statistical analysis of real projects, which have been normalized and condensed into the given tables.</p>
+
+<h3 id="book-heading-12">Internal Logic Files</h3>
+
+<h4 id="book-heading-13">Measuring criteria</h4>
+
+<table style="text-align: center;margin-bottom:10px;">
+<tr>
+<th></th>
+<th colspan = "3">Data Elements</th>
+</tr>
+<tr>
+<th>Record elements</th>
+<th>1 - 19</th>
+<th>20 - 50</th>
+<th>51+</th>
+</tr>
+<tr>
+<th>1</th>
+<td>Low</td>
+<td>Low</td>
+<td>Average</td>
+</tr>
+<tr>
+<th>2 - 5</th>
+<td>Low</td>
+<td>Average</td>
+<td>High</td>
+</tr>
+<tr>
+<th>6+</th>
+<td>Average</td>
+<td>High</td>
+<td>High</td>
+</tr>
+</table>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">Low</td>
+  <td align="center">7</td>
+</tr>
+<tr>
+  <td align="center">Average</td>
+  <td align="center">10</td>
+</tr>
+<tr>
+  <td align="center">Height</td>
+  <td align="center">15</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="book-heading-14">System analysis</h4>
+
+<p>In order to measure the FPs for a specific Internal Logic File, we need to analyze the structure of the data contained in it.</p>
+
+<ul>
+<li><strong>Account data</strong><br />
+This file contains informations about accounts of people interacting with the system, i.e. users and employees. This accounts for 2 record elements. For each account we have a username and a password, then users have a much more detailed representation than employees, and so they are also characterized by name, date of birth, driving licence number and credit card data, which contain owner, number, expiration date and CVV. Overall, this accounts for 9 Data Elements, so this ILF is considered of low complexity.</li>
+<li><strong>Reservation data</strong><br />
+This file contains informations about reservations. For each reservation, we store the reservor user, the reserved car and the creation time. This accounts for 1 Record Element and 3 Data Elements, hence this ILF il considered of low complexity.</li>
+<li><strong>Ride data</strong><br />
+This file contains informations about rides. For each ride, we store the car involved in the ride, its reservor user, the time at which the ride started and the number of passengers that were in the car at the begin of the ride. This accounts for 1 Record Element and 4 Data Elements, hence this ILF is considered of low complexity</li>
+<li><strong>Car data</strong><br />
+This file contains informations about cars. For each car, we store the plate, the battery charge level, the position expressed as a tuple of latitute and longitude, the safe area where the car is parked in and the geographical area where the car is parked in. This accounts for 1 Record Element and 6 Data Elements, hence this ILF is considered of low complexity.</li>
+<li><strong>Safe area data</strong><br />
+This file contains informations about safe areas. There are two types of safe areas: safe parking areas and recharging stations, hence this accounts for 2 Record Types. Each safe area is described by an identifier and the set of polygons which delimit it. Furthermore, recharging stations also need to have the number of plugs specified. This accounts for 3 Data Elements, so this ILF should be considered of low complexity. However, due to the intrinsic complexity of the <em>multipolygon</em> data type, which is used to store the bounding polygon, we decided to consider this as of average complexity (also because data elements refer to elementary data, not to structured data, hence multipolygon violates this hypothesis and we must correct the estimation).</li>
+<li><strong>Geographical area data</strong><br />
+This file contains informations about safe areas. Just like safe areas, each geographical area is described by an identifier and a set of polygons which delimit it. For the very same reasoning done for safe areas, this ILF is of average complexity</li>
+</ul>
+
+<p>Here is a wrap up table</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">ILF</th>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">Account data</td>
+  <td align="center">Low</td>
+  <td align="center">7</td>
+</tr>
+<tr>
+  <td align="left">Reservation data</td>
+  <td align="center">Low</td>
+  <td align="center">7</td>
+</tr>
+<tr>
+  <td align="left">Ride data</td>
+  <td align="center">Low</td>
+  <td align="center">7</td>
+</tr>
+<tr>
+  <td align="left">Bill data</td>
+  <td align="center">Low</td>
+  <td align="center">7</td>
+</tr>
+<tr>
+  <td align="left">Car data</td>
+  <td align="center">Low</td>
+  <td align="center">7</td>
+</tr>
+<tr>
+  <td align="left">Safe area data</td>
+  <td align="center">Average</td>
+  <td align="center">10</td>
+</tr>
+<tr>
+  <td align="left">Geographical area data</td>
+  <td align="center">Average</td>
+  <td align="center">10</td>
+</tr>
+</tbody>
+</table>
+
+<p>Overall sum of calculated FPs gives <strong>55 FPs</strong></p>
+
+<h3 id="book-heading-15">External Interface Files</h3>
+
+<h4 id="book-heading-16">Measuring criteria</h4>
+
+<table style="text-align: center;margin-bottom:10px;">
+<tr>
+<th></th>
+<th colspan = "3">Data Elements</th>
+</tr>
+<tr>
+<th>Record elements</th>
+<th>1 - 19</th>
+<th>20 - 50</th>
+<th>51+</th>
+</tr>
+<tr>
+<th>1</th>
+<td>Low</td>
+<td>Low</td>
+<td>Average</td>
+</tr>
+<tr>
+<th>2 - 5</th>
+<td>Low</td>
+<td>Average</td>
+<td>High</td>
+</tr>
+<tr>
+<th>6+</th>
+<td>Average</td>
+<td>High</td>
+<td>High</td>
+</tr>
+</table>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">Low</td>
+  <td align="center">5</td>
+</tr>
+<tr>
+  <td align="center">Average</td>
+  <td align="center">7</td>
+</tr>
+<tr>
+  <td align="center">Height</td>
+  <td align="center">10</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="book-heading-17">System analysis</h4>
+
+<p>External Interface Files strongly depends on the system which PowerEnJoy interfaces with. These systems are:</p>
+
+<ul>
+<li>The external system for address translations, which carries out the geocoding of given addresses</li>
+<li>The external system for map rendering, which displays maps in the user application</li>
+<li>The payment processing system, which is responsible both for credit card data validation and payment processing</li>
+<li>The driving licence validation system, which is responsible for driving licence validation</li>
+</ul>
+
+<p>For each of these systems, we need to analyze the amount of data that pass through the interface</p>
+
+<ul>
+<li><strong>Geocoding system</strong><br />
+This interaction is fairly simple, as we only send a string (the address to geocode) and get back a tuple of two coordinates (latitute and longitude). This accounts for 2 Record Elements and a overall count of 3 Data Elements, hence this EIF is considered of low complexity.</li>
+<li><strong>Map retrival system</strong><br />
+This interaction is again fairly simple, as we only send a tuple of latitute and longitude on which the map has to be centered and a set of coordinates to highlight on the map, and get back an image. This accounts for 2 Record Elements, and a overall count of 3 Data Elements (even if one of them, we can consider it simple because it's just a list of pairs of floating point numbers). Hence, this EIF is considered of low complexity.</li>
+<li><strong>Payment processing system</strong><br />
+This interaction is not just simple like the two before, as it has to arry out two tasks. For credit card validation, we need to send the credit card parameters (owner, number, CVV and expiration date), and get back a boolean answer. For payment processing, we again need to send credit card parameters plus the amount of the bill to pay, and then get back another boolean value indicating whether the payment was successful or not. Overall, this accounts for 3 Record Elements (credit card validation request, payment request, operation response) and 6 Data Elements. Hence, this EIF can be considered of low complexity again.</li>
+<li><strong>Driving licence validation system</strong><br />
+This interaction is the most simple in this section. We send the driving licence number and the driving licence owner and get back the validity of the licence. Hence, we have 2 Record Elements and an overall count of 3 Data Elements(driving licence owner, number and validity). Hence, this EIF is considered of low complexity.</li>
+</ul>
+
+<p>Here we have a wrap up table</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">EIF</th>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">Geocoding</td>
+  <td align="center">Low</td>
+  <td align="center">5</td>
+</tr>
+<tr>
+  <td align="left">Map retrival</td>
+  <td align="center">Low</td>
+  <td align="center">5</td>
+</tr>
+<tr>
+  <td align="left">Payment processing</td>
+  <td align="center">Low</td>
+  <td align="center">5</td>
+</tr>
+<tr>
+  <td align="left">DL validation</td>
+  <td align="center">Low</td>
+  <td align="center">5</td>
+</tr>
+</tbody>
+</table>
+
+<p>So far, EIF analysis yields a overall sum of <strong>20 FPs</strong></p>
+
+<h3 id="book-heading-18">External Inputs</h3>
+
+<h4 id="book-heading-19">Measuring criteria</h4>
+
+<table style="text-align: center;margin-bottom:10px;">
+<tr>
+<th></th>
+<th colspan = "3">Data Elements</th>
+</tr>
+<tr>
+<th>File Types</th>
+<th>1 - 4</th>
+<th>5 - 15</th>
+<th>16+</th>
+</tr>
+<tr>
+<th>0 - 1</th>
+<td>Low</td>
+<td>Low</td>
+<td>Average</td>
+</tr>
+<tr>
+<th>2 - 3</th>
+<td>Low</td>
+<td>Average</td>
+<td>High</td>
+</tr>
+<tr>
+<th>4+</th>
+<td>Average</td>
+<td>High</td>
+<td>High</td>
+</tr>
+</table>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">Low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="center">Average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="center">Height</td>
+  <td align="center">6</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="book-heading-20">System analysis</h4>
+
+<p>In order to compute FPs for External Inputs, we must consider for each input source (e.g. each API exposed to users or external systems) the complexity of the interaction, measured in terms of both the exchanged data and the ILF / EIF it interacts with. The follwing list carries out the analysis for each external input of the system.
+The count of the exchanged data is done basing upon the API description carried out in the Design Document.</p>
+
+<ul>
+<li><strong>GET /users/{id}/login</strong><br />
+This is a fairly simple functionality, as it evolves only the exchange of two data and interacts with only one ILF (the accounts one). Hence we can consider it of low complexity.</li>
+<li><strong>POST /users/{id}/register</strong><br />
+With respect to the previous one, this is a fairly much complext functionality, as it involves the exchange of 9 Data Elements, but interacts with 1 ILF (the accounts one) and 2 EIF (the payment processing system and the driving licence validation system), hence it has to be considered of average complexity.</li>
+<li><strong>DELETE /users/me/bills</strong><br />
+As far as data exchange is concerned, this is a very simple input, as it has no attached data elements (except for the implicit session token). Instead, it must interact with 1 ILF (the bill one) and 1 EIF (the payment processing system). Hence, we can consider it of low complexity</li>
+<li><strong>POST /users/{id}/reservations</strong><br />
+This input requires 2 Data Elements, and interacts with 2 ILF (the user and the car ones, as specified in the DD) and 1 EIF (for address geocoding), so it can be considered of low complexity.</li>
+<li><strong>PATCH /cars/{plate}/unlock</strong><br />
+This input requires 3 Data Elements to be specified, and interacts with only 3 ILF (the user one, in order to ensure that the user is not banned, the reservation one to ensure the user has a reservation for the car, and the ride one, in order to create the ride). So far, we can consider it of low complexity.</li>
+<li><strong>PATCH /area/geographicals/{id}/split</strong><br />
+This input requires 2 Data Elements to be specified, and interacts with only one ILF (the geographical regions one). But if we consider well the required elements, we notice that we have a fairly complex, structured field required. Than, despite the numbers want this input to be classified as of low complexity, we have to classify it as of average complexity, for reasons which have already been explained for ILF related to geographical regions.</li>
+<li><strong>PATCH /area/geographicals/{id}/merge</strong><br />
+This input requires two Data Elements to be specified, and interacts with only 1 ILF (the one concerned in geographical regions storage), hence we can consider it of low complexity. Despite the similarity, the fields of this input are ways simpler than those of previous one.</li>
+<li><strong>DELETE /area/safes/{id}</strong><br />
+This input only require 1 Data Element to be specified, and only interacts with 1 ILF (the one concerned in safe areas storage), hence we can consider it of low complexity</li>
+<li><strong>POST /area/safes</strong><br />
+The analysis of this input is pretty much similar to that of geographical areas split. In fact, we have 2 Data Elements, of which one fairly complex for the very same reasons as before, and we interact only with 1 ILF (again, the one concerned with safe area storage). Hence, for the same rationale, we consider it of average complexity.</li>
+<li><strong>PATCH /area/safes/{id}</strong><br />
+The analysis of this input is identical to that of the previous one, so we consider it of average complexity for the same reasons as before.</li>
+<li><strong>Car status (message)</strong><br />
+This is the only input which uses the messaging API. It is composed of 4 data elements, and only interacts with 1 ILF (the one concerned with car information storage). Hence, we can consider it of low complexity.</li>
+<li><strong>Payment completion notification</strong><br />
+This input comes from the payment processing system when it processes a payment, and 2 data elements: the former tells if the payment was successful or not, and the latter is the identifier of the bill that was requested to be paid. This input involves an interaction with the ILF concerning bills in order to update the status of the bill. Hence, it can be considered of low complexity.</li>
+</ul>
+
+<p>Moreover, we have to consider that each input (except for those belonging to the /users API) requires user credencials validation and user authentication, hence we must consider it in the overall count. We can model it just as a new input which involves the interaction with one ILF (the one concerned with user information storage) and 1 data element (the session token). Hence we can consider it of low complexity.</p>
+
+<p>Here we have a wrap up table</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">EI</th>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">GET /users/{id}/login</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">POST /users/{id}/register</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">DELETE /users/me/bills</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">POST /users/{id}/reservations</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">PATCH /cars/{plate}/unlock</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">PATCH /area/geographicals/{id}/split</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">PATCH /area/geographicals/{id}/merge</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">DELETE /area/safes/{id}</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">POST /area/safes</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">PATCH /area/safes/{id}</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">Car status message</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">Payment completion notification</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">User authentication</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+</tbody>
+</table>
+
+<p>From the table above, EIs analysis yields a result of <strong>43 FPs</strong>.</p>
+
+<h3 id="book-heading-21">External Outputs</h3>
+
+<h4 id="book-heading-22">Measuring criteria</h4>
+
+<table style="text-align: center;margin-bottom:10px;">
+<tr>
+<th></th>
+<th colspan = "3">Data Elements</th>
+</tr>
+<tr>
+<th>File Types</th>
+<th>1 - 5</th>
+<th>6 - 19</th>
+<th>20+</th>
+</tr>
+<tr>
+<th>0 - 1</th>
+<td>Low</td>
+<td>Low</td>
+<td>Average</td>
+</tr>
+<tr>
+<th>2 - 3</th>
+<td>Low</td>
+<td>Average</td>
+<td>High</td>
+</tr>
+<tr>
+<th>4+</th>
+<td>Average</td>
+<td>High</td>
+<td>High</td>
+</tr>
+</table>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">Low</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="center">Average</td>
+  <td align="center">5</td>
+</tr>
+<tr>
+  <td align="center">Height</td>
+  <td align="center">7</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="book-heading-23">System analysis</h4>
+
+<p>The system sometimes need to communicate with the external environment outside the context of an inquiry, and this is where External Output comes in. To evaluate the complexity of each external output, we must consider how many ILF or EIF the output is produced from, and the data elements which the output carries in. Here is a list of all the external outputs.</p>
+
+<ul>
+<li><strong>Ride duration</strong><br />
+This output is produced on the display on board of the cars in order to inform the driver about how is the ride lasting. It only carries one data element (actually, the difference between two timestamps, the actual one and that one the ride begun at), and has to interact with one ILF (the one that stores data about rides). Hence, it can be considered of low complexity (4 FPs).</li>
+<li><strong>Lock (message)</strong><br />
+This output is an async message sent over the message-driven architecture. It has no payload, but needs to interact with 1 ILF (the one concerning data about cars, in order to know where car has stopped). Hence it can be considered of low complexity (4 FPs).</li>
+<li><strong>Unlock (message)</strong><br />
+Just like the previous one, this output is a message sent over the messaging API. It still have no payload, and need to interact with only one ILF (the one concerning reservations), hence we can consider it of low complexity (4 FPs).</li>
+<li><strong>Payment processing request</strong><br />
+This output sends to the payment processing system a request to carry out a payment (and a payment is described by the amount to pay and the credit card data to get this amount from, so other 4 data elements, which are the credit card owner, number, CVV and expiration date). It must deal with 2 ILF (the one concerning bills for the bill to pay and the one concerning users for the credit card data) and 1 ELF (the one concerning payment processing). Hence we can consider it of low complexity (even if it is quite a borderline classification)</li>
+</ul>
+
+<p>The analysis of External Outputs yields an overall result of <strong>16 FPs</strong>.</p>
+
+<h3 id="book-heading-24">External Inquiries</h3>
+
+<h4 id="book-heading-25">Measuring criteria</h4>
+
+<table style="text-align: center;margin-bottom:10px;">
+<tr>
+<th></th>
+<th colspan = "3">Data Elements</th>
+</tr>
+<tr>
+<th>File Types</th>
+<th>1 - 5</th>
+<th>6 - 19</th>
+<th>20+</th>
+</tr>
+<tr>
+<th>0 - 1</th>
+<td>Low</td>
+<td>Low</td>
+<td>Average</td>
+</tr>
+<tr>
+<th>2 - 3</th>
+<td>Low</td>
+<td>Average</td>
+<td>High</td>
+</tr>
+<tr>
+<th>4+</th>
+<td>Average</td>
+<td>High</td>
+<td>High</td>
+</tr>
+</table>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">Low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="center">Average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="center">Height</td>
+  <td align="center">6</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="book-heading-26">System analysis</h4>
+
+<p>As the system is built mainly with a client-server architectural style, there are many external inputs that require a response by the system which sents him some requested data. The difference with external input is mainly that in the context of an inquiry the server replies with an answer to question of the user without updating his internal status, rather than executing a user command in order to alter its internal status, like in external inputs.</p>
+
+<p>In order to evaluate the complexity of an inquiry, we must understand which files it references and how many data elements are exchanged during both the request and the response phases.</p>
+
+<p>Here is a list of all the inquiries, including those that involve thirdy part systems.</p>
+
+<ul>
+<li><strong>GET /users/{id}/bills</strong><br />
+This is a fairly simple inquiry, it involves only 1 data element in the input side and an array of tuples of 2 data element in the output side. As of files, it only interacts with 1 ILF (the one dealing with bills). Hence, we can consider it of low complexity.</li>
+<li><strong>GET /users/{id}/reservations</strong><br />
+This is a fairly complex inquiry, it involves 4 data element in the input side and an array of tuples of 4 data elements in the output side. Moreover, it has to interact with 1 ILF in order to carry out the task. However, it can still be considered of low complexity</li>
+<li><strong>GET /users/{id}/reservations/{plate}</strong><br />
+This inquiry requires 2 data elements in the input side and 4 data elements in the output side, and still has to interact with only 1 ILF (the one concerning reservations), hence it can be considered of low complexity.</li>
+<li><strong>GET /cars</strong><br />
+This inquiry is fairly complex for the amout of data elements involved, as it involves 5 data elements in the input side and an array of tuples of 7 data elements in the output side. However, it only interacts with 1 ILF (the one concerning cars), and thus it can be considered of low complexity.</li>
+<li><strong>GET /cars/{plate}</strong><br />
+This inquiry is similar to the previous one, except for that the input side only requires 1 data element instead of 5. Still, we can consider it of low complexity.</li>
+<li><strong>GET /area/geographicals</strong><br />
+The complex part of this inquiry is the output side. In fact, the input side requires no parameter, and as far as files are concerned, it only interacts with one file, the one concerning the storage of geographical regions. The output side is instead quite complex, as it is constituited by a list of areas, which are consitituted by sets of paths delimiting them, plus a few other data elements. For these reasons we can consider it of average complexity, just like we did in the whole analysis of FPs when we have to deal with data involving paths and polygons.</li>
+<li><strong>GET /area/geographicals/{id}</strong><br />
+Very similar to the previous one, this inquiry requires an input parameter instead of 0 and outputs only one region instead of a list. However, we still have to deal with paths and polygons like before, hence the complexity of this inquiry is still average.</li>
+<li><strong>GET /area/safes</strong><br />
+This inquiry is again similar to the <em>GET /area/geographicals</em> one, except that it deals with safe areas instead of geographical areas. Still, it has no data element in input, a quite complex output, as it is differs only for a few data elements from the previous one, and involves only one ILF (the one that deals with safe areas). Again, this is a functionality of average complexity.</li>
+<li><strong>GET /area/safes/{id}</strong><br />
+This inquiry, like the previous one, can be analyzed in the very same way of <em>GET /area/geographicals/{id}</em>. Hence we can consider it again of average complexity.</li>
+<li><strong>Driving licence validation</strong><br />
+This inquiry requires as input the driving licence owner and number, and yields as output the validity of the given licence. It deals with only one EIF (the one concerning driving licence validation). Hence we can consider it of low complexity.</li>
+<li><strong>Address geocoding</strong><br />
+This inquiry requires as input the only address to geocode, and yields as output the latitute and longitude of the given address. So far, it only deals with 3 data elements and 1 EIF (the one concerning geocoding), hence we can consider it of low complexity.</li>
+<li><strong>Map retrival</strong><br />
+This inquiry requires only a tuple of latitute and longitude, plus a number of tuples of latitude and longitude to highlight on the map. As these points are usually position of cars, we can consider that it interacts with 1 ILF (the one concerning cars), 1 EIF (the one concerning map retrival) and 3 data elements, of which one is a structured one. Hence, we can consider it of average complexity.</li>
+<li><strong>Credit card validation</strong><br />
+This inquiry requires in the input side 4 data elements (credit card owner, number, CVV and expiration date), and yields as output only 1 data element indicating whether the credit card is valid or not. It deals with 1 EIF (the one concerning payments processing). Hence, we can consider it of low complexity.</li>
+</ul>
+
+<p>Just like for external inputs, we should consider the user authentication, but we can just take advantage of the functionality presented in the external inputs section and avoid counting it another time in this context.</p>
+
+<p>Here is a summarizing table</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">EQ</th>
+  <th align="center">Complexity</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">GET /users/{id}/bills</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">GET /users/{id}/reservations</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">GET /users/{id}/reservations/{plate}</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">GET /cars</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">GET /cars/{plate}</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">GET /area/geographicals</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">GET /area/geographicals/{id}</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">GET /area/safes</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">GET /area/safes/{id}</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">Driving licence validation</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">Address geocoding</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+<tr>
+  <td align="left">Map retrival</td>
+  <td align="center">average</td>
+  <td align="center">4</td>
+</tr>
+<tr>
+  <td align="left">Credit card validation</td>
+  <td align="center">low</td>
+  <td align="center">3</td>
+</tr>
+</tbody>
+</table>
+
+<p>Overall sum of calculated FPs gives <strong>44 FPs</strong>.</p>
+
+<h3 id="book-heading-27">Overall analysis</h3>
+
+<p>The following table summarizes the FPs analysis.</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Function type</th>
+  <th align="center">FPs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">Internal logic files</td>
+  <td align="center">55</td>
+</tr>
+<tr>
+  <td align="left">External logic files</td>
+  <td align="center">20</td>
+</tr>
+<tr>
+  <td align="left">External inputs</td>
+  <td align="center">43</td>
+</tr>
+<tr>
+  <td align="left">External outputs</td>
+  <td align="center">16</td>
+</tr>
+<tr>
+  <td align="left">External inquiries</td>
+  <td align="center">44</td>
+</tr>
+<tr>
+  <td align="left">TOTAL</td>
+  <td align="center">178</td>
+</tr>
+</tbody>
+</table>
+
+<p>Considering Java Enterprise Edition as the deployment environment and ignoring the HTML, JavaScript involved in user and employee applications (which is just a very small part if compared to the server logic and the data structure development, and can be thought as presentation logic only, with no business logic in it), we can get an approximation about the number of line of code that this project will require.</p>
+
+<p>Average approximation:</p>
+
+<pre><code>SLOC = 178 × 46 = 8188
+</code></pre>
+
+<p>Conservative approximation:</p>
+
+<pre><code>SLOC = 178 × 67 = 11926
+</code></pre>
+
+<p>The conversion rates are statistically derived from real projects.</p>
+
+<h2 id="book-heading-28">Effort estimation: COCOMO II</h2>
+
+<p>COCOMO II is an algorithmical methodology aimed at estimating the effort (in person-hours) requried by a project, given its size (expressed in kilo lines of code). It is based on the evaluation of scale factors, which account for how much complexity scales for a unary change in size, and of cost drivers, which account for all the factors related both to project and process that can increase or decrease time required by the development.</p>
+
+<p>In the following paragraphs, we are going to evaluate both scale factors and cost drivers. At the end of the evaluation, the last paragraph will contain the effort estimation.</p>
+
+<h3 id="book-heading-29">Scale factors</h3>
+
+<p>In order to evaluate scale factors, we refer to the official COCOMO II table</p>
+
+<p>For each scale factor, here is a concise explanation of the reasons of the evaluation:</p>
+
+<h4 id="book-heading-30">Precedentedness (PREC)</h4>
+
+<p>Precedentedness accounts for the familiarity of our development team with projects that are similar to this one. In order to evaluate precedentedness, we need to evaluate several factors:</p>
+
+<ul>
+<li><strong>Organizational understanding of product objectives</strong><br />
+Since we had a lot of feedback by the stakeholders, and the analysis of functional and non functional requirements was carried out very attentively, we decided to evaluate this parameter as <strong>considerable</strong>.</li>
+<li><strong>Experience in working with related software systems</strong><br />
+As our team has never worked for sharing companies, and it is not very familiar in dealing with this domain, we evaluate this parameter as <strong>moderate</strong>.</li>
+<li><strong>Concurrent development of associated new hardware and operational procedures</strong><br />
+This project does not require any specific hardware to be developed, as the only hardware needed is the sensor system of the car, which is already present on board of the very same cars. Hence, we decided to evaluate this parameter with the best evaluation possible: <strong>some</strong> (according to the official table).</li>
+<li><strong>Need for innovative data processing architectures, algorithms</strong><br />
+This project does not requires innovative algorithms to be designed in order to handle the tasks he has to carry out. The only tricky part, that was specified in the DD, does not require any innovative algotithm, as all the algorithms used in it are quite known. Hence, we evaluate this parameter as <strong>minimal</strong>.</li>
+</ul>
+
+<p>Averaging these parameters we obtain a rating for the PREC scale factor of <strong>high</strong>.</p>
+
+<h4 id="book-heading-31">Development flexibility (FLEX)</h4>
+
+<p>Development flexibility accounts for the flexibility allowed in the development project with respect to requirements and external interface conformance. In order to evaluate development flexibility, we need ot evaluate several factors:</p>
+
+<ul>
+<li><strong>Need for software conformance with preestablished requirements</strong><br />
+Since we have almost no legal constraint, but quite precise and strict functional requirements that derive from an accurate requirements analysis, we evaluate this parameter as <strong>considerable</strong></li>
+<li><strong>Need for software conformance with external interface specifications</strong><br />
+In this project, there are interactions with external systems, but as we discussed in the FP analysis, all systems have very simple interfaces (at least for the services that we are using), then we decide to evaluate this parameter as <strong>basic</strong></li>
+<li><strong>Combination of inflexibilities above with premium on early completion</strong><br />
+Even if inflexibilities at the previous points are not that serious, we cannot forget them as we still need to stick to them precisely, and this is always a time consuming activity, hence we decided to evaluate this parameter as <strong>medium</strong>.</li>
+</ul>
+
+<p>Averaging these parameters we obtain a rating for the FLEX scale factor of <strong>high</strong>.</p>
+
+<h4 id="book-heading-32">Architecture / Risk Resolution (RESL)</h4>
+
+<p>This scale factor accounts for awarness and reactiveness to risks, and it is strictly connected with the risk plan discussed later in this document. In order to evaluate this scale factor, we need to evaluate several parameters.</p>
+
+<ul>
+<li><strong>Risk Management Plan identifies all critical risk items</strong><br />
+Even if the risk analysis was carried out very carefully, we cannot grant it is complete, hence we decided to evaluate this parameter as <strong>generally</strong>.</li>
+<li><strong>Schedule is compatible with Risk Management Plan</strong><br />
+Since we have a quite tight schedule, the is not much window to handle risks that are time consuming or that are not included in the risk plan, hence we decided to evaluate this parameter as <strong>little</strong></li>
+<li><strong>Percent of development schedule devoted to establishig architecture, given general product objectives</strong><br />
+As it is clear from the Gantt Chart included in this document, the percentage of development schedule devoted to the architectural design is of <strong>18.75%</strong> (about 3 weeks over the overall duration of 16 weeks).</li>
+<li><strong>Percent of required top software architects available to the project</strong><br />
+Since we have no other project running in parallel, we can devote the <strong>100%</strong> of our workforce to this project.</li>
+<li><strong>Tool support available for resolving risk items, developing and verifying architectural specs</strong><br />
+As we don't have plenty of tools to verify architectural specs or resolving risk items (in fact, the main tool is <em>Alloy</em> specification language), we evaluate this parameter as <strong>little</strong></li>
+<li><strong>Number and criticality of risk items</strong><br />
+This can be read directly from the risk analysis, since we have only very few critical risks, we can evaluate this parameter assigning it a <strong>nominal</strong> level.</li>
+</ul>
+
+<p>Averaging these parameters we obtain an overall rating for the RESL scale factor of <strong>nominal</strong>.</p>
+
+<h4 id="book-heading-33">Team cohesion (TEAM)</h4>
+
+<p>The Team Cohesion scale factor accounts for the sources of project turbulence and entropy because of difficulties in synchronizing the project’s stakeholders (from COCOMO specification). In order to evaluate the TEAM scale factor, we need to provide an evaluation of different parameters:</p>
+
+<ul>
+<li><strong>Consistency of stakeholder objectives and cultures</strong><br />
+As almost all the stakeholders come from a quite similar cultural background (in fact, the project has quite limited geographical scope), we evaluate this parameter as <em>strong</em></li>
+<li><strong>Ability, willingness of stakeholders to accommodate other stakeholders’ objectives</strong><br />
+Basing on our knowledge of the stakeholders involved in the project, we evaluate this parameter as <strong>little</strong> (in fact, PowerEnJoy manager only aims at earning as much as possible)</li>
+<li><strong>Experience of stakeholders in operating as a team</strong><br />
+PowerEnJoy is a relatively new company, the feeling among stakeholders might not been so run-in, even if we don't are likely to find serious problems, hence we evaluate this parameter as <strong>basic</strong></li>
+<li><strong>Stakeholder teambuilding to achieve shared vision and commitments)</strong><br />
+For similar reasons as the second point in this list, we evaluate this parameter as <strong>little</strong></li>
+</ul>
+
+<p>Averaging this parameters we obtain an overall rating for the TEAM scale factor of <strong>nominal</strong></p>
+
+<h4 id="book-heading-34">Process Maturity (PMAT)</h4>
+
+<p>We are a very young software company, and we only reached CMM level 2 (process is characterized for projects but it is often reactive and heaviliy relies on the people making it work). So far, the PMAT parameter can be attributed a level of <strong>nominal</strong>.</p>
+
+<h4 id="book-heading-35">Scale factor review</h4>
+
+<p>The following tables summarizes the evaluation of scale factors and maps the rating levels to the corresponding coefficients, according to the official COCOMO specification.</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Scale Factor</th>
+  <th align="center">Rating</th>
+  <th align="right">Coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">PREC</td>
+  <td align="center">High</td>
+  <td align="right">2.48</td>
+</tr>
+<tr>
+  <td align="left">FLEX</td>
+  <td align="center">High</td>
+  <td align="right">2.03</td>
+</tr>
+<tr>
+  <td align="left">RESL</td>
+  <td align="center">Nominal</td>
+  <td align="right">4.24</td>
+</tr>
+<tr>
+  <td align="left">TEAM</td>
+  <td align="center">Nominal</td>
+  <td align="right">3.29</td>
+</tr>
+<tr>
+  <td align="left">PMAT</td>
+  <td align="center">Nominal</td>
+  <td align="right">4.68</td>
+</tr>
+</tbody>
+</table>
+
+<p>Overall, the sum of the coefficients yields a value of S = 16.72.<br />
+From here, we can calculate the E parameter</p>
+
+<pre><code>E = B + 0.01 × S = 1.0772
+</code></pre>
+
+<h3 id="book-heading-36">Cost drivers</h3>
+
+<p>For cost driver estimation we use the <em>Post-Architecture</em> model, as we have already a well detailed design of the system architecture. This allows us to evaluate much more parameters than the <em>Early-design</em> model, thus we'll obtain a more precise estimation of th effort needed for the project.</p>
+
+<p>For each cost driver, we provide the evaluation and a brief explanation of the rational undelying it.</p>
+
+<h4 id="book-heading-37">Required Software Reliability (RELY)</h4>
+
+<p>This driver accounts for the increasing complexity that corresponds to increasing reliability requirements. According to the COCOMO specification, we can classify the effects of a software failures as <em>moderate, easy recoverable losses</em>, as we are not dealing with life-critical or economic-critical applications, so higher rating levels are not appropriate in this context.<br />
+Hence, RELY is rated at <strong>nominal</strong> level (coefficient: 1.00)</p>
+
+<h4 id="book-heading-38">Data Base Size (DATA)</h4>
+
+<p>This driver accounts for the effort needed to develop a larger test database. Hence we neither need tons of test data nor deal with complex or unstructurable data or media files, we can estimate the database size in a range of 10 to 100 bytes per line of code (in a very pessimistic estimation, the overall database size would not be greater than 1MB).<br />
+Thus, DATA is rated at <strong>nominal</strong> level (coefficient: 1.00)</p>
+
+<h4 id="book-heading-39">Product Complexity (CPLX)</h4>
+
+<p>This driver meaning is really implicit in its name. For the evaluation, we need to average the evaluation of 5 different areas</p>
+
+<ul>
+<li><strong>Control Operations</strong><br />
+Code has in general a not so complex control flow graph, except for the algorithms that manipulate safe areas and geographical areas, which use a very nested, recursive control flow graph with lots of predicates, hence according to the COCOMO specification, we can rate it at a <strong>high</strong> level</li>
+<li><strong>Computational Operations</strong><br />
+Even if the complexity of several algorithms is not trivial for the reasons pointed out just before, the underlying operations are kind of simple, there is no differential calculus, numerical analysis or heavy matrix computations, hence we evaluate this parameter as <strong>low</strong></li>
+<li><strong>Device-dependent operations</strong><br />
+The system under consideration does not require specific or specialized hardware, and more it carries out input/output operations using a textual protocol (HTTPS), hence we evaluate this parameter as <strong>low</strong></li>
+<li><strong>Data management operations</strong><br />
+The system requires the processing of moderately complex queries, but the database structure is fixed from the design phase, so we can evaluate this parameter as <strong>low</strong></li>
+<li><strong>User Interface Management Operations</strong><br />
+The user interface designed for the system is quite simple as we can see from the mockups, and can easily be implemented as a set of widgets, so this parameter can be rated <strong>nominal</strong></li>
+</ul>
+
+<p>Averaging these parameters we obtain a overall rating for the CPLX cost driver of a <em>nominal</em> level (coefficient: 1.00)</p>
+
+<h4 id="book-heading-40">Developed For Reusability (RUSE)</h4>
+
+<p>This cost driver accounts for the additional effort to be put in developing and testing reusable components instead of domain specific components. As our company, as an internal policy, always plans to build as much reusable components as possible, in order to advantage in facing future problems, we must evaluate this cost driver as <strong>high</strong> (coefficient: 1.07), as we will put some effort in trying to achieve reusability.</p>
+
+<h4 id="book-heading-41">Documentation Match to Life-Cycle Needs (DOCU)</h4>
+
+<p>This cost driver accounts for the effort that need to be put in writing documentation that fits well product lifecycle needs (and in particular maintenance). As the schedule is quite tight, but documentation is very important too, we try to write a quite extensive documentation that well fits product lifecycle and helps a lot in component reusability. Hence, this cost driver is assigned a rating level of <strong>nominal</strong> (coefficient: 1.00)</p>
+
+<h4 id="book-heading-42">Execution Time Constraint (TIME)</h4>
+
+<p>This cost driver accounts for the relative time consumption of the system in performing the tasks it is intended to with respect to the total completion time. The system we have designed has not to carry out very time expansive operations, but it is planned to be used by many users at a time, thus requiring about the <strong>70%</strong> of the available computational time (coefficient: 1.11)</p>
+
+<h4 id="book-heading-43">Main Storage Constraint (STORE)</h4>
+
+<p>This cost driver accounts for the degree of main storage required by this system to store its data. Hence it is not the case that the data manipulated by the system grow exponentially in time, and since there are no multimedia data, but mainly integers and strings, we can rate this cost driver at a level of <strong>nominal</strong>, which corresponds to a relative use of main storage with respect to available storage of less than 50% (coefficient: 1.00)</p>
+
+<h4 id="book-heading-44">Platform Volatility (PVOL)</h4>
+
+<p>The main platform we work with are J2EE and browsers. As far as J2EE is concerned, platform is almost stable with a major release every about 2 years. The Java language has more frequent major releases, but it aims to be retrocompatible, so it does not present many problems of compatibility. Instead, browsers have more frequent releases (a release every 2 months approximatively), but the HTML5 specification (and the ECMAscript and CSS3 related specifications) are almost stable. Hence, we can rate this cost driver at <strong>low</strong> level (coefficient: 0.87)</p>
+
+<h4 id="book-heading-45">Analyst Capability (ACAP)</h4>
+
+<p>This effort multiplier accounts for the aggregate ability of the analyst team to communicate, cooperate and design, it also account for the efficiency and thoroughness of the team.
+Since we have dedicated much time in the effort of analysing the problem
+ requirements we can rate this effort multiplier at a level of <strong>high</strong> (coefficient: 0.85)</p>
+
+<h4 id="book-heading-46">Programmer Capability (PCAP)</h4>
+
+<p>This effort multiplier accounts for the aggregate ability of the programmer team to communicate and cooperate, it also account for the efficiency and thoroughness of the team.
+Our cooperation started some years ago and since then we have already developed different software product and thus our ability to cooperate is rated <strong>high</strong> (coefficient: 0.88)</p>
+
+<h4 id="book-heading-47">Personnel Continuity (PCON)</h4>
+
+<p>This effort multiplier accounts for the project's annual personnel turnover.
+Since our development team is stable, no personnel turnover is expected, and so we rate this as <strong>very high</strong> (coefficient: 0.81)</p>
+
+<h4 id="book-heading-48">Applications Experience (APEX)</h4>
+
+<p>This effort multiplier accounts for the application experience of the team in developing the software system.
+Since this application field (car sharing) is new to our developing team we set this effort multiplier to <strong>very low</strong> (coefficient: 1.22)</p>
+
+<h4 id="book-heading-49">Platform Experience (PLEX)</h4>
+
+<p>This effort multiplier accounts for the knowledge in many platforms such as graphic user interface, database, networking&hellip;
+Since this knowledge is around 1 year, we can rate this effort multiplier at a level of <strong>nominal</strong> (coefficient: 1.00)</p>
+
+<h4 id="book-heading-50">Language and Tool Experience (LTEX)</h4>
+
+<p>This effort multiplier accounts for the level of the programming language and the software tool experience of the project team.
+Software development also includes program styles and tools for the requirements and design reprenentation and analysis.
+We have mixed experience in language and tools in fact we have a solid experience of more than 3 years in Javascript, HTML and CSS;
+an experience of about 1 year in Java, and some experience in modelling language such as Alloy. Considering all these factor we opted
+ for a level of <strong>nominal</strong> (coefficient: 1.00)</p>
+
+<h4 id="book-heading-51">Use of Software Tools (TOOL)</h4>
+
+<p>This effort multiplier accounts for the use of tools helping the team at different project stages.
+The tools can be from a simple debugger to a more integrated system and since we plan to use tools like Eclipse as IDE, Maven as dependency manager, GIT as versioning tool,
+and some tool for testing we can rate this effort multiplier at a level of <strong>high</strong> (coefficient: 0.90)</p>
+
+<h4 id="book-heading-52">Multisite Development (SITE)</h4>
+
+<p>This effort multiplier takes into account two factors: the site collocation and the communication support.
+Even if we work from different city (<strong>nominal</strong> rate for site collocation) we plan to usually have meetings in Milan and in addition we plan to use chats and email
+so we can rate the communication support at a level of <strong>very high</strong>. Combining the two factors yields a global rate of level <strong>high</strong> (coefficient: 0.93)</p>
+
+<h4 id="book-heading-53">Required Development Schedule (SCED)</h4>
+
+<p>This effort multiplier measures the schedule constraint imposed on the project team. While accelerated schedules tend to produce more effort in the earlier phases to reduce risks, we
+are fine with a normal schedule with no stretches, we rate this factor at a level of <strong>nominal</strong> (coefficient: 1.00)</p>
+
+<h3 id="book-heading-54">Effort estimation</h3>
+
+<p>From scale factor evaluation we get a coefficient</p>
+
+<pre><code>E = 1.0772
+</code></pre>
+
+<p>From cost driver evaluation we get a overall multiplier of</p>
+
+<pre><code>M = 0.6393
+</code></pre>
+
+<p>Hence an overall pessimistic extimation yields a value of</p>
+
+<pre><code>PM = A x (sizeᴱ) x M ≈ 27.5 Person / Months
+where A = 2.94, size = 11.926 [KSLOC]
+</code></pre>
+
+<h3 id="book-heading-55">Duration</h3>
+
+<p>COCOMO provides a simple schedule estimation capability. This estimation is based on the following equation</p>
+
+<div style="font-family:monospace">
+TDEV = [C x PM<sup> D+0.2x(E-B)</sup>] x 
+<span style="display:inline-table;vertical-align:middle;text-align:center;">
+<span style="display:table-row;"><span style="display:table-cell;border-bottom:1px solid;">SCED%</span></span>
+<span style="display:table-row;><span style="display:table-cell;">100</span></span>
+</span> ≈ 10.5 Months
+<br>where C = 3.67, D = 0.28, B = 0.91, PM and E are the values calculated in the previous paragraph
+</div>
+
+<p>This estimation is anyway too pessimistic and provides an upper bound of the time needed, it uses the pessimistic code size and it does not take into consideration that some part of the code needed can be found in already available libraries and some part of the development is carried out in parallel so our final estimation is 6 months.</p>
+
+<h1 id="book-heading-56">Project schedule</h1>
+
+<p>In this section we are going to provide a high-level schedule of the tasks involved in the projects.<br />
+Even if we did not go through implementation, testing and system deployment, we thought it was meaningful to include them as a part of the schedule in order to have a more complete overview of the overall plan devised for the project.</p>
+
+<p>In order to maximize readability, we will present four separate schedules, one per each development phase. They are to be thought one after the other, in the order we present them. However, there are dates on top of each schedule which define the right period in which each activity is planned.</p>
+
+<p>At the end of each development phase, a corresponding document is produced.</p>
+
+<h2 id="book-heading-57">Requirements analysis and specification</h2>
+
+<p><img src="http://localhost/powerenjoy/PP/images/gantt/1%20RASD.png" alt="alt &quot;rasd-gantt&quot;" /></p>
+
+<h2 id="book-heading-58">Design</h2>
+
+<p><img src="http://localhost/powerenjoy/PP/images/gantt/2%20DD.png" alt="alt &quot;dd-gantt&quot;" /></p>
+
+<h2 id="book-heading-59">Implementation</h2>
+
+<p><img src="http://localhost/powerenjoy/PP/images/gantt/3%20DEV.png" alt="alt &quot;dev-gantt&quot;" /></p>
+
+<p><strong>Important note</strong>: Even if code ispection is indicated in the activities with its own performance period, it has not to be intended as a continuous activity. In the diagram, we have indicated the interval over time in which code inspections sessions will be held. Code inspection schedule is to be defined later in the development workflow, according to the availability of the external company performing the inspections.</p>
+
+<h2 id="book-heading-60">Deployment</h2>
+
+<p><img src="http://localhost/powerenjoy/PP/images/gantt/4%20DEPLOY.png" alt="alt &quot;depl-gantt&quot;" /></p>
+
+<h1 id="book-heading-61">Resource allocation</h1>
+
+<p>In order to better highlight parallel work on same tasks or on different tasks, resource allocation is presented in a tabular format, with each activity represented by a rectangle and identified by a label. Moreover, in order to increase readability, we have split the allocation table in four tables, one for each development phase. The numbering of the weeks reflects that of the Gantt, with week1 starting at Oct. 17th.</p>
+
+<p>Not all the tasks described in the Gantt diagram are reflected in the resource allocation map. Here is a list of the exceptions:</p>
+
+<ul>
+<li>Code inspection<br />
+As described in the previous chapter, code inspection is not really a task we have to carry out, as there will be held several code inspections sessions during the development period. So far, we have not included those session in the chart because we considered it as a part of the development tasks.</li>
+<li>System testing<br />
+System testing is not included in the chart because it is carried out by an external company, and thus it not requires one of ou developers to be allocated to it.</li>
+</ul>
+
+<p>For each development phase, we provide a map between activities and their identifier and the resource allocation table</p>
+
+<h2 id="book-heading-62">Requirements analysis and specification</h2>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Identifier</th>
+  <th align="left">Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">#1</td>
+  <td align="left">Talk to customers</td>
+</tr>
+<tr>
+  <td align="center">#2</td>
+  <td align="left">Domain definition</td>
+</tr>
+<tr>
+  <td align="center">#3</td>
+  <td align="left">Stakeholder identification</td>
+</tr>
+<tr>
+  <td align="center">#4</td>
+  <td align="left">Scenario collection</td>
+</tr>
+<tr>
+  <td align="center">#5</td>
+  <td align="left">Use case definition</td>
+</tr>
+<tr>
+  <td align="center">#6</td>
+  <td align="left">Goal identification</td>
+</tr>
+<tr>
+  <td align="center">#7</td>
+  <td align="left">Requirements identification</td>
+</tr>
+<tr>
+  <td align="center">M1</td>
+  <td align="left">Internal checkup meeting (31/10/2016)</td>
+</tr>
+<tr>
+  <td align="center">#8</td>
+  <td align="left">Customer review</td>
+</tr>
+<tr>
+  <td align="center">#9</td>
+  <td align="left">Domain definition refinement</td>
+</tr>
+<tr>
+  <td align="center">#10</td>
+  <td align="left">Goal refinement</td>
+</tr>
+<tr>
+  <td align="center">#11</td>
+  <td align="left">Requirements refinement</td>
+</tr>
+<tr>
+  <td align="center">M2</td>
+  <td align="left">Internal checkup meeting (07/11/2016)</td>
+</tr>
+<tr>
+  <td align="center">#12</td>
+  <td align="left">Model verification</td>
+</tr>
+<tr>
+  <td align="center">#13</td>
+  <td align="left">UI mockups</td>
+</tr>
+<tr>
+  <td align="center">QA</td>
+  <td align="left">Quality Assurance Review (10/11/2016)</td>
+</tr>
+<tr>
+  <td align="center">#14</td>
+  <td align="left">Final refinements</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="http://localhost/powerenjoy/PP/images/resources/RASD.png" alt="alt &quot;resrasd&quot;" /></p>
+
+<h2 id="book-heading-63">Design</h2>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Identifier</th>
+  <th align="left">Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">#15</td>
+  <td align="left">High level architecture draft</td>
+</tr>
+<tr>
+  <td align="center">#16</td>
+  <td align="left">Main components identification</td>
+</tr>
+<tr>
+  <td align="center">#17</td>
+  <td align="left">Data schema design</td>
+</tr>
+<tr>
+  <td align="center">#18</td>
+  <td align="left">Dynamic system modeling</td>
+</tr>
+<tr>
+  <td align="center">M3</td>
+  <td align="left">Internal review (30/11/2016)</td>
+</tr>
+<tr>
+  <td align="center">#19</td>
+  <td align="left">Algorithm design</td>
+</tr>
+<tr>
+  <td align="center">#20</td>
+  <td align="left">Deployment design</td>
+</tr>
+<tr>
+  <td align="center">#21</td>
+  <td align="left">User interface design</td>
+</tr>
+<tr>
+  <td align="center">M4</td>
+  <td align="left">Internal review (06/12/2016)</td>
+</tr>
+<tr>
+  <td align="center">#22</td>
+  <td align="left">Meeting with stakeholders (07/12/2016)</td>
+</tr>
+<tr>
+  <td align="center">QA</td>
+  <td align="left">Quality Assurance Review (08/12/2016)</td>
+</tr>
+<tr>
+  <td align="center">#23</td>
+  <td align="left">Final refinements</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="http://localhost/powerenjoy/PP/images/resources/DD.png" alt="alt &quot;resdd&quot;" /></p>
+
+<h2 id="book-heading-64">Development</h2>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Identifier</th>
+  <th align="left">Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">#24</td>
+  <td align="left">External system acquisition and study</td>
+</tr>
+<tr>
+  <td align="center">#25</td>
+  <td align="left">Integration testing design</td>
+</tr>
+<tr>
+  <td align="center">QA</td>
+  <td align="left">Quality assurance review (16/12/2016)</td>
+</tr>
+<tr>
+  <td align="center">#26</td>
+  <td align="left">Integration testing refinement</td>
+</tr>
+<tr>
+  <td align="center">#27</td>
+  <td align="left">Integration testing environment development</td>
+</tr>
+<tr>
+  <td align="center">#28</td>
+  <td align="left">Subcomponents development</td>
+</tr>
+<tr>
+  <td align="center">#29</td>
+  <td align="left">End user applications development</td>
+</tr>
+<tr>
+  <td align="center">#30</td>
+  <td align="left">Integration testing</td>
+</tr>
+<tr>
+  <td align="center">#31</td>
+  <td align="left">Stakeholder demostration 1</td>
+</tr>
+<tr>
+  <td align="center">M5</td>
+  <td align="left">Internal review (20/01/2017)</td>
+</tr>
+<tr>
+  <td align="center">#32</td>
+  <td align="left">Customer demostration 2</td>
+</tr>
+<tr>
+  <td align="center">#33</td>
+  <td align="left">User manual</td>
+</tr>
+<tr>
+  <td align="center">#34</td>
+  <td align="left">Refinements and bugfixes</td>
+</tr>
+<tr>
+  <td align="center">M6</td>
+  <td align="left">Final internal review</td>
+</tr>
+<tr>
+  <td align="center">#35</td>
+  <td align="left">Final refinements</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="http://localhost/powerenjoy/PP/images/resources/DEV21.png" alt="alt &quot;resdev&quot;" /></p>
+
+<p><img src="http://localhost/powerenjoy/PP/images/resources/DEV22.png" alt="alt &quot;resdev&quot;" /></p>
+
+<h2 id="book-heading-65">Deployment</h2>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Identifier</th>
+  <th align="left">Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center">#36</td>
+  <td align="left">Hardware acquisition and verification</td>
+</tr>
+<tr>
+  <td align="center">#37</td>
+  <td align="left">System deployment</td>
+</tr>
+<tr>
+  <td align="center">#38</td>
+  <td align="left">Teaching sessions with employees</td>
+</tr>
+<tr>
+  <td align="center">#39</td>
+  <td align="left">Real life simulation</td>
+</tr>
+<tr>
+  <td align="center">#40</td>
+  <td align="left">Updates and checks</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="http://localhost/powerenjoy/PP/images/resources/DEPL.png" alt="alt &quot;resdepl&quot;" /></p>
+
+<h1 id="book-heading-66">Risk management</h1>
+
+<p>Risks must be taken into consideration in a project planning.<br />
+Even if it is not possible to foresee any possible risk, a good risk strategy for the most probable risks must be taken into consideration. Three main risk categories are described in the following part of this section of the document.</p>
+
+<ul>
+<li><strong>Project risks</strong>: these risks involve the project plan itself, leading to raise in cost or to deadline missing.</li>
+<li><strong>Technical risks</strong>: these risks involve the implementation of the project and they affect the overall quality of the software we have to develop.</li>
+<li><strong>Business risks</strong>: these risks involve the company developing the software itself.</li>
+</ul>
+
+<h2 id="book-heading-67">Project risks</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Risk</th>
+  <th>Level</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Too optimistic schedules</strong></td>
+  <td>Critical</td>
+  <td>The project may require additional time. If this is the case, we can release an incomplete but working version (e.g. without the ability for employee to define the geographical areas, or with a simplier user interface). However, in order to mitigate this risk, some slack time is inserted in the schedule. This is considered critical as our schedule has not mush slack</td>
+</tr>
+<tr>
+  <td><strong>Too pessimistic schedules</strong></td>
+  <td>Less critical</td>
+  <td>The project may require much less time. If this is the case, we can propose our client some additional services for free (e.g. extended support). For this reason, we do not consider this as a critical risk.</td>
+</tr>
+<tr>
+  <td><strong>Requirements change</strong></td>
+  <td>Moderately critical</td>
+  <td>This risk can be mitigated by designing the system (from requirements analysis up to actual implementation) in a conscious way, so that it is easy to extend or change it. When implementation is in progress, basic principles of OOP (coding to an interface, polymorphism, ...) must be carefully and consistently applied in the whole project and verified with code inspections on the most critical pars. This risk is considered moderately critical because, even if we apply the best design techniques, we cannot predict all changes that may come up</td>
+</tr>
+<tr>
+  <td><strong>Team collaboration issues</strong></td>
+  <td>Less critical</td>
+  <td>Misunderstanding or things left as intended may lead to an incorrect repartition of tasks. This can be mitigated with meetings and a complete and precise task assignment. We consider this less critical because we inserted in the schedule frequent meetings</td>
+</tr>
+<tr>
+  <td><strong>Turnover in development team</strong></td>
+  <td>Moderately critical</td>
+  <td>Since the IT job market is quite flexible, this is always risk to be considered, that can be mitigated by splitting responisibilities among people of the company. We evaluate this risk factor as moderately critical, because given our staff it is extremely unlikely that key members quit the company during the project development, but we cannot avoid it. If happens, we plan to pay extra hours to other members in order to reschedule tasks assigned to those people</td>
+</tr>
+<tr>
+  <td><strong>Illness of key members</strong></td>
+  <td>Moderately critical</td>
+  <td>The classification of this factor is really similar to that of the previous one</td>
+</tr>
+<tr>
+  <td><strong>Gold plating</strong></td>
+  <td>Less critical</td>
+  <td>A software product is never perfect, but this does not mean it cannot be released. Successive releases may refine some aspects. This risk is avoided if deadlines for task assignment are defined and enforced, and for this reasons we classify it as less critical</td>
+</tr>
+<tr>
+  <td><strong>Misunderstanding in requirements</strong></td>
+  <td>Moderately critical</td>
+  <td>This is always a very serious problem, but can be mitigated by deeply involving stakeholders in requirements analysis, asking for frequent feedbacks and organizing frequent meetings. We consider this a moderately critical risk because we put in the schedule frequent meetings</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="book-heading-68">Technical risks</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Risk</th>
+  <th>Level</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Lack of experience in programming with Java EE</strong></td>
+  <td>Moderately critical</td>
+  <td>This must be taken into consideration in the early stages of planning (e.g. adding a timespan devoted to learning of this technology or expanding the time related to the actual coding of the software project).</td>
+</tr>
+<tr>
+  <td><strong>Server downtime</strong></td>
+  <td>Critical</td>
+  <td>Downtimes are often indicators that the software is not scalable or that the hardware running the server components is not enough powerful. To prevent this, one must design the software with scalability in mind from the early stages of the DD, and choose the appropriate hardware. This is considered critical because can only be detected during system testing, which is performed at the very end of the development of the product.</td>
+</tr>
+<tr>
+  <td><strong>Security flaws</strong></td>
+  <td>Critical</td>
+  <td>The application may be susceptible to security issues and to data leaks if not well designed. All the raccomandation from OWASP must be followed, thus the user input must be correctly handled; tests must be done to ensure that most common flaws are handled (e.g. XSS, CSRF, SQL Injection, &hellip;). This is considered critical because it is not easy to discover even with a careful system testing.</td>
+</tr>
+<tr>
+  <td><strong>Data loss</strong></td>
+  <td>Moderately ritical</td>
+  <td>Data loss can occure because of hardware fault or software errors. This problem can be mitigated enforcing periodic backups. Our company performs daily backups archivied both locally and on a cloud service, so it is extremely unikely that this happens</td>
+</tr>
+<tr>
+  <td><strong>Unstructured code</strong></td>
+  <td>Moderately critical</td>
+  <td>With the growth of the project and the approaching deadline the code may become badly structured, with repetitions. This problem can be mitigated performing  periodical code inspections. We have allocated a quite long time period to perfomr code inspections, so we can consider this moderately critical</td>
+</tr>
+<tr>
+  <td><strong>Component integration failure</strong></td>
+  <td>Less critical</td>
+  <td>After having implemented some components, a test may fail and this can require to rewrite large portions of some component. This risk is mitigated by specifying the contracts and interfaces of each component and by starting integration tests earlier so that there is still time to fix problems. As we start integration testing as early as possible, this is considered less critical</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="book-heading-69">Business risks</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Risk</th>
+  <th>Level</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Competitors</strong></td>
+  <td>Critical</td>
+  <td>Other companies might develop and release a similar software product before us. A possible solution for this problem is to continuosly enhance the software product, to highlight peculiarities, or to provide better non functional requirements or designing a most attractive user interface. We consider this a critical risk because we cannot anticipate it in any way.</td>
+</tr>
+<tr>
+  <td><strong>Bankruptcy</strong></td>
+  <td>Less critical</td>
+  <td>While the income for this project is known, its cost is not, a good feasibility study helps to avoid this situation. We consider this less critical because we have carried out a very accurate feasibility study.</td>
+</tr>
+<tr>
+  <td><strong>PowerEnJoy may violete some future laws</strong></td>
+  <td>Less critical</td>
+  <td>Local and State regulators can change some rules and this can lead to unpredictable impact. This risk cannot be avoided, but the problematic portion of the product can be disabled temporarily and the team must work to adapt to the new regulations as soon as possible. This is a future risk, and so it is unlikely that it causes schedule shifts</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="book-heading-70">Appendix</h1>
+
+<h2 id="book-heading-71">Effort spent</h2>
+
+<ul>
+<li>Nardo Loris: 11 hours of work</li>
+<li>Osio Alberto: 13 hours of work</li>
+</ul>
+    </body>
+</html>
